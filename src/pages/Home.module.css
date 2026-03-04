@@ -1,0 +1,97 @@
+.homePage {
+  width: 100%;
+  min-height: 100dvh;
+
+  background-image: url("https://img5.pic.in.th/file/secure-sv1/BG-01b9a4e5c37c23e215.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 28px;
+}
+
+/* LOGO */
+
+.logo {
+  width: 70vw;
+  max-width: 260px;
+  margin-bottom: 36px;
+}
+
+/* GRID TOP */
+
+.gridTop {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  padding: 0 20px;
+}
+
+/* GRID BOTTOM */
+
+.gridBottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  margin-top: 16px;
+  padding: 0 20px;
+}
+
+/* TILE */
+
+.tile {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.tile img {
+  width: 100%;
+  max-width: 150px;
+
+  transition: transform 0.15s ease;
+}
+
+/* BOTTOM TILE BIGGER */
+
+/* .gridBottom .tile img {
+  max-width: 170px;
+} */
+
+/* TAP EFFECT */
+
+.tile:active img {
+  transform: scale(0.92);
+}
+
+/* ------------------ */
+/* iPhone 12 / bigger */
+/* ------------------ */
+
+@media (min-width: 390px) {
+
+  .logo {
+    max-width: 300px;
+    margin-bottom: 48px;
+  }
+
+  .gridTop {
+    gap: 22px;
+  }
+
+  .tile img {
+    max-width: 170px;
+  }
+
+  .gridBottom .tile img {
+    max-width: 190px;
+  }
+
+}
