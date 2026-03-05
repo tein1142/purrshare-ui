@@ -12,6 +12,10 @@
   align-items: center;
 
   padding-top: 28px;
+
+  /* เพิ่มส่วนนี้ */
+  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+  overflow-x: hidden;
 }
 
 /* LOGO */

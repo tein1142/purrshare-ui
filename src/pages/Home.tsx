@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import styles from "./Home.module.css";
+import styles from "./css/Home.module.css";
 export default function Home() {
   const navigate = useNavigate();
 

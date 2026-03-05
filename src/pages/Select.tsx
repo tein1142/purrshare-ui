@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import styles from "./Select.module.css";
+import styles from "./css/Select.module.css";
 
 export default function Select() {
   const navigate = useNavigate();
