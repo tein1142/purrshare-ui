@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styles from "./css/Select.module.css";
+import TabBar from "../components/TabBar";
 
 export default function Select() {
   const navigate = useNavigate();
@@ -305,23 +306,7 @@ export default function Select() {
           </section>
         </main>
 
-        <nav className={styles.tabbar}>
-          <div className={`${styles.tab} ${styles.active}`} onClick={() => navigate("/")}>
-            <img className={styles.tabIconImg} src="https://img5.pic.in.th/file/secure-sv1/icon-168f8d5a7adad294f0.png" />
-          </div>
-
-          <div className={styles.tab} onClick={() => navigate("/star")}>
-            <img className={styles.tabIconImg} src="https://img5.pic.in.th/file/secure-sv1/icon-17.png" />
-          </div>
-
-          <div className={styles.tab} onClick={() => navigate("/cart")}>
-            <img className={styles.tabIconImg} src="https://img5.pic.in.th/file/secure-sv1/icon-1507d739c217dd05c2.png" />
-          </div>
-
-          <div className={styles.tab} onClick={() => navigate("/profile")}>
-            <img className={styles.tabIconImg} src="https://img5.pic.in.th/file/secure-sv1/icon-18.png" />
-          </div>
-        </nav>
+        <TabBar />
       </div>
     </div>
   );

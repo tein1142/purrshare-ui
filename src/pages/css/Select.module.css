@@ -168,7 +168,7 @@
 .searchBox {
   flex: 1;
   height: var(--searchH);
-  border: 1.5px solid var(--line);  
+  border: 2px solid var(--line);  
   border-radius: var(--r16);
   background: #fff;
   display: flex;

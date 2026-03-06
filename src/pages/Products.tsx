@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styles from "./css/Products.module.css";
 import { useNavigate } from "react-router-dom";
+import TabBar from "../components/TabBar";
+import ProductModal from "../components/ProductModal";
+import AddCartModal from "../components/AddCartModal";
 
 type Product = {
   id: string;
@@ -31,9 +34,9 @@ export default function Product() {
   const navigate = useNavigate();
 
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Product | null>(null);
   const [activeTab, setActiveTab] = useState("newest");
-
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [showCartModal, setShowCartModal] = useState(false);
   const filtered = products.filter(
     (p) =>
       p.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -51,16 +54,9 @@ export default function Product() {
             </svg>
           </a>
 
-          {/* <div className={styles.searchWrap}>
-            <svg viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="6.5" />
-              <path d="M16.2 16.2l4.2 4.2" />
-            </svg>
-          </div> */}
-
-            <div className={styles.searchBox}>
-              <input placeholder="ค้นหา..." />
-            </div>
+          <div className={styles.searchBox}>
+            <input placeholder="ค้นหา..." />
+          </div>
         </div>
 
         <div className={styles.title}>รายการสินค้า</div>
@@ -91,7 +87,7 @@ export default function Product() {
             }`}
             onClick={() => setActiveTab("price")}
           >
-            Price
+            Price ↕
           </button>
 
           <button
@@ -100,7 +96,7 @@ export default function Product() {
             }`}
             onClick={() => setActiveTab("filter")}
           >
-            Filter
+            Filter ▾
           </button>
         </div>
       </header>
@@ -111,7 +107,7 @@ export default function Product() {
           <div
             key={p.id}
             className={styles.card}
-            onClick={() => setSelected(p)}
+            onClick={() => setSelectedProduct(p)}
           >
             <div className={styles.thumb}>
               <img src={p.img} alt={p.name} />
@@ -126,98 +122,21 @@ export default function Product() {
             </div>
           </div>
         ))}
+
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onAddCart={() => setShowCartModal(true)}
+          />
+        )}
+
+        {showCartModal && (
+          <AddCartModal onClose={() => setShowCartModal(false)} />
+        )}
       </main>
-
-      {/* PRODUCT DETAIL */}
-      {selected && (
-        <div
-          className={`${styles.pOverlay} ${styles.show}`}
-          onClick={() => setSelected(null)}
-        >
-          <div className={styles.pSheet} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.pTop}>
-              <button
-                className={styles.pClose}
-                onClick={() => setSelected(null)}
-              >
-                <svg viewBox="0 0 24 24">
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </button>
-
-              <div className={styles.pTopTitle}>รายละเอียดสินค้า</div>
-
-              <div className={styles.pTopRight}></div>
-            </div>
-
-            <div className={styles.pBody}>
-              <div className={styles.pCard}>
-                <div className={styles.pImage}>
-                  <img src={selected.img} alt={selected.name} />
-                </div>
-
-                <div className={styles.pInfo}>
-                  <div className={styles.pName}>{selected.name}</div>
-
-                  <div className={styles.pDesc}>{selected.desc}</div>
-
-                  <div className={styles.pPrice}>
-                    {selected.price.toLocaleString("th-TH")} THB
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.pBottom}>
-              <div className={styles.pBottomPrice}>
-                {selected.price.toLocaleString("th-TH")} THB
-              </div>
-
-              <div className={styles.pBottomActions}>
-                <button className={styles.ctaBtn}>โปรไฟล์ผู้ขาย</button>
-
-                <button className={`${styles.ctaBtn} ${styles.primary}`}>
-                  เพิ่มลงตะกร้า
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* TABBAR */}
-      <nav className={styles.tabbar}>
-        <div
-          className={`${styles.tab} ${styles.active}`}
-          onClick={() => navigate("/")}
-        >
-          <img
-            className={styles.tabIconImg}
-            src="https://img5.pic.in.th/file/secure-sv1/icon-168f8d5a7adad294f0.png"
-          />
-        </div>
-
-        <div className={styles.tab} onClick={() => navigate("/star")}>
-          <img
-            className={styles.tabIconImg}
-            src="https://img5.pic.in.th/file/secure-sv1/icon-17.png"
-          />
-        </div>
-
-        <div className={styles.tab} onClick={() => navigate("/cart")}>
-          <img
-            className={styles.tabIconImg}
-            src="https://img5.pic.in.th/file/secure-sv1/icon-1507d739c217dd05c2.png"
-          />
-        </div>
-
-        <div className={styles.tab} onClick={() => navigate("/profile")}>
-          <img
-            className={styles.tabIconImg}
-            src="https://img5.pic.in.th/file/secure-sv1/icon-18.png"
-          />
-        </div>
-      </nav>
+      <TabBar />
     </div>
   );
 }
