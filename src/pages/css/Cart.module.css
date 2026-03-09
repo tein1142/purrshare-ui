@@ -19,11 +19,12 @@
 /* HEADER */
 
 .header {
+
   position: relative;
 
   background: #efe6c6;
 
-  padding: 20px 16px 28px;
+  padding: 20px 16px 15px;
 
   border-bottom-left-radius: 34px;
   border-bottom-right-radius: 34px;
@@ -31,6 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 /* TITLE */
@@ -44,34 +46,43 @@
 /* BACK BUTTON */
 
 .backBtn {
+
   position: absolute;
+
   left: 16px;
 
-  width: 54px;
-  height: 54px;
+  height: 5px;
 
-  border-radius: 20px;
+  border-radius: 13px;
 
-  border: 6px solid rgba(0, 0, 0, 0.08);
+  border: 2px solid black;
 
-  background: #f5f5f5;
+  background: #f4f4f4;
+
+  padding: 15px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 25px;
 
-  color: #3b2c28;
+  color: black;
 
   cursor: pointer;
 
-  transition: transform 0.15s ease;
 }
 
 .backBtn:active {
   transform: scale(0.92);
+}
+
+.arrow {
+
+  transform: translateX(-2px) translateY(-1px);
+
+  font-weight: 700;
+
 }
 
 /* CART ITEM */
@@ -368,3 +379,4 @@
 
   color: #000;
 }
+

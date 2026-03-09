@@ -9,7 +9,7 @@ export default function Cart() {
     <div className={styles.cartpage}>
       <div className={styles.header}>
         <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          ←
+          <span className={styles.arrow}>‹</span>
         </button>
 
         <div className={styles.title}>ตะกร้า</div>
@@ -38,7 +38,7 @@ export default function Cart() {
         </div>
       </div>
 
-<div className={styles.cartItem}>
+      <div className={styles.cartItem}>
         <img
           className={styles.productImg}
           src="https://images.unsplash.com/photo-1503431128871-cd250803fa41?w=400"
