@@ -1,0 +1,370 @@
+/* PAGE */
+
+.cartpage {
+
+  width: 100%;
+  /* max-width: 420px; */
+
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  background: #f4f4f4;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+/* HEADER */
+
+.header {
+  position: relative;
+
+  background: #efe6c6;
+
+  padding: 20px 16px 28px;
+
+  border-bottom-left-radius: 34px;
+  border-bottom-right-radius: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* TITLE */
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* BACK BUTTON */
+
+.backBtn {
+  position: absolute;
+  left: 16px;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 20px;
+
+  border: 6px solid rgba(0, 0, 0, 0.08);
+
+  background: #f5f5f5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  font-weight: 700;
+
+  color: #3b2c28;
+
+  cursor: pointer;
+
+  transition: transform 0.15s ease;
+}
+
+.backBtn:active {
+  transform: scale(0.92);
+}
+
+/* CART ITEM */
+
+.cartItem {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 16px;
+
+  margin: 14px;
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  border: 3px solid rgba(0, 0, 0, 0.08);
+}
+
+/* IMAGE */
+
+.productImg {
+  width: 80px;
+
+  height: 80px;
+
+  border-radius: 16px;
+
+  object-fit: cover;
+}
+
+/* INFO */
+
+.productInfo {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.productName {
+  font-size: 16px;
+
+  font-weight: 900;
+
+  color: #000;
+}
+
+.productDesc {
+  font-size: 14px;
+
+  color: #6b7280;
+
+  font-weight: 600;
+}
+
+.productPrice {
+  font-size: 13px;
+
+  font-weight: 900;
+
+  margin-top: 4px;
+
+  color: #000;
+}
+
+/* QTY BOX */
+
+.qtyBox {
+  display: flex;
+
+  align-items: center;
+
+  padding: 4px 12px;
+
+  background: #efe1b4;
+
+  border-radius: 40px;
+}
+
+/* BUTTON */
+
+.qtyBtn {
+  width: 28px;
+
+  border-radius: 100%;
+
+  border: 3px solid rgba(0, 0, 0, 0.1);
+
+  background: #f2f2f2;
+
+  font-size: 12px;
+
+  font-weight: 1000;
+
+  cursor: pointer;
+
+  color: black;
+
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateX(-1px);
+}
+
+/* NUMBER */
+
+.qtyNumber {
+  font-size: 14px;
+
+  font-weight: 900;
+
+  margin-top: 5%;
+
+  width: 20px;
+
+  text-align: center;
+
+  color: #000;
+}
+
+.left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex: 1;
+}
+
+.bottomRow {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 6px;
+}
+
+/* PAYMENT BOX */
+
+.paymentBox {
+  background: #ffffff;
+
+  margin: 16px;
+
+  padding: 20px;
+
+  border-radius: 28px;
+
+  border: 3px solid rgba(0, 0, 0, 0.08);
+}
+
+/* TITLE */
+
+.paymentTitle {
+  font-size: 20px;
+
+  font-weight: 900;
+
+  margin-bottom: 18px;
+
+  color: #000;
+}
+
+/* ROW */
+
+.paymentRow {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 16px;
+}
+
+/* LABEL */
+
+.paymentLabel {
+  font-size: 15px;
+
+  color: #6b7280;
+
+  font-weight: 700;
+
+  color: #000;
+}
+
+/* VALUE */
+
+.paymentValue {
+  font-size: 15px;
+
+  font-weight: 900;
+
+  color: #000;
+}
+
+/* DIVIDER */
+
+.divider {
+  height: 4px;
+
+  background: rgba(0, 0, 0, 0.08);
+
+  border-radius: 4px;
+
+  margin: 20px 0;
+}
+
+/* TOTAL */
+
+.paymentTotal {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  font-size: 15px;
+
+  font-weight: 900;
+
+  color: #000;
+}
+
+/* CHECKOUT BAR */
+
+.checkoutBar {
+
+  position: fixed;
+
+  bottom: 70px;   /* สูงกว่า tabbar */
+
+  width: 100%;
+  max-width: 420px;
+
+  background: #ffffff;
+
+  padding: 14px 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  border-top: 3px solid rgba(0,0,0,0.08);
+
+}
+
+/* PRICE */
+
+.checkoutPrice {
+  font-size: 18px;
+
+  font-weight: 900;
+
+  color: #000;
+}
+
+/* BUTTON */
+
+.checkoutBtn {
+  flex: 1;
+
+  height: 52px;
+
+  border-radius: 20px;
+
+  border: 4px solid rgba(0, 0, 0, 0.08);
+
+  background: #efe1b4;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  color: #000;
+}
