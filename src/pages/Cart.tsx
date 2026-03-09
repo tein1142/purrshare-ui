@@ -1,10 +1,12 @@
 import TabBar from "../components/TabBar";
 import styles from "./css/Cart.module.css";
 import { useNavigate } from "react-router-dom";
+import PaymentModal from "../components/PaymentModal";
+import { useState } from "react";
 
 export default function Cart() {
   const navigate = useNavigate();
-
+  const [openPayment, setOpenPayment] = useState(false);
   return (
     <div className={styles.cartpage}>
       <div className={styles.header}>
@@ -84,9 +86,15 @@ export default function Cart() {
       <div className={styles.checkoutBar}>
         <div className={styles.checkoutPrice}>304 THB</div>
 
-        <button className={styles.checkoutBtn}>ชำระเงิน</button>
+        <button
+          className={styles.checkoutBtn}
+          onClick={() => setOpenPayment(true)}
+        >
+          ชำระเงิน
+        </button>
       </div>
 
+      <PaymentModal open={openPayment} onClose={() => setOpenPayment(false)} />
       <TabBar />
     </div>
   );
