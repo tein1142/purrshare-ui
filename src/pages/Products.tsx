@@ -43,6 +43,34 @@ export default function Product() {
       p.desc.toLowerCase().includes(query.toLowerCase()),
   );
 
+  function addToCart(product: Product) {
+    try {
+      const raw = localStorage.getItem("ps_cart") || "[]";
+      const cart = JSON.parse(raw);
+
+      const existing = cart.find((item: any) => item.id === product.id);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          img: product.img,
+          qty: 1,
+        });
+      }
+
+      localStorage.setItem("ps_cart", JSON.stringify(cart));
+
+      // update badge
+      window.dispatchEvent(new Event("cart-updated"));
+    } catch (e) {
+      console.error("cart error", e);
+    }
+  }
+
   return (
     <div className={styles.app}>
       {/* HEADER */}
@@ -55,7 +83,11 @@ export default function Product() {
           </a>
 
           <div className={styles.searchBox}>
-            <input placeholder="ค้นหา..." />
+            <input
+              placeholder="ค้นหา..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
           </div>
         </div>
 
@@ -127,7 +159,11 @@ export default function Product() {
           <ProductModal
             product={selectedProduct}
             onClose={() => setSelectedProduct(null)}
-            onAddCart={() => setShowCartModal(true)}
+            onAddCart={(product: Product) => {
+              addToCart(product);
+              setShowCartModal(true);
+              setSelectedProduct(null);
+            }}
           />
         )}
 

@@ -103,8 +103,8 @@ export default function ProductModal({ product, onClose, onAddCart }: any) {
             <button
               className={styles.cartBtn}
               onClick={() => {
-                onClose(); // ปิด ProductModal
-                onAddCart(); // เปิด AddCartModal
+                onAddCart(product);
+                onClose();
               }}
             >
               เพิ่มลงตะกร้า

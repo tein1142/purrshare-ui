@@ -1,0 +1,109 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2000;
+}
+
+.modal {
+  width: 86%;
+  max-width: 340px;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 30px 24px;
+
+  text-align: center;
+
+  border: 6px solid rgba(0, 0, 0, 0.05);
+}
+
+/* LOADING */
+
+.loader {
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 16px;
+
+  border-radius: 50%;
+
+  border: 5px solid #d9f3e6;
+  border-top-color: #2dbb7f;
+
+  animation: spin 1s linear infinite;
+}
+
+.loadingText {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* SUCCESS */
+
+.successIcon {
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 10px;
+
+  border-radius: 50%;
+
+  background: #e9f7f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+  color: #2dbb7f;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 800;
+
+  color: #2dbb7f;
+
+  margin-bottom: 6px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #6b7280;
+
+  margin-bottom: 20px;
+}
+
+.okBtn {
+  width: 160px;
+  height: 48px;
+
+  border-radius: 18px;
+
+  background: #efe1b4;
+
+  border: 4px solid rgba(0, 0, 0, 0.08);
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* ANIMATION */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,357 @@
+.page {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background-color: white;
+  padding-bottom: 70px;
+}
+
+/* HEADER */
+
+.top {
+  background: #fbf3cf;
+  padding: 20px 16px 16px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+}
+
+.topRow {
+  /* display: flex;
+  align-items: center; */
+}
+
+.topTitle {
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.ghost {
+  width: 36px;
+}
+
+/* HERO */
+
+.hero {
+  margin-top: 16px;
+  background: white;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.heroContent {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.heroRow {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* AVATAR */
+
+.avatarSingle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatarSingle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* PET CARD */
+
+.petsCard {
+  background: #f7f7f7;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.petsTitle {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(17,24,39,.72);
+  margin-bottom: 6px;
+}
+
+.petsAvatars {
+  display: flex;
+  gap: 6px;
+}
+
+.petA {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.petA img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.petsSub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* NAME */
+
+.name {
+  text-align: center;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* EDIT BUTTON */
+
+.editBtn {
+  height: 42px;
+  padding: 0 26px;
+  border-radius: 22px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  background: #f8edc3;
+  font-weight: 800;
+  color: #000;
+}
+
+/* PILLS */
+
+.rolePills {
+  display: flex;
+  gap: 10px;
+}
+
+.pill {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #e6e6e6;
+  font-weight: 700;
+}
+
+.active {
+  background: #f8edc3;
+}
+
+/* STATS */
+
+.statsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.stat {
+  background: white;
+  border-radius: 14px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  text-align: center;
+}
+
+.statN {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.statL {
+  font-size: 12px;
+  color: #666;
+}
+
+/* ACCOUNT INFO CARD */
+
+.infoCard {
+  margin: 14px;
+
+  background: #fff;
+
+  border-radius: 18px;
+
+  border: 2px solid rgba(0, 0, 0, 0.08);
+
+  padding: 16px;
+}
+
+/* TITLE */
+
+.infoTitle {
+  font-size: 18px;
+
+  font-weight: 900;
+
+  color: #111;
+
+  margin-bottom: 16px;
+
+  text-align: center;
+}
+
+/* GRID */
+
+.infoGrid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 16px 20px;
+}
+
+/* ITEM */
+
+.infoItem {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+/* LABEL */
+
+.infoLabel {
+  font-size: 14px;
+
+  font-weight: 900;
+
+  color: #8a8f98;
+}
+
+/* VALUE */
+
+.infoValue {
+  font-size: 18px;
+
+  font-weight: 900;
+
+  color: #111;
+}
+
+.section {
+  margin: 14px;
+}
+
+.secHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.secTitle {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.secLink {
+  font-size: 13px;
+  font-weight: 900;
+  color: #6b7280;
+}
+
+.list {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px;
+
+  border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.row:first-child {
+  border-top: none;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.txt {
+  display: flex;
+  flex-direction: column;
+}
+
+.t1 {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.t2 {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.badge {
+  padding: 6px 14px;
+
+  border-radius: 999px;
+
+  border: 3px solid #a7d9c7;
+
+  color: #16a34a;
+
+  font-weight: 900;
+
+  font-size: 13px;
+}
+
+.reviewCard {
+  background: #fff;
+  border-radius: 22px;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  padding: 10px;
+}
+
+.reviewRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.reviewRow:first-child {
+  border-top: none;
+}
+
+.stars {
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}

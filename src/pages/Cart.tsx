@@ -2,99 +2,175 @@ import TabBar from "../components/TabBar";
 import styles from "./css/Cart.module.css";
 import { useNavigate } from "react-router-dom";
 import PaymentModal from "../components/PaymentModal";
-import { useState } from "react";
+import SuccessModal from "../components/SuccessModal";
+import { useState, useEffect } from "react";
 
 export default function Cart() {
   const navigate = useNavigate();
+
+  const [cartItems, setCartItems] = useState<any[]>([]);
   const [openPayment, setOpenPayment] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("ps_cart") || "[]");
+    setCartItems(data);
+  }, []);
+
+  function updateCart(items: any[]) {
+    setCartItems(items);
+    localStorage.setItem("ps_cart", JSON.stringify(items));
+  }
+
+  function increaseQty(index: number) {
+    const items = [...cartItems];
+    items[index].qty += 1;
+    updateCart(items);
+  }
+
+  function decreaseQty(index: number) {
+    const items = [...cartItems];
+
+    items[index].qty -= 1;
+
+    if (items[index].qty <= 0) {
+      items.splice(index, 1);
+    }
+
+    updateCart(items);
+  }
+
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
+  const shipping = cartItems.length ? 25 : 0;
+
+  const totalPrice = subtotal + shipping;
+
+  function saveOrder() {
+    const order = {
+      id: Date.now(),
+      items: cartItems,
+      total: totalPrice,
+      status: "pending",
+    };
+
+    const pending = JSON.parse(localStorage.getItem("ps_pending") || "[]");
+
+    pending.unshift(order);
+
+    localStorage.setItem("ps_pending", JSON.stringify(pending));
+
+    localStorage.removeItem("ps_cart");
+
+    setCartItems([]);
+  }
+
   return (
     <div className={styles.cartpage}>
+      {/* HEADER */}
+
       <div className={styles.header}>
-        <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          <span className={styles.arrow}>‹</span>
-        </button>
+        {/* <button className={styles.backBtn} onClick={() => navigate("/products")}>
+          ‹
+        </button> */}
 
         <div className={styles.title}>ตะกร้า</div>
       </div>
 
-      <div className={styles.cartItem}>
-        <img
-          className={styles.productImg}
-          src="https://images.unsplash.com/photo-1503431128871-cd250803fa41?w=400"
-        />
+      {/* CART ITEMS */}
 
-        <div className={styles.productInfo}>
-          <div className={styles.productName}>อาหารเปียกพรีเมียม 6 ซอง</div>
+      {cartItems.map((item, index) => (
+        <div className={styles.cartItem} key={item.id}>
+          <img className={styles.productImg} src={item.img} />
 
-          <div className={styles.productDesc}>เนื้อแน่น ไม่เค็ม</div>
+          <div className={styles.productInfo}>
+            <div className={styles.productName}>{item.name}</div>
 
-          <div className={styles.bottomRow}>
-            <div className={styles.productPrice}>279 THB</div>
+            <div className={styles.productDesc}>สินค้า</div>
 
-            <div className={styles.qtyBox}>
-              <button className={styles.qtyBtn}>-</button>
-              <div className={styles.qtyNumber}>4</div>
-              <button className={styles.qtyBtn}>+</button>
+            <div className={styles.bottomRow}>
+              <div className={styles.productPrice}>
+                {item.price} THB
+              </div>
+
+              <div className={styles.qtyBox}>
+                <button
+                  className={styles.qtyBtn}
+                  onClick={() => decreaseQty(index)}
+                >
+                  -
+                </button>
+
+                <div className={styles.qtyNumber}>{item.qty}</div>
+
+                <button
+                  className={styles.qtyBtn}
+                  onClick={() => increaseQty(index)}
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ))}
 
-      <div className={styles.cartItem}>
-        <img
-          className={styles.productImg}
-          src="https://images.unsplash.com/photo-1503431128871-cd250803fa41?w=400"
-        />
+      {/* PAYMENT */}
 
-        <div className={styles.productInfo}>
-          <div className={styles.productName}>อาหารเปียกพรีเมียม 6 ซอง</div>
-
-          <div className={styles.productDesc}>เนื้อแน่น ไม่เค็ม</div>
-
-          <div className={styles.bottomRow}>
-            <div className={styles.productPrice}>279 THB</div>
-
-            <div className={styles.qtyBox}>
-              <button className={styles.qtyBtn}>-</button>
-              <div className={styles.qtyNumber}>4</div>
-              <button className={styles.qtyBtn}>+</button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className={styles.paymentBox}>
         <div className={styles.paymentTitle}>ข้อมูลการชำระเงิน</div>
 
         <div className={styles.paymentRow}>
           <span className={styles.paymentLabel}>รวมการสั่งซื้อ</span>
-          <span className={styles.paymentValue}>837 THB</span>
+          <span className={styles.paymentValue}>{subtotal} THB</span>
         </div>
 
         <div className={styles.paymentRow}>
           <span className={styles.paymentLabel}>การจัดส่ง</span>
-          <span className={styles.paymentValue}>25 THB</span>
+          <span className={styles.paymentValue}>{shipping} THB</span>
         </div>
 
         <div className={styles.divider}></div>
 
         <div className={styles.paymentTotal}>
           <span>ยอดชำระเงินทั้งหมด</span>
-          <span>862 THB</span>
+          <span>{totalPrice} THB</span>
         </div>
       </div>
 
+      {/* CHECKOUT */}
+
       <div className={styles.checkoutBar}>
-        <div className={styles.checkoutPrice}>304 THB</div>
+        <div className={styles.checkoutPrice}>{totalPrice} THB</div>
 
         <button
           className={styles.checkoutBtn}
+          disabled={!cartItems.length}
           onClick={() => setOpenPayment(true)}
         >
           ชำระเงิน
         </button>
       </div>
 
-      <PaymentModal open={openPayment} onClose={() => setOpenPayment(false)} />
+      {/* MODALS */}
+
+      <PaymentModal
+        open={openPayment}
+        onClose={() => setOpenPayment(false)}
+        onSuccess={() => {
+          saveOrder();
+          setOpenSuccess(true);
+        }}
+      />
+
+      <SuccessModal
+        open={openSuccess}
+        onClose={() => setOpenSuccess(false)}
+      />
+
       <TabBar />
     </div>
   );

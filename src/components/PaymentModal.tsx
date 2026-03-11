@@ -3,19 +3,21 @@ import styles from "../pages/css/PaymentModal.module.css";
 type Props = {
   open: boolean;
   onClose: () => void;
+  onSuccess: () => void;
 };
 
-export default function PaymentModal({ open, onClose }: Props) {
+export default function PaymentModal({ open, onClose, onSuccess }: Props) {
   if (!open) return null;
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-
         {/* HEADER */}
 
         <div className={styles.header}>
-          <button className={styles.closeBtn} onClick={onClose}>✕</button>
+          <button className={styles.closeBtn} onClick={onClose}>
+            ✕
+          </button>
           <div className={styles.title}>สแกนเพื่อชำระเงิน</div>
         </div>
 
@@ -42,10 +44,15 @@ export default function PaymentModal({ open, onClose }: Props) {
 
         {/* BUTTON */}
 
-        <button className={styles.payBtn}>
+        <button
+          className={styles.payBtn}
+          onClick={() => {
+            onClose(); 
+            onSuccess();
+          }}
+        >
           ชำระเงินแล้ว
         </button>
-
       </div>
     </div>
   );
