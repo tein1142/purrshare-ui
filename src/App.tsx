@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import liff from "@line/liff";
 import Home from "./pages/Home";
 import Select from "./pages/Select";
 import Products from "./pages/Products";
@@ -8,7 +10,32 @@ import Star from "./pages/Star";
 import Sell from "./pages/Sell";
 import Donate from "./pages/Donate";
 
+let liffInitPromise: Promise<void> | null = null;
+
+async function initializeLiff(): Promise<void> {
+  const liffId = import.meta.env.VITE_LIFF_ID;
+
+  if (!liffId) {
+    console.warn("[LIFF] Missing VITE_LIFF_ID. Skipping LIFF initialization.");
+    return;
+  }
+
+  liffInitPromise ??= liff.init({ liffId }).then(() => {
+    if (!liff.isLoggedIn()) {
+      liff.login({ redirectUri: globalThis.location.href });
+    }
+  });
+
+  await liffInitPromise;
+}
+
 function App() {
+  useEffect(() => {
+    void initializeLiff().catch((error) => {
+      console.error("[LIFF] Initialization failed:", error);
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
