@@ -1,7 +1,7 @@
 .app {
   --scale: 0.8;
 
-  --bg: #ffffff;
+  --bg: #faf5f1;
   --panel: #fbf3cf;
   --panel2: #f8edc3;
   --card: #ffffff;
@@ -337,4 +337,43 @@
   text-align: center;
   font-size: 13px;
   font-weight: 700;
+}
+
+@media (max-width: 390px) {
+  .app {
+    --scale: 0.72;
+  }
+
+  .controls {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ctrlBtn {
+    min-width: calc(50% - 8px);
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    --scale: 1;
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .top {
+    border-bottom-left-radius: calc(var(--r22) * 1.2);
+    border-bottom-right-radius: calc(var(--r22) * 1.2);
+  }
+}
+
+@media (min-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }

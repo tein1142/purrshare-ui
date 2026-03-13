@@ -380,3 +380,41 @@
   color: #000;
 }
 
+@media (max-width: 390px) {
+  .header {
+    padding: 16px 12px 12px;
+  }
+
+  .cartItem {
+    margin: 10px 10px 0;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .productImg {
+    width: 68px;
+    height: 68px;
+  }
+
+  .checkoutBar {
+    padding: 12px;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cartpage {
+    max-width: 960px;
+  }
+
+  .checkoutBar {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, 960px);
+    max-width: 960px;
+    bottom: 0;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+  }
+}
+

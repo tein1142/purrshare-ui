@@ -355,3 +355,32 @@
   font-weight: 900;
   letter-spacing: 2px;
 }
+
+@media (max-width: 390px) {
+  .page {
+    padding-bottom: 84px;
+  }
+
+  .heroContent {
+    padding: 14px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .page {
+    max-width: 960px;
+  }
+
+  .heroContent {
+    padding: 22px;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

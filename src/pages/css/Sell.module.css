@@ -513,3 +513,36 @@
     --scale: 1.15;
   }
 }
+
+@media (max-width: 390px) {
+  .app {
+    --scale: 0.9;
+  }
+
+  .grid {
+    gap: calc(10px * var(--scale));
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .top,
+  .content {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

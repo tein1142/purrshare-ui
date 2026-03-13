@@ -183,3 +183,60 @@
   }
 
 }
+
+@media (max-width: 389px) {
+  .homePage {
+    padding-top: 18px;
+  }
+
+  .logo {
+    width: 76vw;
+    max-width: 230px;
+    margin-bottom: 26px;
+  }
+
+  .gridTop {
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .gridBottom {
+    padding: 0 12px;
+  }
+
+  .tile img {
+    max-width: 136px;
+  }
+}
+
+@media (min-width: 768px) {
+  .homePage {
+    padding-top: 34px;
+  }
+
+  .logo {
+    width: 34vw;
+    max-width: 340px;
+    margin-bottom: 44px;
+  }
+
+  .gridTop,
+  .gridBottom {
+    width: min(100%, 1080px);
+    padding: 0 28px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gridTop {
+    gap: 28px;
+  }
+
+  .tile img {
+    max-width: 230px;
+  }
+
+  .gridBottom .tile img {
+    max-width: 260px;
+  }
+}

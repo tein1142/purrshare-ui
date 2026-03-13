@@ -47,7 +47,7 @@ const sampleImages = [
   "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
   "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=800&q=70",
   "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=70",
-  "https://images.unsplash.com/photo-1601758228006-964e41e11d5f?auto=format&fit=crop&w=800&q=70",
+  "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
 ];
 
 const categoryKeys: Category[] = [

@@ -120,6 +120,46 @@ const products: Product[] = [
     createdAt: 1720051200000,
     sold: 29,
   },
+  {
+    id: "p-9",
+    name: "ชุดน่ารักแมวลายสตริป",
+    price: 349,
+    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f",
+    desc: "ชุดลายเรียบร้อย เหมาะถ่ายรูป",
+    category: "outfit",
+    createdAt: 1716000000000,
+    sold: 41,
+  },
+  {
+    id: "p-10",
+    name: "โบว์สีทองประดับ",
+    price: 129,
+    img: "https://images.unsplash.com/photo-1584515933487-779824d29309",
+    desc: "โบว์สุดน่ารักตรงลำคอแมว",
+    category: "bow",
+    createdAt: 1715700000000,
+    sold: 134,
+  },
+  {
+    id: "p-11",
+    name: "ป้ายชื่อแมวทอง",
+    price: 89,
+    img: "https://images.unsplash.com/photo-1574158622682-e40e69881006",
+    desc: "ป้ายชื่อแกะสลักชื่อแมวได้",
+    category: "tag",
+    createdAt: 1715900000000,
+    sold: 203,
+  },
+  {
+    id: "p-12",
+    name: "หมวกสายรัดแมว",
+    price: 159,
+    img: "https://images.unsplash.com/photo-1583947582886-f40ec95dd752",
+    desc: "หมวกแมวเบาเหมาะถ่ายรูป",
+    category: "hat",
+    createdAt: 1716100000000,
+    sold: 87,
+  },
 ];
 
 const categoryLabel: Record<string, string> = {
@@ -137,6 +177,13 @@ const categoryLabel: Record<string, string> = {
   hat: "หมวก",
   new: "ของใหม่ล่าสุด",
   popular: "สินค้ายอดนิยม",
+};
+
+// Map from Select routeCat to product categories
+const categoryGroupMapping: Record<string, ProductCategory[]> = {
+  fashion: ["collar", "leash", "outfit", "bow", "tag", "sweater", "hat"],
+  daily: ["toys", "furniture", "daily"],
+  health: ["food", "daily"],
 };
 
 export default function Product() {
@@ -195,7 +242,14 @@ export default function Product() {
     });
 
     if (selectedCategory && selectedCategory !== "new" && selectedCategory !== "popular") {
-      list = list.filter((p) => p.category === selectedCategory);
+      // Check if this is a group category (fashion, daily, health)
+      const groupCategories = categoryGroupMapping[selectedCategory];
+      if (groupCategories) {
+        list = list.filter((p) => groupCategories.includes(p.category));
+      } else {
+        // Direct category match
+        list = list.filter((p) => p.category === selectedCategory);
+      }
     }
 
     if (visibleTab === "price") {
