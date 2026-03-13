@@ -1,13 +1,10 @@
 import TabBar from "../components/TabBar";
 import styles from "./css/Cart.module.css";
-import { useNavigate } from "react-router-dom";
 import PaymentModal from "../components/PaymentModal";
 import SuccessModal from "../components/SuccessModal";
 import { useState, useEffect } from "react";
 
 export default function Cart() {
-  const navigate = useNavigate();
-
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [openPayment, setOpenPayment] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);

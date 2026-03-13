@@ -326,3 +326,15 @@
   border-color: #e4d9ad;
   color: #111;
 }
+
+.emptyState {
+  grid-column: 1 / -1;
+  border: 2px dashed #d8ccb0;
+  border-radius: 14px;
+  background: #fffdf7;
+  color: #645a4d;
+  padding: 18px 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}

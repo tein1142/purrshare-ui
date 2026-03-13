@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import styles from "./css/Products.module.css";
-import { useNavigate } from "react-router-dom";
 import TabBar from "../components/TabBar";
 import ProductModal from "../components/ProductModal";
 import AddCartModal from "../components/AddCartModal";
+
+type ProductCategory =
+  | "food"
+  | "litter"
+  | "daily"
+  | "furniture"
+  | "toys"
+  | "collar"
+  | "leash"
+  | "outfit"
+  | "bow"
+  | "tag"
+  | "sweater"
+  | "hat"
+  | "other";
 
 type Product = {
   id: string;
@@ -11,44 +26,199 @@ type Product = {
   price: number;
   img: string;
   desc: string;
+  category: ProductCategory;
+  createdAt: number;
+  sold: number;
+};
+
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  img: string;
+  qty: number;
 };
 
 const products: Product[] = [
   {
-    id: "1",
+    id: "p-1",
+    name: "อาหารแมวเกรดโฮลิสติก 1.5kg",
+    price: 359,
+    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42",
+    desc: "โปรตีนสูง ย่อยง่าย เหมาะกับแมวโต",
+    category: "food",
+    createdAt: 1711065600000,
+    sold: 91,
+  },
+  {
+    id: "p-2",
+    name: "ทรายแมวจับตัวไว กลิ่นลาเวนเดอร์",
+    price: 249,
+    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131",
+    desc: "คุมกลิ่นดี ฝุ่นน้อย ใช้งานได้นาน",
+    category: "litter",
+    createdAt: 1712448000000,
+    sold: 120,
+  },
+  {
+    id: "p-3",
+    name: "ชามอาหารสเตนเลสกันลื่น",
+    price: 189,
+    img: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4",
+    desc: "ทำความสะอาดง่าย เหมาะกับการใช้งานทุกวัน",
+    category: "daily",
+    createdAt: 1713657600000,
+    sold: 53,
+  },
+  {
+    id: "p-4",
+    name: "ที่นอนแมวทรงโดนัท",
+    price: 429,
+    img: "https://images.unsplash.com/photo-1503431128871-cd250803fa41",
+    desc: "นุ่มพิเศษ รองรับสรีระการนอนของแมว",
+    category: "furniture",
+    createdAt: 1714608000000,
+    sold: 38,
+  },
+  {
+    id: "p-5",
+    name: "ของเล่นไม้ตกแมวพร้อมพู่",
+    price: 119,
+    img: "https://images.unsplash.com/photo-1532386236358-a33d8a9434e3",
+    desc: "ช่วยกระตุ้นการเคลื่อนไหวและลดความเครียด",
+    category: "toys",
+    createdAt: 1716854400000,
+    sold: 167,
+  },
+  {
+    id: "p-6",
     name: "ปลอกคอผ้าลายจุด พร้อมกระดิ่ง",
     price: 189,
     img: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6",
     desc: "นุ่ม เบา ปรับได้ 3 ระดับ",
+    category: "collar",
+    createdAt: 1717286400000,
+    sold: 84,
   },
   {
-    id: "2",
-    name: "ปลอกคอหนังเทียม Minimal",
-    price: 259,
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131",
-    desc: "ดูแพง ใส่สบาย ไม่บาดขน",
+    id: "p-7",
+    name: "สายจูงไนลอนสะท้อนแสง",
+    price: 239,
+    img: "https://images.unsplash.com/photo-1543852786-1cf6624b9987",
+    desc: "เหนียวทน จับถนัดมือ เหมาะเดินเล่นกลางคืน",
+    category: "leash",
+    createdAt: 1718841600000,
+    sold: 41,
+  },
+  {
+    id: "p-8",
+    name: "เสื้อกันหนาวแมวลายสก็อต",
+    price: 279,
+    img: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13",
+    desc: "ผ้านิ่ม ใส่สบาย เหมาะอากาศเย็น",
+    category: "sweater",
+    createdAt: 1720051200000,
+    sold: 29,
   },
 ];
 
-export default function Product() {
-  const navigate = useNavigate();
+const categoryLabel: Record<string, string> = {
+  food: "อาหารและโภชนาการ",
+  litter: "ห้องน้ำและทรายแมว",
+  daily: "ของใช้ประจำวัน",
+  furniture: "ที่นอนและเฟอร์นิเจอร์",
+  toys: "ของเล่น",
+  collar: "ปลอกคอ",
+  leash: "สายจูง",
+  outfit: "ชุดน่ารัก",
+  bow: "โบว์",
+  tag: "ป้ายชื่อ",
+  sweater: "เสื้อกันหนาว",
+  hat: "หมวก",
+  new: "ของใหม่ล่าสุด",
+  popular: "สินค้ายอดนิยม",
+};
 
+export default function Product() {
+  const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState("newest");
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showCartModal, setShowCartModal] = useState(false);
-  const filtered = products.filter(
-    (p) =>
-      p.name.toLowerCase().includes(query.toLowerCase()) ||
-      p.desc.toLowerCase().includes(query.toLowerCase()),
-  );
+  const [customProducts, setCustomProducts] = useState<Product[]>([]);
+
+  const selectedCategory = (searchParams.get("cat") || "").toLowerCase();
+
+  useEffect(() => {
+    const loadCustomProducts = () => {
+      try {
+        const raw = localStorage.getItem("ps_user_products") || "[]";
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) {
+          setCustomProducts([]);
+          return;
+        }
+        setCustomProducts(parsed as Product[]);
+      } catch {
+        setCustomProducts([]);
+      }
+    };
+
+    loadCustomProducts();
+    window.addEventListener("products-updated", loadCustomProducts);
+
+    return () => {
+      window.removeEventListener("products-updated", loadCustomProducts);
+    };
+  }, []);
+
+  const visibleTab =
+    selectedCategory === "popular"
+      ? "top"
+      : selectedCategory === "new"
+      ? "newest"
+      : activeTab;
+
+  const subtitle = selectedCategory
+    ? categoryLabel[selectedCategory] || "หมวดหมู่สินค้า"
+    : "Purrshare";
+
+  const shownProducts = useMemo(() => {
+    const merged = [...customProducts, ...products];
+
+    let list = merged.filter((p) => {
+      const normalizedQuery = query.toLowerCase();
+      return (
+        p.name.toLowerCase().includes(normalizedQuery) ||
+        p.desc.toLowerCase().includes(normalizedQuery)
+      );
+    });
+
+    if (selectedCategory && selectedCategory !== "new" && selectedCategory !== "popular") {
+      list = list.filter((p) => p.category === selectedCategory);
+    }
+
+    if (visibleTab === "price") {
+      list = [...list].sort((a, b) => a.price - b.price);
+    } else if (visibleTab === "top") {
+      list = [...list].sort((a, b) => b.sold - a.sold);
+    } else {
+      list = [...list].sort((a, b) => b.createdAt - a.createdAt);
+    }
+
+    if (visibleTab === "filter") {
+      list = list.filter((p) => p.price <= 250);
+    }
+
+    return list;
+  }, [customProducts, query, selectedCategory, visibleTab]);
 
   function addToCart(product: Product) {
     try {
       const raw = localStorage.getItem("ps_cart") || "[]";
-      const cart = JSON.parse(raw);
+      const cart = JSON.parse(raw) as CartItem[];
 
-      const existing = cart.find((item: any) => item.id === product.id);
+      const existing = cart.find((item) => item.id === product.id);
 
       if (existing) {
         existing.qty += 1;
@@ -92,12 +262,12 @@ export default function Product() {
         </div>
 
         <div className={styles.title}>รายการสินค้า</div>
-        <div className={styles.subtitle}>Purrshare</div>
+        <div className={styles.subtitle}>{subtitle}</div>
 
         <div className={styles.controls}>
           <button
             className={`${styles.ctrlBtn} ${
-              activeTab === "newest" ? styles.active : ""
+              visibleTab === "newest" ? styles.active : ""
             }`}
             onClick={() => setActiveTab("newest")}
           >
@@ -106,7 +276,7 @@ export default function Product() {
 
           <button
             className={`${styles.ctrlBtn} ${
-              activeTab === "top" ? styles.active : ""
+              visibleTab === "top" ? styles.active : ""
             }`}
             onClick={() => setActiveTab("top")}
           >
@@ -115,7 +285,7 @@ export default function Product() {
 
           <button
             className={`${styles.ctrlBtn} ${
-              activeTab === "price" ? styles.active : ""
+              visibleTab === "price" ? styles.active : ""
             }`}
             onClick={() => setActiveTab("price")}
           >
@@ -124,7 +294,7 @@ export default function Product() {
 
           <button
             className={`${styles.ctrlBtn} ${
-              activeTab === "filter" ? styles.active : ""
+              visibleTab === "filter" ? styles.active : ""
             }`}
             onClick={() => setActiveTab("filter")}
           >
@@ -135,7 +305,7 @@ export default function Product() {
 
       {/* GRID */}
       <main className={styles.grid}>
-        {filtered.map((p) => (
+        {shownProducts.map((p) => (
           <div
             key={p.id}
             className={styles.card}
@@ -154,6 +324,12 @@ export default function Product() {
             </div>
           </div>
         ))}
+
+        {!shownProducts.length && (
+          <div className={styles.emptyState}>
+            ไม่พบสินค้าที่ตรงเงื่อนไข ลองเปลี่ยนหมวดหรือคำค้นหา
+          </div>
+        )}
 
         {selectedProduct && (
           <ProductModal

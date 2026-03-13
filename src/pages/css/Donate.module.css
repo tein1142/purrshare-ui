@@ -1,0 +1,93 @@
+.page {
+  min-height: 100vh;
+  background: #fffdf7;
+  padding-bottom: 90px;
+}
+
+.header {
+  background: #fbf3cf;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  padding: 16px;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #2b241d;
+}
+
+.subTitle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #62574b;
+}
+
+.content {
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 10px;
+  background: #fff;
+  border: 2px solid #efe4c5;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  min-height: 130px;
+  object-fit: cover;
+}
+
+.body {
+  padding: 10px 10px 10px 0;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: #201b17;
+}
+
+.desc {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #5f574f;
+}
+
+.amount {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #8a2b23;
+}
+
+.donateBtn {
+  margin-top: 8px;
+  border: 0;
+  border-radius: 10px;
+  background: #f0bb3c;
+  color: #352a16;
+  width: 100%;
+  font: inherit;
+  font-weight: 800;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.message {
+  border-radius: 12px;
+  background: #e9f5e8;
+  color: #2f6a3a;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 12px;
+}
