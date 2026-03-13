@@ -1,4 +1,6 @@
 import styles from "../pages/css/PaymentModal.module.css";
+import CloseIcon from "./CloseButton";
+import ModalShell from "./ModalShell";
 
 type Props = {
   open: boolean;
@@ -6,19 +8,15 @@ type Props = {
   onSuccess: () => void;
 };
 
-export default function PaymentModal({ open, onClose, onSuccess }: Props) {
-  if (!open) return null;
-
+export default function PaymentModal({ open, onClose, onSuccess }: Readonly<Props>) {
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
+    <ModalShell open={open} onClose={onClose} panelClassName={styles.modal}>
         {/* HEADER */}
 
         <div className={styles.header}>
-          <button className={styles.closeBtn} onClick={onClose}>
-            ✕
-          </button>
+          <CloseIcon onClose={onClose} />
           <div className={styles.title}>สแกนเพื่อชำระเงิน</div>
+          <div className={styles.topSpacer} />
         </div>
 
         {/* QR */}
@@ -27,6 +25,7 @@ export default function PaymentModal({ open, onClose, onSuccess }: Props) {
           <img
             className={styles.qr}
             src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=promptpay-demo"
+            alt="QR PromptPay"
           />
         </div>
 
@@ -53,7 +52,6 @@ export default function PaymentModal({ open, onClose, onSuccess }: Props) {
         >
           ชำระเงินแล้ว
         </button>
-      </div>
-    </div>
+    </ModalShell>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../pages/css/EditProfileModal.module.css";
 import CloseIcon from "./CloseButton";
+import ModalShell from "./ModalShell";
 
 type Props = {
   open: boolean;
@@ -16,7 +17,7 @@ export default function EditProfileModal({
   setProfile,
   onClose,
   onSave,
-}: Props) {
+}: Readonly<Props>) {
   const [tempProfile, setTempProfile] = useState(profile);
 
   useEffect(() => {
@@ -28,8 +29,7 @@ export default function EditProfileModal({
   if (!open) return null;
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.sheet}>
+    <ModalShell open={open} onClose={onClose} panelClassName={styles.sheet}>
         <div className={styles.top}>
           <CloseIcon onClose={onClose} />
 
@@ -40,8 +40,9 @@ export default function EditProfileModal({
 
         <div className={styles.body}>
           <div className={styles.field}>
-            <label>ชื่อ-นามสกุล</label>
+            <label htmlFor="profileName">ชื่อ-นามสกุล</label>
             <input
+              id="profileName"
               value={tempProfile.name}
               onChange={(e) =>
                 setTempProfile({ ...tempProfile, name: e.target.value })
@@ -50,8 +51,9 @@ export default function EditProfileModal({
           </div>
 
           <div className={styles.field}>
-            <label>อีเมล</label>
+            <label htmlFor="profileEmail">อีเมล</label>
             <input
+              id="profileEmail"
               value={tempProfile.email}
               onChange={(e) =>
                 setTempProfile({ ...tempProfile, email: e.target.value })
@@ -60,8 +62,9 @@ export default function EditProfileModal({
           </div>
 
           <div className={styles.field}>
-            <label>เบอร์โทร</label>
+            <label htmlFor="profilePhone">เบอร์โทร</label>
             <input
+              id="profilePhone"
               value={tempProfile.phone}
               onChange={(e) =>
                 setTempProfile({ ...tempProfile, phone: e.target.value })
@@ -70,8 +73,9 @@ export default function EditProfileModal({
           </div>
 
           <div className={styles.field}>
-            <label>ที่อยู่</label>
+            <label htmlFor="profileAddr">ที่อยู่</label>
             <input
+              id="profileAddr"
               value={tempProfile.addr}
               onChange={(e) =>
                 setTempProfile({ ...tempProfile, addr: e.target.value })
@@ -89,7 +93,6 @@ export default function EditProfileModal({
             บันทึก
           </button>
         </div>
-      </div>
-    </div>
+    </ModalShell>
   );
 }

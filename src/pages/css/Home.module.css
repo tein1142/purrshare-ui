@@ -51,6 +51,9 @@
 /* TILE */
 
 .tile {
+  border: 0;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -63,16 +66,97 @@
   transition: transform 0.15s ease;
 }
 
-/* BOTTOM TILE BIGGER */
-
-/* .gridBottom .tile img {
-  max-width: 170px;
-} */
-
 /* TAP EFFECT */
 
 .tile:active img {
   transform: scale(0.92);
+}
+
+.loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+}
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loadingLogo {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 180px;
+  opacity: 0.15;
+}
+
+.cat {
+  position: absolute;
+  font-size: 72px;
+  top: 55%;
+  transform: translateY(-50%);
+  left: -120px;
+}
+
+.jump {
+  animation: jumpLogo 0.9s ease forwards, runAfter 1.2s linear 0.9s forwards;
+}
+
+@keyframes jumpLogo {
+  0% {
+    left: -120px;
+    transform: translateY(-50%) translateY(0);
+  }
+  40% {
+    left: 40vw;
+    transform: translateY(-50%) translateY(-80px);
+  }
+  70% {
+    left: 55vw;
+    transform: translateY(-50%) translateY(0);
+  }
+  100% {
+    left: 55vw;
+    transform: translateY(-50%) translateY(0);
+  }
+}
+
+@keyframes runAfter {
+  from {
+    left: 55vw;
+  }
+  to {
+    left: 120vw;
+  }
+}
+
+.loadingText {
+  position: absolute;
+  bottom: 25%;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  opacity: 0.8;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* ------------------ */

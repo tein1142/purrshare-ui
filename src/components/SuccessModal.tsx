@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../pages/css/SuccessModal.module.css";
 import { useNavigate } from "react-router-dom";
+import ModalShell from "./ModalShell";
 
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
   onClose: () => void;
 };
 
-export default function SuccessModal({ open, onClose }: Props) {
+export default function SuccessModal({ open, onClose }: Readonly<Props>) {
   const navigate = useNavigate();
   
   const [loading, setLoading] = useState(true);
@@ -24,11 +25,8 @@ export default function SuccessModal({ open, onClose }: Props) {
 
   }, [open]);
 
-  if (!open) return null;
-
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
+    <ModalShell open={open} onClose={onClose} panelClassName={styles.modal}>
 
         {loading ? (
           <>
@@ -61,7 +59,6 @@ export default function SuccessModal({ open, onClose }: Props) {
           </>
         )}
 
-      </div>
-    </div>
+    </ModalShell>
   );
 }

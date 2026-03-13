@@ -1,22 +1,57 @@
 import styles from "../pages/css/ProductModal.module.css";
+import CloseIcon from "./CloseButton";
+import ModalShell from "./ModalShell";
 
-export default function ProductModal({ product, onClose, onAddCart }: any) {
+type Product = {
+  category:
+    | "food"
+    | "litter"
+    | "daily"
+    | "furniture"
+    | "toys"
+    | "collar"
+    | "leash"
+    | "outfit"
+    | "bow"
+    | "tag"
+    | "sweater"
+    | "hat"
+    | "other";
+  id: string;
+  createdAt: number;
+  sold: number;
+  img: string;
+  name: string;
+  desc: string;
+  price: number;
+};
+
+type Props = {
+  product: Product;
+  onClose: () => void;
+  onAddCart: (product: Product) => void;
+};
+
+export default function ProductModal({
+  product,
+  onClose,
+  onAddCart,
+}: Readonly<Props>) {
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <ModalShell open onClose={onClose} panelClassName={styles.modal}>
         {/* header */}
         <div className={styles.header}>
-          <button className={styles.closeBtn} onClick={onClose}>
-            ✕
-          </button>
-
+          <div className={styles.closeBtnPosition}>
+            <CloseIcon onClose={onClose} />
+          </div>
           <div className={styles.title}>รายละเอียดสินค้า</div>
+          <div className={styles.topSpacer} />
         </div>
 
         {/* image */}
         <div className={styles.productCard}>
           <div className={styles.productImage}>
-            <img src={product.img} />
+            <img src={product.img} alt={product.name} />
           </div>
 
           {/* info */}
@@ -75,7 +110,10 @@ export default function ProductModal({ product, onClose, onAddCart }: any) {
           <div className={styles.sellerRow}>
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
-                <img src="https://robohash.org/fafb2830147a924143b9dd45b8250089?set=set4&bgset=&size=400x400" />
+                <img
+                  src="https://robohash.org/fafb2830147a924143b9dd45b8250089?set=set4&bgset=&size=400x400"
+                  alt="Meow & Co."
+                />
               </div>
 
               <div className={styles.sellerName}>Meow & Co.</div>
@@ -84,7 +122,10 @@ export default function ProductModal({ product, onClose, onAddCart }: any) {
 
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
-                <img src="https://robohash.org/76bf070195f6c4772b2c57f5bbd52e6a?set=set4&bgset=&size=400x400" />
+                <img
+                  src="https://robohash.org/76bf070195f6c4772b2c57f5bbd52e6a?set=set4&bgset=&size=400x400"
+                  alt="ร้านแมวอ้วน"
+                />
               </div>
 
               <div className={styles.sellerName}>ร้านแมวอ้วน</div>
@@ -111,7 +152,6 @@ export default function ProductModal({ product, onClose, onAddCart }: any) {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+    </ModalShell>
   );
 }

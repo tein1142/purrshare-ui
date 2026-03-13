@@ -5,14 +5,14 @@ type Props = {
   onClose?: () => void;
 };
 
-export default function CloseIcon({ size = 20, onClose }: Props) {
+export default function CloseIcon({ size = 20, onClose }: Readonly<Props>) {
   return (
-    <button className={styles.closeBtn} onClick={onClose}>
-      <svg width={size} height="18" viewBox="0 0 24 24">
+    <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="ปิด">
+      <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
         <path
-          d="M6 6L18 18M18 6L6 18"
+          d="M6 6l12 12M18 6L6 18"
           stroke="black"
-          strokeWidth="3"
+          strokeWidth="3.2"
           strokeLinecap="round"
         />
       </svg>

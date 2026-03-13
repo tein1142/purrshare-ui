@@ -64,7 +64,9 @@ export default function Select() {
                 className={styles.brandLink}
                 onClick={() => navigate("/")}
               >
-                <img src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png" />
+                <img
+                  src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+                />
               </div>
             </div>
 

@@ -1,34 +1,37 @@
-/* html, body, #root {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-  */
-* {
-  box-sizing: border-box;
+:root {
+  --ui-scale: 2;
+  --ui-bg: #ffffff;
+  --ui-panel: #fbf3cf;
+  --ui-panel-2: #f8edc3;
+  --ui-card: #ffffff;
+  --ui-line: #3a2a27;
+  --ui-text: #111827;
+  --ui-muted: rgba(17, 24, 39, 0.7);
+  --ui-accent: #d24a32;
+  --ui-r16: calc(16px * var(--ui-scale));
+  --ui-r18: calc(18px * var(--ui-scale));
+  --ui-r22: calc(22px * var(--ui-scale));
+  --ui-border: calc(2px * var(--ui-scale));
+  --ui-shadow: 0 calc(5px * var(--ui-scale)) calc(16px * var(--ui-scale)) rgba(58, 42, 39, 0.12);
 }
 
 html,
 body,
 #root {
   width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  min-height: 100%;
   overflow-x: hidden;
-  color: #000;
-  font-family:
-    "Noto Sans Thai",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Arial,
-    sans-serif;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font-family: "Noto Sans Thai", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .page {
   width: 100vw;
   min-height: 100vh;
-  
 }

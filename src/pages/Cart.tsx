@@ -17,6 +17,7 @@ export default function Cart() {
   function updateCart(items: any[]) {
     setCartItems(items);
     localStorage.setItem("ps_cart", JSON.stringify(items));
+    globalThis.dispatchEvent(new Event("cart-updated"));
   }
 
   function increaseQty(index: number) {
@@ -61,6 +62,7 @@ export default function Cart() {
     localStorage.setItem("ps_pending", JSON.stringify(pending));
 
     localStorage.removeItem("ps_cart");
+    globalThis.dispatchEvent(new Event("cart-updated"));
 
     setCartItems([]);
   }
@@ -81,7 +83,7 @@ export default function Cart() {
 
       {cartItems.map((item, index) => (
         <div className={styles.cartItem} key={item.id}>
-          <img className={styles.productImg} src={item.img} />
+          <img className={styles.productImg} src={item.img} alt={item.name} />
 
           <div className={styles.productInfo}>
             <div className={styles.productName}>{item.name}</div>

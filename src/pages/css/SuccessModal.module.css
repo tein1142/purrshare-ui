@@ -11,8 +11,10 @@
 }
 
 .modal {
-  width: 86%;
-  max-width: 340px;
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
 
   background: #ffffff;
 
