@@ -8,10 +8,39 @@
 }
 
 .top {
+  position: relative;
   background: #fbf3cf;
   padding: 18px 16px 20px;
   border-bottom-left-radius: 26px;
   border-bottom-right-radius: 26px;
+}
+
+.logoBtn {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.logoBtn:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .topTitle {

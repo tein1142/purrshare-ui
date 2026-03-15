@@ -9,6 +9,7 @@
 /* HEADER */
 
 .top {
+  position: relative;
   background: #fbf3cf;
   padding: 20px 16px 16px;
   border-bottom-left-radius: 28px;
@@ -16,8 +17,7 @@
 }
 
 .topRow {
-  /* display: flex;
-  align-items: center; */
+  position: relative;
 }
 
 .topTitle {
@@ -28,6 +28,34 @@
 
 .ghost {
   width: 36px;
+}
+
+.logoBtn {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.logoBtn:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 /* HERO */

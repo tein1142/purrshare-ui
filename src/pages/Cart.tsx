@@ -3,8 +3,10 @@ import styles from "./css/Cart.module.css";
 import PaymentModal from "../components/PaymentModal";
 import SuccessModal from "../components/SuccessModal";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [openPayment, setOpenPayment] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -72,9 +74,18 @@ export default function Cart() {
       {/* HEADER */}
 
       <div className={styles.header}>
-        {/* <button className={styles.backBtn} onClick={() => navigate("/products")}>
-          ‹
-        </button> */}
+        <button
+          type="button"
+          className={styles.logoBtn}
+          onClick={() => navigate("/select")}
+          aria-label="กลับหน้าหมวดหมู่"
+        >
+          <img
+            className={styles.logoImg}
+            src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+            alt="Purrshare"
+          />
+        </button>
 
         <div className={styles.title}>ตะกร้า</div>
       </div>

@@ -20,11 +20,8 @@ async function initializeLiff(): Promise<void> {
     return;
   }
 
-  liffInitPromise ??= liff.init({ liffId }).then(() => {
-    if (!liff.isLoggedIn()) {
-      liff.login({ redirectUri: globalThis.location.href });
-    }
-  });
+  // Initialize LIFF only. Do not force login so users can open the app directly.
+  liffInitPromise ??= liff.init({ liffId });
 
   await liffInitPromise;
 }

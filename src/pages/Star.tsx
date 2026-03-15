@@ -1,12 +1,27 @@
 import styles from "./css/Star.module.css";
 import Tabbar from "../components/TabBar";
+import { useNavigate } from "react-router-dom";
 
 export default function Star() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.page}>
       {/* HEADER */}
 
       <header className={styles.top}>
+        <button
+          type="button"
+          className={styles.logoBtn}
+          onClick={() => navigate("/select")}
+          aria-label="กลับหน้าหมวดหมู่"
+        >
+          <img
+            className={styles.logoImg}
+            src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+            alt="Purrshare"
+          />
+        </button>
         <div className={styles.topTitle}>อันดับและคุณภาพผู้ขาย</div>
       </header>
 

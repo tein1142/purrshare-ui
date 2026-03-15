@@ -953,10 +953,6 @@
   .app {
     max-width: 100%;
   }
-
-  .quickCats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
 
 @media (min-width: 768px) {

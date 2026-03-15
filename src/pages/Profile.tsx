@@ -2,8 +2,10 @@ import EditProfileModal from "../components/EditProfileModal";
 import TabBar from "../components/TabBar";
 import styles from "./css/Profile.module.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const [orders] = useState<any[]>(() => {
     try {
       const pending = JSON.parse(localStorage.getItem("ps_pending") || "[]");
@@ -60,13 +62,34 @@ export default function Profile() {
     setOpenEdit(false);
   };
 
+  const pendingItems = orders.flatMap((order) => {
+    const items = Array.isArray(order.items) ? order.items : [];
+
+    return items.map((item: any) => ({
+      ...item,
+      orderId: order.id,
+      orderStatus: order.status,
+    }));
+  });
+
   return (
     <div className={styles.page}>
       {/* TOP HEADER */}
 
       <header className={styles.top}>
         <div className={styles.topRow}>
-          <div className={styles.ghost}></div>
+          <button
+            type="button"
+            className={styles.logoBtn}
+            onClick={() => navigate("/select")}
+            aria-label="กลับหน้าหมวดหมู่"
+          >
+            <img
+              className={styles.logoImg}
+              src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+              alt="Purrshare"
+            />
+          </button>
           <div className={styles.topTitle}>โปรไฟล์</div>
         </div>
 
@@ -191,9 +214,7 @@ export default function Profile() {
         </div>
 
         <div className={styles.list}>
-          {(showAll ? orders : orders.slice(0, 3)).map((o, i) => {
-            const item = o.items[0];
-
+          {(showAll ? pendingItems : pendingItems.slice(0, 3)).map((item, i) => {
             return (
               <div key={i} className={styles.row}>
                 <div className={styles.left}>
@@ -203,7 +224,7 @@ export default function Profile() {
 
                   <div className={styles.txt}>
                     <div className={styles.t1}>{item.name}</div>
-                    <div className={styles.t2}>{o.total} THB</div>
+                    <div className={styles.t2}>จำนวน {item.qty ?? 1} ชิ้น</div>
                   </div>
                 </div>
 
