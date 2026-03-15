@@ -5,6 +5,7 @@ import SellQuickModal from "../components/SellQuickModal";
 import SellFormModal from "../components/SellFormModal";
 import SellDetailModal from "../components/SellDetailModal";
 import styles from "./css/Sell.module.css";
+import { useImageScan } from "../hooks/useImageScan";
 
 type Category =
   | "food"
@@ -142,6 +143,8 @@ export default function Sell() {
     return seed;
   });
   const [imgIndex, setImgIndex] = useState(0);
+  // Scan the candidate images and keep only the ones that actually load.
+  const validSampleImages = useImageScan(sampleImages);
 
   const [openQuick, setOpenQuick] = useState(false);
   const [openForm, setOpenForm] = useState(false);
@@ -206,7 +209,8 @@ export default function Sell() {
   };
 
   function cycleImage() {
-    setImgIndex((prev) => (prev + 1) % sampleImages.length);
+    if (validSampleImages.length === 0) return;
+    setImgIndex((prev) => (prev + 1) % validSampleImages.length);
   }
 
   function openQuickSheet() {
@@ -241,7 +245,7 @@ export default function Sell() {
       name: quickName.trim(),
       nameEn: quickName.trim(),
       price,
-      img: sampleImages[imgIndex],
+      img: validSampleImages[imgIndex],
       desc: formDesc.trim() || "สินค้าจากผู้ใช้งาน",
       descEn: formDesc.trim() || "User product",
       province: formProvince.trim(),
@@ -364,7 +368,7 @@ export default function Sell() {
         open={openQuick}
         onClose={() => setOpenQuick(false)}
         onCycleImage={cycleImage}
-        imageSrc={sampleImages[imgIndex]}
+        imageSrc={validSampleImages[imgIndex]}
         quickName={quickName}
         quickPrice={quickPrice}
         onChangeName={setQuickName}
@@ -381,7 +385,7 @@ export default function Sell() {
         open={openForm}
         onClose={() => setOpenForm(false)}
         onCycleImage={cycleImage}
-        imageSrc={sampleImages[imgIndex]}
+        imageSrc={validSampleImages[imgIndex]}
         formName={formName}
         formDesc={formDesc}
         formProvince={formProvince}
