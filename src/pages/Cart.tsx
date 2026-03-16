@@ -4,6 +4,7 @@ import PaymentModal from "../components/PaymentModal";
 import SuccessModal from "../components/SuccessModal";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import logo02 from "../assets/images/LOGO-02.png";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ export default function Cart() {
         >
           <img
             className={styles.logoImg}
-            src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+            src={logo02}
             alt="Purrshare"
           />
         </button>

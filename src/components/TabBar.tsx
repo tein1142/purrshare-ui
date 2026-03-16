@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "../pages/css/TabBar.module.css";
+import homeIcon from "../assets/icons/Home.png";
+import topListIcon from "../assets/icons/Toplist.png";
+import shopIcon from "../assets/icons/shop.png";
+import meIcon from "../assets/icons/Me.png";
 
 export default function TabBar() {
   const navigate = useNavigate();
@@ -15,25 +19,25 @@ export default function TabBar() {
         key: "home",
         path: "/",
         label: "หน้าแรก",
-        icon: "https://img5.pic.in.th/file/secure-sv1/icon-168f8d5a7adad294f0.png",
+        icon: homeIcon,
       },
       {
         key: "star",
         path: "/star",
         label: "อันดับ",
-        icon: "https://img5.pic.in.th/file/secure-sv1/icon-17.png",
+        icon: topListIcon,
       },
       {
         key: "cart",
         path: "/cart",
         label: "ตะกร้า",
-        icon: "https://img5.pic.in.th/file/secure-sv1/icon-1507d739c217dd05c2.png",
+        icon: shopIcon,
       },
       {
         key: "profile",
         path: "/profile",
         label: "โปรไฟล์",
-        icon: "https://img5.pic.in.th/file/secure-sv1/icon-18.png",
+        icon: meIcon,
       },
     ],
     []

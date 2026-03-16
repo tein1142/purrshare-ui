@@ -1,6 +1,9 @@
 import styles from "./css/Star.module.css";
 import Tabbar from "../components/TabBar";
 import { useNavigate } from "react-router-dom";
+import logo02 from "../assets/images/LOGO-02.png";
+import infoRichMenu from "../assets/images/Info_Rich_Menu-01.jpg";
+
 
 export default function Star() {
   const navigate = useNavigate();
@@ -18,7 +21,7 @@ export default function Star() {
         >
           <img
             className={styles.logoImg}
-            src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+            src={logo02}
             alt="Purrshare"
           />
         </button>
@@ -41,7 +44,7 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300" />
+                  <img src="/external/unsplash_1524504388940-b1c1722653e1.jpg" />
                 </div>
 
                 <div className={styles.pName}>Mimi Shop</div>
@@ -52,7 +55,7 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300" />
+                  <img src="/external/unsplash_1535713875002-d1d0cf377fde.jpg" />
                 </div>
 
                 <div className={styles.pName}>Purr Premium</div>
@@ -63,7 +66,7 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=300" />
+                  <img src="/external/unsplash_1544723795-3fb6469f5b39.jpg" />
                 </div>
 
                 <div className={styles.pName}>Catty Corner</div>
@@ -75,7 +78,7 @@ export default function Star() {
 
             {/* <div className={styles.feature}>
               <div className={styles.featImg}>
-                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=600" />
+                <img src="/external/unsplash_1543852786-1cf6624b9987.jpg?w=600" />
               </div>
 
               <div className={styles.featTxt}>
@@ -102,7 +105,7 @@ export default function Star() {
               <div className={styles.reviewLeft}>
                 <img
                   className={styles.rDot}
-                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  src="/external/randomuser_women_44.jpg"
                 />
 
                 <div>
@@ -118,7 +121,7 @@ export default function Star() {
               <div className={styles.reviewLeft}>
                 <img
                   className={styles.rDot}
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  src="/external/randomuser_men_32.jpg"
                 />
 
                 <div>
@@ -134,7 +137,7 @@ export default function Star() {
               <div className={styles.reviewLeft}>
                 <img
                   className={styles.rDot}
-                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  src="/external/randomuser_women_68.jpg"
                 />
 
                 <div>
@@ -172,7 +175,7 @@ export default function Star() {
         {/* INFO IMAGE */}
 
         <div className={styles.infoSection}>
-          <img src="https://img5.pic.in.th/file/secure-sv1/Info_Rich_Menu-01.jpg" />
+          <img src={infoRichMenu} alt="ข้อมูลเมนู" />
         </div>
       </div>
 

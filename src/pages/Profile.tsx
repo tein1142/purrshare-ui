@@ -3,6 +3,8 @@ import TabBar from "../components/TabBar";
 import styles from "./css/Profile.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import logo02 from "../assets/images/LOGO-02.png";
+
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -20,19 +22,19 @@ export default function Profile() {
       id: 1,
       name: "สินค้า",
       star: 4,
-      img: "https://placecats.com/neo/300/200",
+      img: "/external/placecats_neo_300_200.jpg",
     },
     {
       id: 2,
       name: "สินค้า",
       star: 4,
-      img: "https://placecats.com/millie/300/200",
+      img: "/external/placecats_millie_300_200.jpg",
     },
     {
       id: 3,
       name: "สินค้า",
       star: 4,
-      img: "https://placecats.com/poppy/300/200",
+      img: "/external/placecats_poppy_300_200.jpg",
     },
   ]);
 
@@ -86,7 +88,7 @@ export default function Profile() {
           >
             <img
               className={styles.logoImg}
-              src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+              src={logo02}
               alt="Purrshare"
             />
           </button>
@@ -101,7 +103,7 @@ export default function Profile() {
 
             <div className={styles.heroRow}>
               <div className={styles.avatarSingle}>
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" />
+                <img src="/external/randomuser_men_32.jpg" />
               </div>
 
               <div className={styles.petsCard}>
@@ -111,15 +113,15 @@ export default function Profile() {
 
                 <div className={styles.petsAvatars}>
                   <div className={styles.petA}>
-                    <img src="https://placecats.com/neo/300/200" />
+                    <img src="/external/placecats_neo_300_200.jpg" />
                   </div>
 
                   <div className={styles.petA}>
-                    <img src="https://placecats.com/millie/300/200" />
+                    <img src="/external/placecats_millie_300_200.jpg" />
                   </div>
 
                   <div className={styles.petA}>
-                    <img src="https://placecats.com/poppy/300/200" />
+                    <img src="/external/placecats_poppy_300_200.jpg" />
                   </div>
                 </div>
 

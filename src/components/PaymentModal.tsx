@@ -24,7 +24,7 @@ export default function PaymentModal({ open, onClose, onSuccess }: Readonly<Prop
         <div className={styles.qrCard}>
           <img
             className={styles.qr}
-            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=promptpay-demo"
+            src="/external/qr_promptpay_demo.png"
             alt="QR PromptPay"
           />
         </div>

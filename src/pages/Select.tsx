@@ -2,6 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styles from "./css/Select.module.css";
 import TabBar from "../components/TabBar";
+import logo02 from "../assets/images/LOGO-02.png";
+import foodIcon from "../assets/icons/Food.png";
+import toiletIcon from "../assets/icons/Toilet.png";
+import itemsIcon from "../assets/icons/Items.png";
+import bedIcon from "../assets/icons/Bed.png";
+import toysIcon from "../assets/icons/Toys.png";
+import newIcon from "../assets/icons/New.png";
+import topListIcon from "../assets/icons/Toplist.png";
 
 type LifestyleItem = {
   name: string;
@@ -23,13 +31,13 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "fashionRow",
     routeCat: "fashion",
     items: [
-      { name: "ปลอกคอ", cat: "collar", img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131", hint: "ลุคน่ารัก" },
-      { name: "สายจูง", cat: "leash", img: "https://images.unsplash.com/photo-1543852786-1cf6624b9987", hint: "พาเดินเล่น" },
-      { name: "ชุดน่ารัก", cat: "outfit", img: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13", hint: "แต่งตัววันพิเศษ" },
-      { name: "โบว์", cat: "bow", img: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6", hint: "เพิ่มความคิวท์" },
-      { name: "ป้ายชื่อ", cat: "tag", img: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4", hint: "ปลอดภัยขึ้น" },
-      { name: "เสื้อกันหนาว", cat: "sweater", img: "https://images.unsplash.com/photo-1503431128871-cd250803fa41", hint: "อบอุ่นสบาย" },
-      { name: "หมวก", cat: "hat", img: "https://images.unsplash.com/photo-1532386236358-a33d8a9434e3", hint: "ถ่ายรูปขึ้น" },
+      { name: "ปลอกคอ", cat: "collar", img: "/external/unsplash_1518791841217-8f162f1e1131.jpg", hint: "ลุคน่ารัก" },
+      { name: "สายจูง", cat: "leash", img: "/external/unsplash_1543852786-1cf6624b9987.jpg", hint: "พาเดินเล่น" },
+      { name: "ชุดน่ารัก", cat: "outfit", img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg", hint: "แต่งตัววันพิเศษ" },
+      { name: "โบว์", cat: "bow", img: "/external/unsplash_1592194996308-7b43878e84a6.jpg", hint: "เพิ่มความคิวท์" },
+      { name: "ป้ายชื่อ", cat: "tag", img: "/external/unsplash_1519052537078-e6302a4968d4.jpg", hint: "ปลอดภัยขึ้น" },
+      { name: "เสื้อกันหนาว", cat: "sweater", img: "/external/unsplash_1503431128871-cd250803fa41.jpg", hint: "อบอุ่นสบาย" },
+      { name: "หมวก", cat: "hat", img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg", hint: "ถ่ายรูปขึ้น" },
     ],
   },
   {
@@ -37,13 +45,13 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "dailyRow",
     routeCat: "daily",
     items: [
-      { name: "ของเล่น", cat: "toys", img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131", hint: "เล่นเพลิน" },
-      { name: "ชามอาหาร", cat: "bowl", img: "https://images.unsplash.com/photo-1543852786-1cf6624b9987", hint: "กินง่าย" },
-      { name: "น้ำพุแมว", cat: "fountain", img: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13", hint: "ดื่มน้ำมากขึ้น" },
-      { name: "ที่นอน", cat: "bed", img: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6", hint: "นุ่มหลับสบาย" },
-      { name: "คอนโดแมว", cat: "condo", img: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4", hint: "ปีนป่ายสนุก" },
-      { name: "กรง/กระเป๋า", cat: "carrier", img: "https://images.unsplash.com/photo-1503431128871-cd250803fa41", hint: "เดินทางสะดวก" },
-      { name: "แผ่นรอง", cat: "pad", img: "https://images.unsplash.com/photo-1532386236358-a33d8a9434e3", hint: "ทำความสะอาดง่าย" },
+      { name: "ของเล่น", cat: "toys", img: "/external/unsplash_1518791841217-8f162f1e1131.jpg", hint: "เล่นเพลิน" },
+      { name: "ชามอาหาร", cat: "bowl", img: "/external/unsplash_1543852786-1cf6624b9987.jpg", hint: "กินง่าย" },
+      { name: "น้ำพุแมว", cat: "fountain", img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg", hint: "ดื่มน้ำมากขึ้น" },
+      { name: "ที่นอน", cat: "bed", img: "/external/unsplash_1592194996308-7b43878e84a6.jpg", hint: "นุ่มหลับสบาย" },
+      { name: "คอนโดแมว", cat: "condo", img: "/external/unsplash_1519052537078-e6302a4968d4.jpg", hint: "ปีนป่ายสนุก" },
+      { name: "กรง/กระเป๋า", cat: "carrier", img: "/external/unsplash_1503431128871-cd250803fa41.jpg", hint: "เดินทางสะดวก" },
+      { name: "แผ่นรอง", cat: "pad", img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg", hint: "ทำความสะอาดง่าย" },
     ],
   },
   {
@@ -51,13 +59,13 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "healthRow",
     routeCat: "health",
     items: [
-      { name: "วิตามิน", cat: "vitamin", img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131", hint: "เสริมภูมิคุ้มกัน" },
-      { name: "อาหารเฉพาะทาง", cat: "clinical-food", img: "https://images.unsplash.com/photo-1543852786-1cf6624b9987", hint: "ดูแลเฉพาะจุด" },
-      { name: "ดูแลช่องปาก", cat: "dental", img: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13", hint: "ลมหายใจสดชื่น" },
-      { name: "แชมพู", cat: "shampoo", img: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6", hint: "ขนนุ่มสะอาด" },
-      { name: "บำรุงขน", cat: "coat", img: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4", hint: "ลดขนร่วง" },
-      { name: "ป้องกันเห็บหมัด", cat: "flea", img: "https://images.unsplash.com/photo-1503431128871-cd250803fa41", hint: "ป้องกันระยะยาว" },
-      { name: "อุปกรณ์ดูแล", cat: "care", img: "https://images.unsplash.com/photo-1532386236358-a33d8a9434e3", hint: "ครบชุดดูแล" },
+      { name: "วิตามิน", cat: "vitamin", img: "/external/unsplash_1518791841217-8f162f1e1131.jpg", hint: "เสริมภูมิคุ้มกัน" },
+      { name: "อาหารเฉพาะทาง", cat: "clinical-food", img: "/external/unsplash_1543852786-1cf6624b9987.jpg", hint: "ดูแลเฉพาะจุด" },
+      { name: "ดูแลช่องปาก", cat: "dental", img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg", hint: "ลมหายใจสดชื่น" },
+      { name: "แชมพู", cat: "shampoo", img: "/external/unsplash_1592194996308-7b43878e84a6.jpg", hint: "ขนนุ่มสะอาด" },
+      { name: "บำรุงขน", cat: "coat", img: "/external/unsplash_1519052537078-e6302a4968d4.jpg", hint: "ลดขนร่วง" },
+      { name: "ป้องกันเห็บหมัด", cat: "flea", img: "/external/unsplash_1503431128871-cd250803fa41.jpg", hint: "ป้องกันระยะยาว" },
+      { name: "อุปกรณ์ดูแล", cat: "care", img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg", hint: "ครบชุดดูแล" },
     ],
   },
 ];
@@ -134,7 +142,7 @@ export default function Select() {
                 aria-label="กลับหน้าแรก"
               >
                 <img
-                  src="https://img5.pic.in.th/file/secure-sv1/LOGO-0383f8dd99c535b987.png"
+                  src={logo02}
                   alt="Purrshare"
                 />
               </button>
@@ -152,35 +160,35 @@ export default function Select() {
           <div className={styles.quickCats}>
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=food")}>
               <div className={styles.quickIco}>
-                <img src="https://img5.pic.in.th/file/secure-sv1/icon-08.png" alt="อาหารและโภชนาการ" />
+                <img src={foodIcon} alt="อาหารและโภชนาการ" />
               </div>
               <span>อาหาร<br />และโภชนาการ</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=litter")}>
               <div className={styles.quickIco}>
-                <img src="https://img5.pic.in.th/file/secure-sv1/icon-09415f32d6faf6a906.png" alt="ห้องน้ำและทรายแมว" />
+                <img src={toiletIcon} alt="ห้องน้ำและทรายแมว" />
               </div>
               <span>ห้องน้ำ<br />ทรายแมว</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=daily")}>
               <div className={styles.quickIco}>
-                <img src="https://img5.pic.in.th/file/secure-sv1/icon-107aa0b07e7612da66.png" alt="ของใช้ประจำวัน" />
+                <img src={itemsIcon} alt="ของใช้ประจำวัน" />
               </div>
               <span>ของใช้<br />ประจำวัน</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=furniture")}>
               <div className={styles.quickIco}>
-                <img src="https://img2.pic.in.th/icon-11.png" alt="ที่นอนและเฟอร์นิเจอร์" />
+                <img src={bedIcon} alt="ที่นอนและเฟอร์นิเจอร์" />
               </div>
               <span>ที่นอน<br />เฟอร์นิเจอร์</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=toys")}>
               <div className={styles.quickIco}>
-                <img src="https://img5.pic.in.th/file/secure-sv1/icon-12b9ced998f5e338f6.png" alt="ของเล่น" />
+                <img src={toysIcon} alt="ของเล่น" />
               </div>
               <span>ของเล่น</span>
             </button>
@@ -189,14 +197,14 @@ export default function Select() {
           <div className={styles.bigButtons}>
             <button type="button" className={styles.bigBtn} onClick={() => navigate("/products?cat=new")}>
               <div className={styles.bigIco}>
-                <img src="https://img2.pic.in.th/icon-13.png" alt="ของใหม่ล่าสุด" />
+                <img src={newIcon} alt="ของใหม่ล่าสุด" />
               </div>
               <div className={styles.label}>ของใหม่ล่าสุด</div>
             </button>
 
             <button type="button" className={styles.bigBtn} onClick={() => navigate("/products?cat=popular")}>
               <div className={styles.bigIco}>
-                <img src="https://img5.pic.in.th/file/secure-sv1/icon-14.png" alt="ยอดนิยม" />
+                <img src={topListIcon} alt="ยอดนิยม" />
               </div>
               <div className={styles.label}>ยอดนิยม</div>
             </button>

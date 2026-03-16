@@ -45,25 +45,25 @@ const catalog: CatalogItem[] = [
     id: "food",
     name: "อาหารแมว",
     meta: "สำหรับน้องเหมียว",
-    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "litter",
     name: "ทรายแมว",
     meta: "สะอาด กลิ่นน้อย",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "toy",
     name: "ของเล่นแมว",
     meta: "สนุกเพลินทั้งวัน",
-    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1545249390-6bdfa286032f.jpg?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "bed",
     name: "ที่นอนแมว",
     meta: "นุ่มสบาย",
-    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1573865526739-10659fec78a5.jpg",
   },
 ];
 
@@ -72,7 +72,7 @@ const needsSeed: NeedItem[] = [
     id: "pads",
     name: "สำลีแผ่น",
     meta: "34 / 200 ชิ้น",
-    img: "https://images.unsplash.com/photo-1583947582886-f40ec95dd752?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1583947582886-f40ec95dd752.jpg?auto=format&fit=crop&w=800&q=70",
     current: 34,
     target: 200,
     catalogId: "toy",
@@ -81,7 +81,7 @@ const needsSeed: NeedItem[] = [
     id: "wetfood",
     name: "อาหารเปียก",
     meta: "67 / 100 ชิ้น",
-    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
     current: 67,
     target: 100,
     catalogId: "food",
@@ -90,7 +90,7 @@ const needsSeed: NeedItem[] = [
     id: "wound",
     name: "ผ้าก๊อตทำแผล",
     meta: "23 / 50 ชิ้น",
-    img: "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1584515933487-779824d29309.jpg?auto=format&fit=crop&w=800&q=70",
     current: 23,
     target: 50,
     catalogId: "toy",
@@ -99,7 +99,7 @@ const needsSeed: NeedItem[] = [
     id: "litter-need",
     name: "ทรายแมว",
     meta: "12 / 80 ชิ้น",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
     current: 12,
     target: 80,
     catalogId: "litter",
@@ -108,7 +108,7 @@ const needsSeed: NeedItem[] = [
     id: "blanket",
     name: "ผ้าห่ม/ผ้าขนหนู",
     meta: "9 / 60 ชิ้น",
-    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1573865526739-10659fec78a5.jpg",
     current: 9,
     target: 60,
     catalogId: "bed",
@@ -123,7 +123,7 @@ const sampleItems: SampleItem[] = [
     donor: "May",
     loc: "ลาดพร้าว, กทม.",
     tag: "อาหาร",
-    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "s2",
@@ -132,7 +132,7 @@ const sampleItems: SampleItem[] = [
     donor: "Nina",
     loc: "บางนา, กทม.",
     tag: "ทราย",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "s3",
@@ -141,7 +141,7 @@ const sampleItems: SampleItem[] = [
     donor: "Beam",
     loc: "นนทบุรี",
     tag: "ที่นอน",
-    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1573865526739-10659fec78a5.jpg",
   },
   {
     id: "s4",
@@ -150,13 +150,13 @@ const sampleItems: SampleItem[] = [
     donor: "Minnie",
     loc: "พระราม 9, กทม.",
     tag: "ของเล่น",
-    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=70",
+    img: "/external/unsplash_1545249390-6bdfa286032f.jpg?auto=format&fit=crop&w=800&q=70",
   },
 ];
 
 export default function Donate() {
   const navigate = useNavigate();
-  const fallbackImage = "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=70";
+  const fallbackImage = "/external/unsplash_1543852786-1cf6624b9987.jpg?auto=format&fit=crop&w=800&q=70";
   const [search, setSearch] = useState("");
   const [needs] = useState<NeedItem[]>(needsSeed);
   const [needsExpanded, setNeedsExpanded] = useState(false);
@@ -350,7 +350,7 @@ export default function Donate() {
           <div className={styles.heroBox}>
             <img
               className={styles.heroImage}
-              src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=70"
+              src="/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=1200&q=70"
               alt="แบนเนอร์แคมเปญบริจาค"
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;
@@ -494,7 +494,7 @@ export default function Donate() {
             <div className={styles.meowBox}>
               <img
                 className={styles.meowIcon}
-                src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=300&q=70"
+                src="/external/unsplash_1574158622682-e40e69881006.jpg?auto=format&fit=crop&w=300&q=70"
                 alt="แมวขอบคุณสำหรับการบริจาค"
                 loading="lazy"
                 onError={(e) => {

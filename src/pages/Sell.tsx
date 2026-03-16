@@ -43,11 +43,11 @@ type SellerProduct = {
 const LS_KEY = "ps_sell_items";
 
 const sampleImages = [
-  "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=70",
-  "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
-  "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=800&q=70",
-  "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=70",
-  "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+  "/external/unsplash_1543852786-1cf6624b9987.jpg?auto=format&fit=crop&w=800&q=70",
+  "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
+  "/external/unsplash_1495360010541-f48722b34f7d.jpg",
+  "/external/unsplash_1592194996308-7b43878e84a6.jpg?auto=format&fit=crop&w=800&q=70",
+  "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
 ];
 
 const categoryKeys: Category[] = [

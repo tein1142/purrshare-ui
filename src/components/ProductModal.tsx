@@ -111,7 +111,7 @@ export default function ProductModal({
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
                 <img
-                  src="https://robohash.org/fafb2830147a924143b9dd45b8250089?set=set4&bgset=&size=400x400"
+                  src="/external/robohash_fafb2830147a924143b9dd45b8250089.png"
                   alt="Meow & Co."
                 />
               </div>
@@ -123,7 +123,7 @@ export default function ProductModal({
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
                 <img
-                  src="https://robohash.org/76bf070195f6c4772b2c57f5bbd52e6a?set=set4&bgset=&size=400x400"
+                  src="/external/robohash_76bf070195f6c4772b2c57f5bbd52e6a.png"
                   alt="ร้านแมวอ้วน"
                 />
               </div>
