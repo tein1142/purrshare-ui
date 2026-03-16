@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "../components/CloseButton";
 import ModalShell from "../components/ModalShell";
@@ -45,25 +45,25 @@ const catalog: CatalogItem[] = [
     id: "food",
     name: "อาหารแมว",
     meta: "สำหรับน้องเหมียว",
-    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "litter",
     name: "ทรายแมว",
     meta: "สะอาด กลิ่นน้อย",
-    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "toy",
     name: "ของเล่นแมว",
     meta: "สนุกเพลินทั้งวัน",
-    img: "/external/unsplash_1545249390-6bdfa286032f.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "bed",
     name: "ที่นอนแมว",
     meta: "นุ่มสบาย",
-    img: "/external/unsplash_1573865526739-10659fec78a5.jpg",
+    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
   },
 ];
 
@@ -72,7 +72,7 @@ const needsSeed: NeedItem[] = [
     id: "pads",
     name: "สำลีแผ่น",
     meta: "34 / 200 ชิ้น",
-    img: "/external/unsplash_1583947582886-f40ec95dd752.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1583947582886-f40ec95dd752?auto=format&fit=crop&w=800&q=70",
     current: 34,
     target: 200,
     catalogId: "toy",
@@ -81,7 +81,7 @@ const needsSeed: NeedItem[] = [
     id: "wetfood",
     name: "อาหารเปียก",
     meta: "67 / 100 ชิ้น",
-    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
     current: 67,
     target: 100,
     catalogId: "food",
@@ -90,7 +90,7 @@ const needsSeed: NeedItem[] = [
     id: "wound",
     name: "ผ้าก๊อตทำแผล",
     meta: "23 / 50 ชิ้น",
-    img: "/external/unsplash_1584515933487-779824d29309.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=70",
     current: 23,
     target: 50,
     catalogId: "toy",
@@ -99,7 +99,7 @@ const needsSeed: NeedItem[] = [
     id: "litter-need",
     name: "ทรายแมว",
     meta: "12 / 80 ชิ้น",
-    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
     current: 12,
     target: 80,
     catalogId: "litter",
@@ -108,7 +108,7 @@ const needsSeed: NeedItem[] = [
     id: "blanket",
     name: "ผ้าห่ม/ผ้าขนหนู",
     meta: "9 / 60 ชิ้น",
-    img: "/external/unsplash_1573865526739-10659fec78a5.jpg",
+    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
     current: 9,
     target: 60,
     catalogId: "bed",
@@ -123,7 +123,7 @@ const sampleItems: SampleItem[] = [
     donor: "May",
     loc: "ลาดพร้าว, กทม.",
     tag: "อาหาร",
-    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "s2",
@@ -132,7 +132,7 @@ const sampleItems: SampleItem[] = [
     donor: "Nina",
     loc: "บางนา, กทม.",
     tag: "ทราย",
-    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "s3",
@@ -141,7 +141,7 @@ const sampleItems: SampleItem[] = [
     donor: "Beam",
     loc: "นนทบุรี",
     tag: "ที่นอน",
-    img: "/external/unsplash_1573865526739-10659fec78a5.jpg",
+    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
   },
   {
     id: "s4",
@@ -150,18 +150,13 @@ const sampleItems: SampleItem[] = [
     donor: "Minnie",
     loc: "พระราม 9, กทม.",
     tag: "ของเล่น",
-    img: "/external/unsplash_1545249390-6bdfa286032f.jpg?auto=format&fit=crop&w=800&q=70",
+    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=70",
   },
-];
-
-const deliveryOptions = [
-  "นัดรับด้วยตนเอง",
-  "จัดส่งผ่านไปรษณีย์"
 ];
 
 export default function Donate() {
   const navigate = useNavigate();
-  const fallbackImage = "/external/unsplash_1543852786-1cf6624b9987.jpg?auto=format&fit=crop&w=800&q=70";
+  const fallbackImage = "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=70";
   const [search, setSearch] = useState("");
   const [needs] = useState<NeedItem[]>(needsSeed);
   const [needsExpanded, setNeedsExpanded] = useState(false);
@@ -184,12 +179,10 @@ export default function Donate() {
   const [pickIndex, setPickIndex] = useState(0);
   const [pickQty, setPickQty] = useState(1);
   const [selectedSample, setSelectedSample] = useState<SampleItem | null>(null);
-  const deliveryDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [senderName, setSenderName] = useState("Minnie");
   const [senderPhone, setSenderPhone] = useState("09x-xxx-xxxx");
-  const [senderType, setSenderType] = useState(deliveryOptions[0]);
-  const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
+  const [senderType, setSenderType] = useState("บริจาค");
   const [senderAddr, setSenderAddr] = useState("กรุงเทพฯ");
   const [senderNote, setSenderNote] = useState("ฝากน้องเหมียวด้วยนะ");
 
@@ -215,40 +208,6 @@ export default function Donate() {
   }, [search]);
 
   const totalQty = list.reduce((sum, item) => sum + item.qty, 0);
-
-  useEffect(() => {
-    if (!isDeliveryOpen) {
-      return;
-    }
-
-    const onPointerDown = (event: PointerEvent) => {
-      if (!(event.target instanceof Node)) {
-        return;
-      }
-      if (!deliveryDropdownRef.current?.contains(event.target)) {
-        setIsDeliveryOpen(false);
-      }
-    };
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsDeliveryOpen(false);
-      }
-    };
-
-    globalThis.addEventListener("pointerdown", onPointerDown);
-    globalThis.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      globalThis.removeEventListener("pointerdown", onPointerDown);
-      globalThis.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isDeliveryOpen]);
-
-  function closeFormModal() {
-    setFormOpen(false);
-    setIsDeliveryOpen(false);
-  }
 
   function persistDonateItems(next: DonateItem[]) {
     setList(next);
@@ -331,11 +290,11 @@ export default function Donate() {
 
   function submitDonationFlow() {
     if (!list.length) {
-      closeFormModal();
+      setFormOpen(false);
       return;
     }
 
-    closeFormModal();
+    setFormOpen(false);
     setLoading(true);
 
     globalThis.setTimeout(() => {
@@ -391,7 +350,7 @@ export default function Donate() {
           <div className={styles.heroBox}>
             <img
               className={styles.heroImage}
-              src="/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=1200&q=70"
+              src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=70"
               alt="แบนเนอร์แคมเปญบริจาค"
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;
@@ -491,7 +450,7 @@ export default function Donate() {
             )}
           </div>
 
-          {/* <div className={styles.sectionTitle}>ตัวอย่างสินค้าที่มีคนบริจาคแล้ว</div>
+          <div className={styles.sectionTitle}>ตัวอย่างสินค้าที่มีคนบริจาคแล้ว</div>
           <div className={styles.sampleGrid}>
             {filteredSamples.map((item) => (
               <button
@@ -525,7 +484,7 @@ export default function Donate() {
                 </div>
               </button>
             ))}
-          </div> */}
+          </div>
         </main>
       )}
 
@@ -535,7 +494,7 @@ export default function Donate() {
             <div className={styles.meowBox}>
               <img
                 className={styles.meowIcon}
-                src="/external/unsplash_1574158622682-e40e69881006.jpg?auto=format&fit=crop&w=300&q=70"
+                src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=300&q=70"
                 alt="แมวขอบคุณสำหรับการบริจาค"
                 loading="lazy"
                 onError={(e) => {
@@ -607,10 +566,10 @@ export default function Donate() {
         </div>
       </ModalShell>
 
-      <ModalShell open={formOpen} onClose={closeFormModal} panelClassName={styles.sheet}>
+      <ModalShell open={formOpen} onClose={() => setFormOpen(false)} panelClassName={styles.sheet}>
         <div className={styles.sheetHead}>
           <div className={styles.sheetTitle}>รายละเอียดการรับบริจาค</div>
-          <CloseIcon onClose={closeFormModal} />
+          <CloseIcon onClose={() => setFormOpen(false)} />
         </div>
         <div className={styles.sheetBody}>
           <div className={styles.field}>
@@ -623,39 +582,8 @@ export default function Donate() {
               <input id="fPhone" className={styles.input} value={senderPhone} onChange={(e) => setSenderPhone(e.target.value)} />
             </div>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="fType">วิธีการส่งมอบ</label>
-              <div className={styles.dropdownWrap} ref={deliveryDropdownRef}>
-                <button
-                  id="fType"
-                  type="button"
-                  className={`${styles.input} ${styles.dropdownTrigger}`}
-                  aria-expanded={isDeliveryOpen}
-                  onClick={() => setIsDeliveryOpen((prev) => !prev)}
-                >
-                  <span className={styles.dropdownValue}>{senderType}</span>
-                  <span className={`${styles.dropdownArrow} ${isDeliveryOpen ? styles.open : ""}`} aria-hidden="true">
-                    ▼
-                  </span>
-                </button>
-
-                {isDeliveryOpen && (
-                  <div id="fTypeOptions" className={styles.dropdownMenu}>
-                    {deliveryOptions.map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        className={`${styles.dropdownOption} ${senderType === option ? styles.selected : ""}`}
-                        onClick={() => {
-                          setSenderType(option);
-                          setIsDeliveryOpen(false);
-                        }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <label className={styles.label} htmlFor="fType">ประเภท</label>
+              <input id="fType" className={styles.input} value={senderType} onChange={(e) => setSenderType(e.target.value)} />
             </div>
           </div>
           <div className={styles.field}>
@@ -668,7 +596,7 @@ export default function Donate() {
           </div>
         </div>
         <div className={styles.sheetActions}>
-          <button className={styles.ghostBtn} type="button" onClick={closeFormModal}>ยกเลิก</button>
+          <button className={styles.ghostBtn} type="button" onClick={() => setFormOpen(false)}>ยกเลิก</button>
           <button className={styles.primaryBtn} type="button" onClick={submitDonationFlow}>ยืนยัน</button>
         </div>
       </ModalShell>

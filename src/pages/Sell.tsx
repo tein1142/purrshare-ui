@@ -86,54 +86,54 @@ export default function Sell() {
       {
         id: "a1",
         status: "selling",
-        name: "Name 000111",
-        nameEn: "Name 000111",
+        name: "อาหารแมว MeowMix 1kg",
+        nameEn: "MeowMix Cat Food 1kg",
         price: 200,
         img: sampleImages[2],
-        desc: "Lorem ipsum dolor sit amet",
-        descEn: "Lorem ipsum dolor sit amet",
+        desc: "อาหารแมวชนิดเม็ด สำหรับแมวโต อายุ 1 ปีขึ้นไป",
+        descEn: "Dry cat food for adult cats, 1 year+",
         province: "กรุงเทพฯ",
-        contact: "09x-xxx-xxxx",
+        contact: "089-123-4567",
         used: "วันนี้",
         age: "30 วัน",
         remain: "10",
-        category: "other",
+        category: "food",
         createdAt: Date.now() - 50000,
         sold: 0,
       },
       {
         id: "a2",
         status: "selling",
-        name: "Name 000111",
-        nameEn: "Name 000111",
-        price: 200,
+        name: "ทรายแมว OdourLock 5L",
+        nameEn: "OdourLock Cat Litter 5L",
+        price: 180,
         img: sampleImages[1],
-        desc: "Lorem ipsum dolor sit amet",
-        descEn: "Lorem ipsum dolor sit amet",
-        province: "กรุงเทพฯ",
-        contact: "09x-xxx-xxxx",
+        desc: "ทรายแมวเก็บกลิ่น กำจัดกลิ่นเหม็นได้ดี",
+        descEn: "Odour control cat litter, 5L bag",
+        province: "นนทบุรี",
+        contact: "081-234-5678",
         used: "วันนี้",
         age: "30 วัน",
         remain: "6",
-        category: "other",
+        category: "litter",
         createdAt: Date.now() - 40000,
         sold: 0,
       },
       {
         id: "a3",
         status: "sold",
-        name: "Name 000111",
-        nameEn: "Name 000111",
-        price: 200,
+        name: "ของเล่นแมว ไม้ตกปลา",
+        nameEn: "Cat Toy Fishing Rod",
+        price: 99,
         img: sampleImages[3],
-        desc: "Lorem ipsum dolor sit amet",
-        descEn: "Lorem ipsum dolor sit amet",
-        province: "กรุงเทพฯ",
-        contact: "09x-xxx-xxxx",
+        desc: "ของเล่นเสริมพัฒนาการ สำหรับแมวทุกวัย",
+        descEn: "Interactive toy for all cat ages",
+        province: "สมุทรปราการ",
+        contact: "086-345-6789",
         used: "เมื่อวาน",
         age: "-",
         remain: "0",
-        category: "other",
+        category: "toys",
         createdAt: Date.now() - 30000,
         sold: 1,
       },
@@ -149,16 +149,16 @@ export default function Sell() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [activeItem, setActiveItem] = useState<SellerProduct | null>(null);
 
-  const [quickName, setQuickName] = useState("Name 000111");
+  const [quickName, setQuickName] = useState("อาหารแมว MeowMix 1kg");
   const [quickPrice, setQuickPrice] = useState("200");
 
-  const [formName, setFormName] = useState("Name 000111");
-  const [formDesc, setFormDesc] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-  const [formProvince, setFormProvince] = useState("กรุงเทพฯ");
-  const [formContact, setFormContact] = useState("09x-xxx-xxxx");
+  const [formName, setFormName] = useState("ทรายแมว OdourLock 5L");
+  const [formDesc, setFormDesc] = useState("ทรายแมวเก็บกลิ่น กำจัดกลิ่นเหม็นได้ดี");
+  const [formProvince, setFormProvince] = useState("นนทบุรี");
+  const [formContact, setFormContact] = useState("081-234-5678");
   const [formUsed, setFormUsed] = useState("วันนี้");
   const [formAge, setFormAge] = useState("30 วัน");
-  const [formRemain, setFormRemain] = useState("10");
+  const [formRemain, setFormRemain] = useState("6");
 
   const [notice, setNotice] = useState("");
 
@@ -210,15 +210,15 @@ export default function Sell() {
   }
 
   function openQuickSheet() {
-    setQuickName("Name 000111");
+    setQuickName("อาหารแมว MeowMix 1kg");
     setQuickPrice("200");
-    setFormName("Name 000111");
-    setFormDesc("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-    setFormProvince("กรุงเทพฯ");
-    setFormContact("09x-xxx-xxxx");
+    setFormName("ทรายแมว OdourLock 5L");
+    setFormDesc("ทรายแมวเก็บกลิ่น กำจัดกลิ่นเหม็นได้ดี");
+    setFormProvince("นนทบุรี");
+    setFormContact("081-234-5678");
     setFormUsed("วันนี้");
     setFormAge("30 วัน");
-    setFormRemain("10");
+    setFormRemain("6");
     setNotice("");
     setOpenQuick(true);
   }
