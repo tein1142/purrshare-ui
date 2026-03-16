@@ -1,19 +1,14 @@
 import styles from "./css/Star.module.css";
 import Tabbar from "../components/TabBar";
-import { useNavigate } from "react-router-dom";
-import logo02 from "../assets/images/LOGO-02.png";
 import infoRichMenu from "../assets/images/Info_Rich_Menu-01.jpg";
 
-
 export default function Star() {
-  const navigate = useNavigate();
-
   return (
     <div className={styles.page}>
       {/* HEADER */}
 
       <header className={styles.top}>
-        <button
+        {/* <button
           type="button"
           className={styles.logoBtn}
           onClick={() => navigate("/select")}
@@ -24,19 +19,19 @@ export default function Star() {
             src={logo02}
             alt="Purrshare"
           />
-        </button>
+        </button> */}
         <div className={styles.topTitle}>อันดับและคุณภาพผู้ขาย</div>
       </header>
 
       {/* CONTENT */}
 
       <div className={styles.content}>
-        <div className={styles.h1}>ผู้ขายยอดนิยม 3 อันดับประจำเดือน</div>
-
         {/* TOP SELLER */}
 
         <div className={styles.card}>
           <div className={styles.cardPad}>
+            <div className={styles.h1}>ผู้ขายยอดนิยม 3 อันดับประจำเดือน</div>
+
             <div className={styles.subHead}>Top 1</div>
 
             <div className={styles.top3}>

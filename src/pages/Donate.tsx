@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "../components/CloseButton";
 import ModalShell from "../components/ModalShell";
@@ -154,6 +154,11 @@ const sampleItems: SampleItem[] = [
   },
 ];
 
+const deliveryOptions = [
+  "นัดรับด้วยตนเอง",
+  "จัดส่งผ่านไปรษณีย์"
+];
+
 export default function Donate() {
   const navigate = useNavigate();
   const fallbackImage = "/external/unsplash_1543852786-1cf6624b9987.jpg?auto=format&fit=crop&w=800&q=70";
@@ -179,10 +184,12 @@ export default function Donate() {
   const [pickIndex, setPickIndex] = useState(0);
   const [pickQty, setPickQty] = useState(1);
   const [selectedSample, setSelectedSample] = useState<SampleItem | null>(null);
+  const deliveryDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [senderName, setSenderName] = useState("Minnie");
   const [senderPhone, setSenderPhone] = useState("09x-xxx-xxxx");
-  const [senderType, setSenderType] = useState("บริจาค");
+  const [senderType, setSenderType] = useState(deliveryOptions[0]);
+  const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
   const [senderAddr, setSenderAddr] = useState("กรุงเทพฯ");
   const [senderNote, setSenderNote] = useState("ฝากน้องเหมียวด้วยนะ");
 
@@ -208,6 +215,40 @@ export default function Donate() {
   }, [search]);
 
   const totalQty = list.reduce((sum, item) => sum + item.qty, 0);
+
+  useEffect(() => {
+    if (!isDeliveryOpen) {
+      return;
+    }
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!(event.target instanceof Node)) {
+        return;
+      }
+      if (!deliveryDropdownRef.current?.contains(event.target)) {
+        setIsDeliveryOpen(false);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsDeliveryOpen(false);
+      }
+    };
+
+    globalThis.addEventListener("pointerdown", onPointerDown);
+    globalThis.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      globalThis.removeEventListener("pointerdown", onPointerDown);
+      globalThis.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isDeliveryOpen]);
+
+  function closeFormModal() {
+    setFormOpen(false);
+    setIsDeliveryOpen(false);
+  }
 
   function persistDonateItems(next: DonateItem[]) {
     setList(next);
@@ -290,11 +331,11 @@ export default function Donate() {
 
   function submitDonationFlow() {
     if (!list.length) {
-      setFormOpen(false);
+      closeFormModal();
       return;
     }
 
-    setFormOpen(false);
+    closeFormModal();
     setLoading(true);
 
     globalThis.setTimeout(() => {
@@ -450,7 +491,7 @@ export default function Donate() {
             )}
           </div>
 
-          <div className={styles.sectionTitle}>ตัวอย่างสินค้าที่มีคนบริจาคแล้ว</div>
+          {/* <div className={styles.sectionTitle}>ตัวอย่างสินค้าที่มีคนบริจาคแล้ว</div>
           <div className={styles.sampleGrid}>
             {filteredSamples.map((item) => (
               <button
@@ -484,7 +525,7 @@ export default function Donate() {
                 </div>
               </button>
             ))}
-          </div>
+          </div> */}
         </main>
       )}
 
@@ -566,10 +607,10 @@ export default function Donate() {
         </div>
       </ModalShell>
 
-      <ModalShell open={formOpen} onClose={() => setFormOpen(false)} panelClassName={styles.sheet}>
+      <ModalShell open={formOpen} onClose={closeFormModal} panelClassName={styles.sheet}>
         <div className={styles.sheetHead}>
           <div className={styles.sheetTitle}>รายละเอียดการรับบริจาค</div>
-          <CloseIcon onClose={() => setFormOpen(false)} />
+          <CloseIcon onClose={closeFormModal} />
         </div>
         <div className={styles.sheetBody}>
           <div className={styles.field}>
@@ -582,8 +623,39 @@ export default function Donate() {
               <input id="fPhone" className={styles.input} value={senderPhone} onChange={(e) => setSenderPhone(e.target.value)} />
             </div>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="fType">ประเภท</label>
-              <input id="fType" className={styles.input} value={senderType} onChange={(e) => setSenderType(e.target.value)} />
+              <label className={styles.label} htmlFor="fType">วิธีการส่งมอบ</label>
+              <div className={styles.dropdownWrap} ref={deliveryDropdownRef}>
+                <button
+                  id="fType"
+                  type="button"
+                  className={`${styles.input} ${styles.dropdownTrigger}`}
+                  aria-expanded={isDeliveryOpen}
+                  onClick={() => setIsDeliveryOpen((prev) => !prev)}
+                >
+                  <span className={styles.dropdownValue}>{senderType}</span>
+                  <span className={`${styles.dropdownArrow} ${isDeliveryOpen ? styles.open : ""}`} aria-hidden="true">
+                    ▼
+                  </span>
+                </button>
+
+                {isDeliveryOpen && (
+                  <div id="fTypeOptions" className={styles.dropdownMenu}>
+                    {deliveryOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        className={`${styles.dropdownOption} ${senderType === option ? styles.selected : ""}`}
+                        onClick={() => {
+                          setSenderType(option);
+                          setIsDeliveryOpen(false);
+                        }}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.field}>
@@ -596,7 +668,7 @@ export default function Donate() {
           </div>
         </div>
         <div className={styles.sheetActions}>
-          <button className={styles.ghostBtn} type="button" onClick={() => setFormOpen(false)}>ยกเลิก</button>
+          <button className={styles.ghostBtn} type="button" onClick={closeFormModal}>ยกเลิก</button>
           <button className={styles.primaryBtn} type="button" onClick={submitDonationFlow}>ยืนยัน</button>
         </div>
       </ModalShell>

@@ -36,7 +36,7 @@
 .title {
   flex: 1;
   text-align: center;
-  font-weight: 800;
+  font-weight: var(--fw-bold);
 }
 
 .topSpacer {
@@ -46,7 +46,7 @@
 }
 
 .price {
-  font-weight: 800;
+  font-weight: var(--fw-bold);
   margin-top: 8px;
 }
 
@@ -73,7 +73,7 @@
   justify-content: space-between;
   gap: 10px;
   height: 64px;
-  background: #efe6c6;
+  background: #fbf3cf;
   border-bottom: 2px solid rgba(0,0,0,0.08);
   border-top-left-radius: 26px;
   border-top-right-radius: 26px;
@@ -103,22 +103,22 @@
 }
 
 .productName {
-  font-size: 18px;
-  font-weight: 800;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
 
   margin-bottom: 6px;
 }
 
 .productDesc {
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: #6b7280;
 
   margin-bottom: 10px;
 }
 
 .productPrice {
-  font-size: 18px;
-  font-weight: 900;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
 }
 
 .productCard {
@@ -168,15 +168,15 @@
 }
 
 .metaLabel {
-  font-size: 14px;
-  font-weight: 800;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
 
   color: #111;
 }
 
 .metaValue {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
 
   color: #6b7280;
 }
@@ -186,8 +186,8 @@
 }
 
 .sellerTitle {
-  font-size: 16px;
-  font-weight: 900;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
   margin-bottom: 12px;
 }
 
@@ -231,14 +231,14 @@
 }
 
 .sellerName {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
 }
 
 .sellerSub {
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: #6b7280;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 .bottomBar {
@@ -261,8 +261,8 @@
 }
 
 .bottomPrice {
-  font-size: 15px;
-  font-weight: 900;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
 }
 
 .bottomActions {
@@ -281,8 +281,8 @@
 
   background: #fff;
 
-  font-weight: 900;
-  font-size: small;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
 
   color: black;
 }
@@ -298,8 +298,8 @@
 
   background: #e8d9a4;
 
-  font-weight: 900;
-  font-size: small;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
 
   color:black;
 }

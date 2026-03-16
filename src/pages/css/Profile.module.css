@@ -1,6 +1,7 @@
 .page {
+  --page-scale: 0.96;
   width: 100%;
-  max-width: 420px;
+  max-width: 430px;
   margin: 0 auto;
   background-color: white;
   padding-bottom: 70px;
@@ -11,19 +12,23 @@
 .top {
   position: relative;
   background: #fbf3cf;
-  padding: 20px 16px 16px;
-  border-bottom-left-radius: 28px;
-  border-bottom-right-radius: 28px;
+  padding: 16px 14px 12px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
 }
 
 .topRow {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .topTitle {
-  font-size: 20px;
-  font-weight: 900;
+  font-size: calc(var(--fs-3xl) * var(--page-scale));
+  font-weight: var(--fw-bold);
   text-align: center;
+  color: #111;
 }
 
 .ghost {
@@ -61,33 +66,35 @@
 /* HERO */
 
 .hero {
-  margin-top: 16px;
-  background: white;
-  border-radius: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.08);
+  margin-top: 10px;
 }
 
 .heroContent {
-  padding: 18px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .heroRow {
   display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 /* AVATAR */
 
 .avatarSingle {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 14px rgb(17 24 39 / 14%);
+  flex: 0 0 auto;
 }
 
 .avatarSingle img {
@@ -99,28 +106,40 @@
 /* PET CARD */
 
 .petsCard {
-  background: #f7f7f7;
-  border-radius: 16px;
-  padding: 10px;
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border-radius: 12px;
+  border: 0;
+  box-shadow: none;
+  padding: 2px 2px 2px 4px;
 }
 
 .petsTitle {
-  font-size: 12px;
-  font-weight: 800;
-  color: rgba(17,24,39,.72);
-  margin-bottom: 6px;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  color: rgb(17 24 39 / 78%);
+  margin-bottom: 9px;
+  line-height: 1.2;
 }
 
 .petsAvatars {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  gap: 10px;
 }
 
 .petA {
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgb(17 24 39 / 12%);
+}
+
+.petA + .petA {
+  margin-left: 0;
 }
 
 .petA img {
@@ -130,28 +149,34 @@
 }
 
 .petsSub {
-  margin-top: 6px;
-  font-size: 12px;
-  color: #666;
+  margin-top: 10px;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  color: rgb(17 24 39 / 68%);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* NAME */
 
 .name {
   text-align: center;
-  font-weight: 900;
-  font-size: 16px;
+  font-weight: var(--fw-bold);
+  font-size: calc(var(--fs-lg) * var(--page-scale));
 }
 
 /* EDIT BUTTON */
 
 .editBtn {
-  height: 42px;
-  padding: 0 26px;
-  border-radius: 22px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
+  height: 38px;
+  padding: 0 20px;
+  border-radius: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
   background: #f8edc3;
-  font-weight: 800;
+  font-weight: var(--fw-bold);
+  font-size: calc(var(--fs-sm) * var(--page-scale));
   color: #000;
 }
 
@@ -159,14 +184,15 @@
 
 .rolePills {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .pill {
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 6px 12px;
+  border-radius: 14px;
   background: #e6e6e6;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
+  font-size: calc(var(--fs-sm) * var(--page-scale));
 }
 
 .active {
@@ -178,52 +204,52 @@
 .statsRow {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 
 .stat {
   background: white;
-  border-radius: 14px;
+  border-radius: 12px;
   border: 2px solid rgba(0, 0, 0, 0.08);
-  padding: 12px;
+  padding: 10px;
   text-align: center;
 }
 
 .statN {
-  font-size: 16px;
-  font-weight: 900;
+  font-size: calc(var(--fs-lg) * var(--page-scale));
+  font-weight: var(--fw-bold);
 }
 
 .statL {
-  font-size: 12px;
+  font-size: calc(var(--fs-xs) * var(--page-scale));
   color: #666;
 }
 
 /* ACCOUNT INFO CARD */
 
 .infoCard {
-  margin: 14px;
+  margin: 12px 10px;
 
   background: #fff;
 
-  border-radius: 18px;
+  border-radius: 14px;
 
   border: 2px solid rgba(0, 0, 0, 0.08);
 
-  padding: 16px;
+  padding: 12px;
 }
 
 /* TITLE */
 
 .infoTitle {
-  font-size: 18px;
+  font-size: calc(var(--fs-xl) * var(--page-scale));
 
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 
   color: #111;
 
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 
   text-align: center;
 }
@@ -235,7 +261,7 @@
 
   grid-template-columns: 1fr 1fr;
 
-  gap: 16px 20px;
+  gap: 10px 12px;
 }
 
 /* ITEM */
@@ -251,9 +277,9 @@
 /* LABEL */
 
 .infoLabel {
-  font-size: 14px;
+  font-size: calc(var(--fs-sm) * var(--page-scale));
 
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 
   color: #8a8f98;
 }
@@ -261,38 +287,38 @@
 /* VALUE */
 
 .infoValue {
-  font-size: 18px;
+  font-size: calc(var(--fs-base) * var(--page-scale));
 
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 
   color: #111;
 }
 
 .section {
-  margin: 14px;
+  margin: 12px 10px;
 }
 
 .secHead {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .secTitle {
-  font-size: 16px;
-  font-weight: 900;
+  font-size: calc(var(--fs-base) * var(--page-scale));
+  font-weight: var(--fw-bold);
 }
 
 .secLink {
-  font-size: 13px;
-  font-weight: 900;
+  font-size: calc(var(--fs-sm) * var(--page-scale));
+  font-weight: var(--fw-bold);
   color: #6b7280;
 }
 
 .list {
   background: white;
-  border-radius: 20px;
+  border-radius: 14px;
   border: 2px solid rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
@@ -302,7 +328,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 12px;
+  padding: 10px;
 
   border-top: 2px solid rgba(0, 0, 0, 0.05);
 }
@@ -314,12 +340,12 @@
 .left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .dot {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 100%;
   overflow: hidden;
 }
@@ -336,41 +362,41 @@
 }
 
 .t1 {
-  font-weight: 900;
-  font-size: 15px;
+  font-weight: var(--fw-bold);
+  font-size: calc(var(--fs-sm) * var(--page-scale));
 }
 
 .t2 {
-  font-weight: 900;
-  font-size: 14px;
+  font-weight: var(--fw-bold);
+  font-size: calc(var(--fs-xs) * var(--page-scale));
 }
 
 .badge {
-  padding: 6px 14px;
+  padding: 5px 10px;
 
   border-radius: 999px;
 
-  border: 3px solid #a7d9c7;
+  border: 2px solid #a7d9c7;
 
   color: #16a34a;
 
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 
-  font-size: 13px;
+  font-size: calc(var(--fs-xs) * var(--page-scale));
 }
 
 .reviewCard {
   background: #fff;
-  border-radius: 22px;
-  border: 3px solid rgba(0, 0, 0, 0.08);
-  padding: 10px;
+  border-radius: 14px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  padding: 8px;
 }
 
 .reviewRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 10px 0;
   border-top: 2px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -379,8 +405,8 @@
 }
 
 .stars {
-  font-size: 14px;
-  font-weight: 900;
+  font-size: calc(var(--fs-sm) * var(--page-scale));
+  font-weight: var(--fw-bold);
   letter-spacing: 2px;
 }
 
@@ -390,7 +416,7 @@
   }
 
   .heroContent {
-    padding: 14px;
+    padding: 10px;
   }
 
   .infoGrid {

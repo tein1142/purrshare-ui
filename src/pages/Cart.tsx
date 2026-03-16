@@ -75,19 +75,6 @@ export default function Cart() {
       {/* HEADER */}
 
       <div className={styles.header}>
-        <button
-          type="button"
-          className={styles.logoBtn}
-          onClick={() => navigate("/select")}
-          aria-label="กลับหน้าหมวดหมู่"
-        >
-          <img
-            className={styles.logoImg}
-            src={logo02}
-            alt="Purrshare"
-          />
-        </button>
-
         <div className={styles.title}>ตะกร้า</div>
       </div>
 

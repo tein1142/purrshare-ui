@@ -8,7 +8,7 @@ type Props = {
   profile: any;
   setProfile: (p: any) => void;
   onClose: () => void;
-  onSave: () => void;
+  onSave: (updated: any) => void;
 };
 
 export default function EditProfileModal({
@@ -87,7 +87,7 @@ export default function EditProfileModal({
             className={styles.saveBtn}
             onClick={() => {
               setProfile(tempProfile);
-              onSave();
+              onSave(tempProfile);
             }}
           >
             บันทึก

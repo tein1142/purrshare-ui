@@ -44,7 +44,7 @@
 }
 
 .loadingText {
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: #666;
   margin-bottom: 10px;
 }
@@ -65,14 +65,14 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 24px;
+  font-size: var(--fs-5xl);
   color: #2dbb7f;
-  font-weight: bold;
+  font-weight: var(--fw-bold);
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
 
   color: #2dbb7f;
 
@@ -80,7 +80,7 @@
 }
 
 .desc {
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: #6b7280;
 
   margin-bottom: 20px;
@@ -96,8 +96,8 @@
 
   border: 4px solid rgba(0, 0, 0, 0.08);
 
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
 
   cursor: pointer;
 }

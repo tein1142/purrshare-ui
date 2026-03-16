@@ -17,7 +17,7 @@ export default function TabBar() {
     () => [
       {
         key: "home",
-        path: "/",
+        path: "/select",
         label: "หน้าแรก",
         icon: homeIcon,
       },
@@ -75,6 +75,7 @@ export default function TabBar() {
           className={`${styles.tab} ${isActive(tab.path) ? styles.active : ""}`}
           onClick={() => navigate(tab.path)}
           type="button"
+          aria-current={isActive(tab.path) ? "page" : undefined}
         >
           <div className={styles.tabIcoWrap}>
             <img className={styles.tabIconImg} src={tab.icon} alt={tab.label} />

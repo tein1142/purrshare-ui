@@ -1,5 +1,5 @@
 :root {
-  --scale: 1;
+  --scale: 1.08;
   --bg: #fff;
   --panel: #fbf3cf;
   --panel2: #f8edc3;
@@ -80,7 +80,7 @@
   border: 0;
   outline: 0;
   flex: 1;
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   font-size: calc(12px * var(--scale));
   color: #111;
   background: transparent;
@@ -124,7 +124,7 @@
   justify-content: center;
   padding: calc(12px * var(--scale));
   font-size: calc(12px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   color: #111;
   text-align: center;
 }
@@ -165,7 +165,7 @@
   padding: calc(6px * var(--scale)) calc(10px * var(--scale));
   border-radius: 999px;
   font-size: calc(10px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   white-space: nowrap;
 }
 
@@ -184,13 +184,13 @@
 .flowArrow {
   color: rgb(17 24 39 / 55%);
   font-size: calc(12px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 }
 
 .sectionTitle {
   margin: calc(14px * var(--scale)) 0 calc(10px * var(--scale));
   font-size: calc(13px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
 }
 
@@ -278,7 +278,7 @@
 .sampleName,
 .itemNameMulti {
   font-size: calc(13px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
   white-space: nowrap;
   overflow: hidden;
@@ -305,7 +305,7 @@
 .sampleMeta,
 .itemMetaMulti {
   font-size: calc(11px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   color: rgb(17 24 39 / 70%);
   white-space: nowrap;
   overflow: hidden;
@@ -341,7 +341,7 @@
   border-radius: calc(12px * var(--scale));
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 18%);
   background: #fff;
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   font-size: calc(12px * var(--scale));
   color: #111;
   white-space: nowrap;
@@ -356,7 +356,7 @@
   margin-top: calc(10px * var(--scale));
   text-align: center;
   font-size: calc(11px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: rgb(17 24 39 / 70%);
   border: 0;
   background: transparent;
@@ -376,7 +376,7 @@
   border-radius: 999px;
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 16%);
   background: #fff;
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   font-size: calc(14px * var(--scale));
   color: #111;
   padding: 0;
@@ -390,7 +390,7 @@
   min-width: calc(28px * var(--scale));
   text-align: center;
   font-size: calc(12px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
 }
 
@@ -398,7 +398,7 @@
   padding: calc(14px * var(--scale));
   text-align: center;
   color: rgb(17 24 39 / 65%);
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 }
 
 .emptyWrap {
@@ -414,7 +414,7 @@
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 16%);
   background: #fff;
   font-size: calc(11px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
 }
 
@@ -468,7 +468,7 @@
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 12%);
   background: var(--panel2);
   font-size: calc(10px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
   display: inline-flex;
   align-items: center;
@@ -501,7 +501,7 @@
   display: grid;
   place-items: center;
   font-size: calc(18px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
   z-index: 1500;
   box-shadow: 0 3px 0 rgb(58 42 39 / 8%);
@@ -544,13 +544,13 @@
 
 .sumTitle {
   font-size: calc(12px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
 }
 
 .sumSub {
   font-size: calc(11px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   color: rgb(17 24 39 / 70%);
   white-space: nowrap;
   overflow: hidden;
@@ -562,7 +562,7 @@
 .ghostBtn {
   height: var(--btnH);
   border-radius: var(--r18);
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   font-size: calc(13px * var(--scale));
   transition: transform 0.12s ease;
   white-space: nowrap;
@@ -627,7 +627,7 @@
 
 .sheetTitle {
   font-size: calc(13px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
 }
 
@@ -649,22 +649,92 @@
 
 .label {
   font-size: calc(11px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: rgb(17 24 39 / 75%);
 }
 
 .input {
   width: 100%;
   min-width: 0;
+  display: block;
   box-sizing: border-box;
   height: calc(44px * var(--scale));
   border-radius: var(--r16);
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 14%);
   padding: 0 calc(12px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   font-size: calc(12px * var(--scale));
   color: #111;
   outline: 0;
+}
+
+.dropdownWrap {
+  position: relative;
+}
+
+.dropdownTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(8px * var(--scale));
+  text-align: left;
+  cursor: pointer;
+  background: #fff;
+}
+
+.dropdownValue {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownArrow {
+  flex: 0 0 auto;
+  font-size: calc(10px * var(--scale));
+  color: rgb(17 24 39 / 75%);
+  transition: transform 0.14s ease;
+}
+
+.open {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + calc(6px * var(--scale)));
+  z-index: 60;
+  background: #fff;
+  border-radius: var(--r16);
+  border: calc(2px * var(--scale)) solid rgb(58 42 39 / 14%);
+  box-shadow: 0 10px 18px rgb(17 24 39 / 12%);
+  padding: calc(6px * var(--scale));
+  display: grid;
+  gap: calc(4px * var(--scale));
+}
+
+.dropdownOption {
+  width: 100%;
+  min-height: calc(38px * var(--scale));
+  border: 0;
+  background: transparent;
+  border-radius: calc(12px * var(--scale));
+  text-align: left;
+  padding: 0 calc(10px * var(--scale));
+  font-size: calc(12px * var(--scale));
+  font-weight: var(--fw-bold);
+  color: #111;
+  cursor: pointer;
+}
+
+.dropdownOption:active {
+  transform: scale(0.99);
+}
+
+.selected {
+  background: var(--panel2);
 }
 
 .row2 {
@@ -708,13 +778,13 @@
 }
 
 .detailStrong {
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   font-size: calc(12px * var(--scale));
   color: #111;
 }
 
 .detailMuted {
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   font-size: calc(12px * var(--scale));
   color: rgb(17 24 39 / 75%);
 }
@@ -753,7 +823,7 @@
 
 .loadingText {
   font-size: calc(13px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   color: #111;
   line-height: 1.2;
 }
@@ -803,7 +873,7 @@
 
 .meow {
   font-size: calc(24px * var(--scale));
-  font-weight: 1000;
+  font-weight: var(--fw-bold);
   color: #111;
   margin: 0;
 }
@@ -812,7 +882,7 @@
   margin-top: calc(8px * var(--scale));
   margin-bottom: calc(14px * var(--scale));
   font-size: calc(12px * var(--scale));
-  font-weight: 900;
+  font-weight: var(--fw-bold);
   color: rgb(17 24 39 / 70%);
 }
 

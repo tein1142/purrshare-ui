@@ -3,7 +3,6 @@ import TabBar from "../components/TabBar";
 import styles from "./css/Profile.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import logo02 from "../assets/images/LOGO-02.png";
 
 
 export default function Profile() {
@@ -59,8 +58,8 @@ export default function Profile() {
     } catch {}
   }, []);
 
-  const saveProfile = () => {
-    localStorage.setItem("ps_profile", JSON.stringify(profile));
+  const saveProfile = (updated: any) => {
+    localStorage.setItem("ps_profile", JSON.stringify(updated));
     setOpenEdit(false);
   };
 
@@ -80,7 +79,7 @@ export default function Profile() {
 
       <header className={styles.top}>
         <div className={styles.topRow}>
-          <button
+          {/* <button
             type="button"
             className={styles.logoBtn}
             onClick={() => navigate("/select")}
@@ -91,7 +90,7 @@ export default function Profile() {
               src={logo02}
               alt="Purrshare"
             />
-          </button>
+          </button> */}
           <div className={styles.topTitle}>โปรไฟล์</div>
         </div>
 
@@ -99,33 +98,11 @@ export default function Profile() {
 
         <div className={styles.hero}>
           <div className={styles.heroContent}>
-            {/* AVATAR + PETS */}
+            {/* AVATAR */}
 
             <div className={styles.heroRow}>
               <div className={styles.avatarSingle}>
-                <img src="/external/randomuser_men_32.jpg" />
-              </div>
-
-              <div className={styles.petsCard}>
-                <div className={styles.petsTitle}>
-                  สัตว์เลี้ยงในครอบครัวของฉัน
-                </div>
-
-                <div className={styles.petsAvatars}>
-                  <div className={styles.petA}>
-                    <img src="/external/placecats_neo_300_200.jpg" />
-                  </div>
-
-                  <div className={styles.petA}>
-                    <img src="/external/placecats_millie_300_200.jpg" />
-                  </div>
-
-                  <div className={styles.petA}>
-                    <img src="/external/placecats_poppy_300_200.jpg" />
-                  </div>
-                </div>
-
-                <div className={styles.petsSub}>มีมี • จูเท้า • โกโก้</div>
+                <img src="/external/randomuser_men_32.jpg" alt="รูปโปรไฟล์" />
               </div>
             </div>
 

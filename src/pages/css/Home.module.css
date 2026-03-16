@@ -101,7 +101,7 @@
 
 .cat {
   position: absolute;
-  font-size: 72px;
+  font-size: var(--fs-display);
   top: 55%;
   transform: translateY(-50%);
   left: -120px;
@@ -142,8 +142,8 @@
 .loadingText {
   position: absolute;
   bottom: 25%;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
   letter-spacing: 0.3px;
   opacity: 0.8;
   animation: pulse 1.4s ease-in-out infinite;
