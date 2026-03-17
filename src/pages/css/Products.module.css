@@ -149,8 +149,9 @@
 .title {
   text-align: center;
   margin: calc(10px * var(--scale)) 0 0;
-  font-size: calc(18px * var(--scale));
+  font-size: calc(26px * var(--scale));
   font-weight: var(--fw-bold);
+  color: #d24a32;
 }
 
 .subtitle {

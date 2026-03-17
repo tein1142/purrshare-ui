@@ -162,7 +162,7 @@ export default function Select() {
               <div className={styles.quickIco}>
                 <img src={foodIcon} alt="อาหารและโภชนาการ" />
               </div>
-              <span>อาหาร<br />และโภชนาการ</span>
+              <span>อาหารและ<br />โภชนาการ</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=litter")}>
@@ -197,9 +197,9 @@ export default function Select() {
           <div className={styles.bigButtons}>
             <button type="button" className={styles.bigBtn} onClick={() => navigate("/products?cat=new")}>
               <div className={styles.bigIco}>
-                <img src={newIcon} alt="ของใหม่ล่าสุด" />
+                <img src={newIcon} alt="ของล่าสุด" />
               </div>
-              <div className={styles.label}>ของใหม่ล่าสุด</div>
+              <div className={styles.label}>ของล่าสุด</div>
             </button>
 
             <button type="button" className={styles.bigBtn} onClick={() => navigate("/products?cat=popular")}>
@@ -240,7 +240,7 @@ export default function Select() {
                       <div className={styles.tileImg}>
                         <img src={item.img} alt={item.name} />
                       </div>
-                      <div className={styles.tileBadge}>หมวดแนะนำ</div>
+                      {/* <div className={styles.tileBadge}>หมวดแนะนำ</div> */}
                       <div className={styles.name}>{item.name}</div>
                       <div className={styles.tileHint}>{item.hint}</div>
                     </button>

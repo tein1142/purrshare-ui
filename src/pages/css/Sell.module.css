@@ -67,9 +67,9 @@
 
 .topTitle {
   text-align: center;
-  font-size: var(--fs-xl);
+  font-size: calc(26px * var(--scale));
   font-weight: var(--fw-bold);
-  color: #111;
+  color: #d24a32;
 }
 
 .topGhost {

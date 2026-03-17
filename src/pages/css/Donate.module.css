@@ -47,9 +47,9 @@
 }
 /* Match Cart header title style */
 .topTitle {
-  font-size: calc(var(--fs-3xl) * 0.96);
+  font-size: calc(26px * var(--scale));
   font-weight: var(--fw-bold);
-  color: #111;
+  color: #d24a32;
 }
 
 .psLogoBtn {

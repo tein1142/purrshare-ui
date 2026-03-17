@@ -45,8 +45,9 @@
 
 .topTitle {
   font-weight: var(--fw-bold);
-  font-size: large;
+  font-size: 26px;
   text-align: center;
+  color: #d24a32;
 }
 
 .subHead {

@@ -39,9 +39,9 @@
 /* TITLE */
 
 .title {
-  font-size: calc(var(--fs-3xl) * var(--page-scale));
+  font-size: calc(26px * var(--page-scale));
   font-weight: var(--fw-bold);
-  color: #111;
+  color: #d24a32;
 }
 
 .logoBtn {
