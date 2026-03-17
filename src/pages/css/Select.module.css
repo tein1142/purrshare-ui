@@ -86,8 +86,6 @@
   font-weight: var(--fw-regular);
   -webkit-text-size-adjust: 100%;
   overflow-anchor: none;
-  display: flex;
-  justify-content: center;
 }
 
 * {
@@ -104,8 +102,6 @@
 
 .app {
   width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
   min-height: 100vh;
   padding-bottom: calc(var(--tabH) + env(safe-area-inset-bottom));
 }

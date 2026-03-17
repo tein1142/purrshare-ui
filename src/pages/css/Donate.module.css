@@ -15,11 +15,11 @@
 
   --btnH: calc(52px * var(--scale));
   --searchH: calc(40px * var(--scale));
-  --tabH: calc(78px * var(--scale));
+  --tabH: calc(55px * var(--scale));
 }
 
 .app {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
@@ -28,8 +28,6 @@
 
 .psHeader {
   width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
   padding: 16px 14px 12px;
   background: #fbf3cf;
   border-bottom-left-radius: 24px;

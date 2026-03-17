@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
 import Layout from "../components/Layout";
 import styles from "./css/Home.module.css";
 import logo01 from "../assets/images/LOGO-01.png";
@@ -8,13 +7,8 @@ import shopIcon from "../assets/images/home/Our_shop.png";
 import shareIcon from "../assets/images/home/share.png";
 export default function Home() {
   const navigate = useNavigate();
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [catJump, setCatJump] = useState(false);
 
   function goPage(path: string) {
-    // setIsLoading(true);
-    // setTimeout(() => setCatJump(true), 100);
-    // setTimeout(() => , 100);
     navigate(path)
   }
 
@@ -42,15 +36,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* <div className={`${styles.loadingOverlay} ${isLoading ? styles.show : ""}`}>
-          <img
-            className={styles.loadingLogo}
-            src={logo01}
-            alt=""
-          />
-          <div className={`${styles.cat} ${catJump ? styles.jump : ""}`}>🐱</div>
-          <div className={styles.loadingText}>กําลังกระโดดไปหน้าใหม่...</div>
-        </div> */}
       </div>
     </Layout>
   );

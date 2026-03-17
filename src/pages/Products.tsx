@@ -212,19 +212,16 @@ export default function Product() {
     };
 
     loadCustomProducts();
-    window.addEventListener("products-updated", loadCustomProducts);
+    globalThis.addEventListener("products-updated", loadCustomProducts);
 
     return () => {
-      window.removeEventListener("products-updated", loadCustomProducts);
+      globalThis.removeEventListener("products-updated", loadCustomProducts);
     };
   }, []);
 
-  const visibleTab =
-    selectedCategory === "popular"
-      ? "top"
-      : selectedCategory === "new"
-      ? "newest"
-      : activeTab;
+  let visibleTab = activeTab;
+  if (selectedCategory === "popular") visibleTab = "top";
+  else if (selectedCategory === "new") visibleTab = "newest";
 
   const subtitle = selectedCategory
     ? categoryLabel[selectedCategory] || "หมวดหมู่สินค้า"
@@ -289,7 +286,7 @@ export default function Product() {
       localStorage.setItem("ps_cart", JSON.stringify(cart));
 
       // update badge
-      window.dispatchEvent(new Event("cart-updated"));
+      globalThis.dispatchEvent(new Event("cart-updated"));
     } catch (e) {
       console.error("cart error", e);
     }
@@ -360,8 +357,9 @@ export default function Product() {
       {/* GRID */}
       <main className={styles.grid}>
         {shownProducts.map((p) => (
-          <div
+          <button
             key={p.id}
+            type="button"
             className={styles.card}
             onClick={() => setSelectedProduct(p)}
           >
@@ -376,7 +374,7 @@ export default function Product() {
                 {p.price.toLocaleString("th-TH")} THB
               </div>
             </div>
-          </div>
+          </button>
         ))}
 
         {!shownProducts.length && (

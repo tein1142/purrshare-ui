@@ -2,11 +2,9 @@ import EditProfileModal from "../components/EditProfileModal";
 import TabBar from "../components/TabBar";
 import styles from "./css/Profile.module.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 
 export default function Profile() {
-  const navigate = useNavigate();
   const [orders] = useState<any[]>(() => {
     try {
       const pending = JSON.parse(localStorage.getItem("ps_pending") || "[]");
@@ -109,8 +107,8 @@ export default function Profile() {
             {/* NAME */}
 
             <div className={styles.name}>
-              {profile.name.split("\n").map((n: string, i: number) => (
-                <div key={i}>{n}</div>
+              {profile.name.split("\n").map((n: string) => (
+                <div key={n}>{n}</div>
               ))}
             </div>
 
@@ -184,21 +182,22 @@ export default function Profile() {
       <section className={styles.section}>
         <div className={styles.secHead}>
           <div className={styles.secTitle}>รายการสินค้าที่รอส่ง</div>
-          <div
+          <button
+            type="button"
             className={styles.secLink}
             onClick={() => setShowAll((prev) => !prev)}
           >
             {showAll ? "ดูน้อยลง ▲" : "ดูทั้งหมด ›"}
-          </div>
+          </button>
         </div>
 
         <div className={styles.list}>
           {(showAll ? pendingItems : pendingItems.slice(0, 3)).map((item, i) => {
             return (
-              <div key={i} className={styles.row}>
+              <div key={`${item.orderId}-${i}`} className={styles.row}>
                 <div className={styles.left}>
                   <div className={styles.dot}>
-                    <img src={item.img} />
+                    <img src={item.img} alt={item.name} />
                   </div>
 
                   <div className={styles.txt}>
@@ -229,7 +228,7 @@ export default function Profile() {
               <div key={r.id} className={styles.reviewRow}>
                 <div className={styles.left}>
                   <div className={styles.dot}>
-                    <img src={r.img} />
+                    <img src={r.img} alt={r.name} />
                   </div>
 
                   <div className={styles.txt}>

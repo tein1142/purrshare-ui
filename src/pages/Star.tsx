@@ -39,7 +39,7 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="/external/unsplash_1524504388940-b1c1722653e1.jpg" />
+                  <img src="/external/unsplash_1524504388940-b1c1722653e1.jpg" alt="Mimi Shop" />
                 </div>
 
                 <div className={styles.pName}>Mimi Shop</div>
@@ -50,7 +50,7 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="/external/unsplash_1535713875002-d1d0cf377fde.jpg" />
+                  <img src="/external/unsplash_1535713875002-d1d0cf377fde.jpg" alt="Purr Premium" />
                 </div>
 
                 <div className={styles.pName}>Purr Premium</div>
@@ -61,7 +61,7 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="/external/unsplash_1544723795-3fb6469f5b39.jpg" />
+                  <img src="/external/unsplash_1544723795-3fb6469f5b39.jpg" alt="Catty Corner" />
                 </div>
 
                 <div className={styles.pName}>Catty Corner</div>
@@ -101,6 +101,7 @@ export default function Star() {
                 <img
                   className={styles.rDot}
                   src="/external/randomuser_women_44.jpg"
+                  alt="มินนี่"
                 />
 
                 <div>
@@ -117,6 +118,7 @@ export default function Star() {
                 <img
                   className={styles.rDot}
                   src="/external/randomuser_men_32.jpg"
+                  alt="ก้องภพ"
                 />
 
                 <div>
@@ -133,6 +135,7 @@ export default function Star() {
                 <img
                   className={styles.rDot}
                   src="/external/randomuser_women_68.jpg"
+                  alt="พลอยใส"
                 />
 
                 <div>

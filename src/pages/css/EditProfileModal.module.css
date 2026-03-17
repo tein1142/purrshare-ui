@@ -13,11 +13,10 @@
   width:100%;
   max-width:420px;
   max-height: calc(100dvh - 24px);
-  overflow: auto;
+  overflow:hidden;
   background:#fbf3cf;
   border-radius:24px;
   border:3px solid rgba(58,42,39,.2);
-  overflow:hidden;
 }
 
 .top{
@@ -34,10 +33,6 @@
 }
 
 .closeBtn {
-  /* position: absolute;
-  left: 0; */
-
-  /* width: 44px; */
   height: 34px;
 
   border-radius: 10px;

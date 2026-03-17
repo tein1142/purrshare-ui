@@ -24,6 +24,7 @@ type NeedItem = {
 
 type DonateItem = {
   id: string;
+  catalogId?: string;
   name: string;
   meta: string;
   img: string;
@@ -156,9 +157,10 @@ const sampleItems: SampleItem[] = [
 
 export default function Donate() {
   const navigate = useNavigate();
-  const fallbackImage = "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=70";
+  const fallbackImage =
+    "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=70";
   const [search, setSearch] = useState("");
-  const [needs] = useState<NeedItem[]>(needsSeed);
+  const [needs, setNeeds] = useState<NeedItem[]>(needsSeed);
   const [needsExpanded, setNeedsExpanded] = useState(false);
   const [list, setList] = useState<DonateItem[]>(() => {
     try {
@@ -178,13 +180,15 @@ export default function Donate() {
 
   const [pickIndex, setPickIndex] = useState(0);
   const [pickQty, setPickQty] = useState(1);
-  const [selectedSample, setSelectedSample] = useState<SampleItem | null>(null);
 
   const [senderName, setSenderName] = useState("Minnie");
   const [senderPhone, setSenderPhone] = useState("09x-xxx-xxxx");
-  const [senderType, setSenderType] = useState("บริจาค");
+  const [senderType, setSenderType] = useState("จัดส่งทางไปษณีย์");
+  const [senderTypeOpen, setSenderTypeOpen] = useState(false);
   const [senderAddr, setSenderAddr] = useState("กรุงเทพฯ");
   const [senderNote, setSenderNote] = useState("ฝากน้องเหมียวด้วยนะ");
+
+  const senderTypeOptions = ["จัดส่งทางไปษณีย์", "จัดส่งด้วยตนเอง"];
 
   const activePick = catalog[pickIndex % catalog.length];
 
@@ -204,8 +208,12 @@ export default function Donate() {
   const filteredSamples = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return sampleItems;
-    return sampleItems.filter((s) => `${s.name} ${s.desc} ${s.tag}`.toLowerCase().includes(q));
+    return sampleItems.filter((s) =>
+      `${s.name} ${s.desc} ${s.tag}`.toLowerCase().includes(q),
+    );
   }, [search]);
+
+  const selectedSample = filteredSamples[0] ?? null;
 
   const totalQty = list.reduce((sum, item) => sum + item.qty, 0);
 
@@ -216,7 +224,7 @@ export default function Donate() {
 
   function increaseListQty(id: string) {
     const next = list.map((item) =>
-      item.id === id ? { ...item, qty: item.qty + 1 } : item
+      item.id === id ? { ...item, qty: item.qty + 1 } : item,
     );
     persistDonateItems(next);
   }
@@ -224,7 +232,7 @@ export default function Donate() {
   function decreaseListQty(id: string) {
     const next = list
       .map((item) =>
-        item.id === id ? { ...item, qty: Math.max(0, item.qty - 1) } : item
+        item.id === id ? { ...item, qty: Math.max(0, item.qty - 1) } : item,
       )
       .filter((item) => item.qty > 0);
     persistDonateItems(next);
@@ -242,12 +250,13 @@ export default function Donate() {
       ? list.map((item) =>
           item.id === activePick.id
             ? { ...item, qty: item.qty + pickQty }
-            : item
+            : item,
         )
       : [
           ...list,
           {
             id: activePick.id,
+            catalogId: activePick.id,
             name: activePick.name,
             meta: activePick.meta,
             img: activePick.img,
@@ -264,28 +273,56 @@ export default function Donate() {
   }
 
   function addNeedToList(need: NeedItem) {
-    const existing = list.find((item) => item.id === need.catalogId);
-    const fromCatalog = catalog.find((c) => c.id === need.catalogId) ?? catalog[0];
-    const next = existing
-      ? list.map((item) =>
-          item.id === need.catalogId ? { ...item, qty: item.qty + 1 } : item
-        )
-      : [
-          ...list,
-          {
-            id: fromCatalog.id,
-            name: fromCatalog.name,
-            meta: fromCatalog.meta,
-            img: fromCatalog.img,
-            qty: 1,
-          },
-        ];
+    setList((prev) => {
+      const existing = prev.find((item) => item.id === need.id);
+      const next = existing
+        ? prev.map((item) =>
+            item.id === need.id ? { ...item, qty: item.qty + 1 } : item,
+          )
+        : [
+            ...prev,
+            {
+              id: need.id,
+              catalogId: need.catalogId,
+              name: need.name,
+              meta: need.meta,
+              img: need.img,
+              qty: 1,
+            },
+          ];
 
-    setLoading(true);
-    globalThis.setTimeout(() => {
-      persistDonateItems(next);
-      setLoading(false);
-    }, 260);
+      localStorage.setItem("ps_donate_items", JSON.stringify(next));
+      return next;
+    });
+  }
+
+  function applyDonationToNeeds(
+    prevNeeds: NeedItem[],
+    submittedItems: DonateItem[],
+  ) {
+    const remainByCatalog = new Map<string, number>();
+    submittedItems.forEach((item) => {
+      const key = item.catalogId ?? item.id;
+      remainByCatalog.set(key, (remainByCatalog.get(key) ?? 0) + item.qty);
+    });
+
+    return prevNeeds.map((need) => {
+      const remain = remainByCatalog.get(need.catalogId) ?? 0;
+      if (remain <= 0) return need;
+
+      const room = Math.max(0, need.target - need.current);
+      if (room <= 0) return need;
+
+      const added = Math.min(remain, room);
+      const nextCurrent = need.current + added;
+      remainByCatalog.set(need.catalogId, remain - added);
+
+      return {
+        ...need,
+        current: nextCurrent,
+        meta: `${nextCurrent} / ${need.target} ชิ้น`,
+      };
+    });
   }
 
   function submitDonationFlow() {
@@ -296,6 +333,8 @@ export default function Donate() {
 
     setFormOpen(false);
     setLoading(true);
+
+    const submittedItems = [...list];
 
     globalThis.setTimeout(() => {
       const raw = localStorage.getItem("ps_donations") || "[]";
@@ -311,22 +350,65 @@ export default function Donate() {
       });
       localStorage.setItem("ps_donations", JSON.stringify(history));
 
+      setNeeds((prev) => applyDonationToNeeds(prev, submittedItems));
+
       persistDonateItems([]);
       setLoading(false);
       setSuccess(true);
     }, 700);
   }
 
+  function closeSuccessModal() {
+    setSuccess(false);
+  }
+
   return (
     <div className={styles.app}>
       <header className={styles.psHeader}>
         <div className={styles.psHeaderRow}>
-          <button className={styles.psLogoBtn} type="button" onClick={() => navigate("/")} aria-label="Home">
-            <svg className={styles.psLogoSvg} viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M32 14c7 0 12 5 12 12 0 9-6 16-12 16s-12-7-12-16c0-7 5-12 12-12Z" fill="none" stroke="rgba(17,24,39,.85)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M20 22c-3-2-5-5-5-8 0-2 1-4 3-4 3 0 5 3 6 6" fill="none" stroke="rgba(17,24,39,.85)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M44 22c3-2 5-5 5-8 0-2-1-4-3-4-3 0-5 3-6 6" fill="none" stroke="rgba(17,24,39,.85)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M18 46c4 4 9 6 14 6s10-2 14-6" fill="none" stroke="rgba(17,24,39,.85)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+          <button
+            className={styles.psLogoBtn}
+            type="button"
+            onClick={() => navigate("/")}
+            aria-label="Home"
+          >
+            <svg
+              className={styles.psLogoSvg}
+              viewBox="0 0 64 64"
+              aria-hidden="true"
+            >
+              <path
+                d="M32 14c7 0 12 5 12 12 0 9-6 16-12 16s-12-7-12-16c0-7 5-12 12-12Z"
+                fill="none"
+                stroke="rgba(17,24,39,.85)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M20 22c-3-2-5-5-5-8 0-2 1-4 3-4 3 0 5 3 6 6"
+                fill="none"
+                stroke="rgba(17,24,39,.85)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M44 22c3-2 5-5 5-8 0-2-1-4-3-4-3 0-5 3-6 6"
+                fill="none"
+                stroke="rgba(17,24,39,.85)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M18 46c4 4 9 6 14 6s10-2 14-6"
+                fill="none"
+                stroke="rgba(17,24,39,.85)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
           <div className={styles.psSearch}>
@@ -338,7 +420,11 @@ export default function Donate() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <svg className={styles.psSearchIcon} viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              className={styles.psSearchIcon}
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm8 3-4.2-4.2" />
             </svg>
           </div>
@@ -356,7 +442,9 @@ export default function Donate() {
                 e.currentTarget.src = fallbackImage;
               }}
             />
-            <div className={styles.heroCaption}>พื้นที่รูป / แบนเนอร์แคมเปญบริจาค</div>
+            <div className={styles.heroCaption}>
+              พื้นที่รูป / แบนเนอร์แคมเปญบริจาค
+            </div>
           </div>
 
           <div className={styles.flowGuide}>
@@ -367,10 +455,15 @@ export default function Donate() {
             <div className={styles.flowChipActive}>3. ยืนยันบริจาค</div>
           </div>
 
-          <div className={styles.sectionTitle}>รายการสิ่งของที่มูลนิธิต้องการ</div>
+          <div className={styles.sectionTitle}>
+            รายการสิ่งของที่มูลนิธิต้องการ
+          </div>
           <div className={styles.needsCard}>
             {filteredNeeds.map((item) => {
-              const pct = Math.min(100, Math.round((item.current / item.target) * 100));
+              const pct = Math.min(
+                100,
+                Math.round((item.current / item.target) * 100),
+              );
               return (
                 <div className={styles.needRow} key={item.id}>
                   <div className={styles.needLeft}>
@@ -388,7 +481,10 @@ export default function Donate() {
                       <div className={styles.needName}>{item.name}</div>
                       <div className={styles.needMeta}>{item.meta}</div>
                       <div className={styles.needBar}>
-                        <div className={styles.needFill} style={{ width: `${pct}%` }} />
+                        <div
+                          className={styles.needFill}
+                          style={{ width: `${pct}%` }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -415,8 +511,14 @@ export default function Donate() {
           <div className={styles.listCard}>
             {filteredList.length === 0 ? (
               <div className={styles.emptyWrap}>
-                <div className={styles.empty}>เพิ่มรายการจากสิ่งของที่มูลนิธิต้องการด้านบน</div>
-                <button className={styles.openAddBtn} type="button" onClick={openAddModal}>
+                <div className={styles.empty}>
+                  เพิ่มรายการจากสิ่งของที่มูลนิธิต้องการด้านบน
+                </div>
+                <button
+                  className={styles.openAddBtn}
+                  type="button"
+                  onClick={openAddModal}
+                >
                   เลือกจากแคตตาล็อก
                 </button>
               </div>
@@ -441,55 +543,35 @@ export default function Donate() {
                   </div>
 
                   <div className={styles.qtyPill}>
-                    <button type="button" className={styles.qtyBtn} onClick={() => decreaseListQty(item.id)}>−</button>
+                    <button
+                      type="button"
+                      className={styles.qtyBtn}
+                      onClick={() => decreaseListQty(item.id)}
+                    >
+                      −
+                    </button>
                     <div className={styles.qtyVal}>{item.qty}</div>
-                    <button type="button" className={styles.qtyBtn} onClick={() => increaseListQty(item.id)}>+</button>
+                    <button
+                      type="button"
+                      className={styles.qtyBtn}
+                      onClick={() => increaseListQty(item.id)}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               ))
             )}
           </div>
-
-          <div className={styles.sectionTitle}>ตัวอย่างสินค้าที่มีคนบริจาคแล้ว</div>
-          <div className={styles.sampleGrid}>
-            {filteredSamples.map((item) => (
-              <button
-                key={item.id}
-                className={styles.sampleCard}
-                type="button"
-                onClick={() => {
-                  setSelectedSample(item);
-                  setDetailOpen(true);
-                }}
-              >
-                <div className={styles.sampleImg}>
-                  <img
-                    src={item.img}
-                    alt={item.name}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.src = fallbackImage;
-                    }}
-                  />
-                </div>
-                <div className={styles.sampleBody}>
-                  <div className={styles.sampleName}>{item.name}</div>
-                  <div className={styles.sampleMeta}>{item.loc}</div>
-                  <div className={styles.sampleTagRow}>
-                    <div className={styles.sampleTag}>{item.tag}</div>
-                    <svg className={styles.sampleArrow} viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M9 6l6 6-6 6" />
-                    </svg>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
         </main>
       )}
 
-      {success && (
-        <div className={styles.successWrap}>
+      <ModalShell
+        open={success}
+        onClose={closeSuccessModal}
+        panelClassName={styles.sheet}
+      >
+        <div className={styles.sheetBody}>
           <div className={styles.successCard}>
             <div className={styles.meowBox}>
               <img
@@ -504,12 +586,16 @@ export default function Donate() {
             </div>
             <p className={styles.meow}>Meow</p>
             <div className={styles.meowSub}>ขอบคุณที่ช่วยน้องเหมียว 💛</div>
-            <button className={styles.primaryBtn} type="button" onClick={() => navigate("/")}>
-              กลับหน้าแรก
+            <button
+              className={styles.primaryBtn}
+              type="button"
+              onClick={closeSuccessModal}
+            >
+              ตกลง
             </button>
           </div>
         </div>
-      )}
+      </ModalShell>
 
       {!success && (
         <div className={styles.bottomBar}>
@@ -517,7 +603,9 @@ export default function Donate() {
             <div className={styles.summary}>
               <div className={styles.sumTitle}>พร้อมบริจาคแล้ว</div>
               <div className={styles.sumSub}>
-                {totalQty > 0 ? `รวม ${totalQty} ชิ้น • กดบริจาคเพื่อกรอกข้อมูล` : "เพิ่มรายการอย่างน้อย 1 ชิ้น"}
+                {totalQty > 0
+                  ? `รวม ${totalQty} ชิ้น • กดบริจาคเพื่อกรอกข้อมูล`
+                  : "เพิ่มรายการอย่างน้อย 1 ชิ้น"}
               </div>
             </div>
             <button
@@ -532,7 +620,11 @@ export default function Donate() {
         </div>
       )}
 
-      <ModalShell open={addOpen} onClose={() => setAddOpen(false)} panelClassName={styles.sheet}>
+      <ModalShell
+        open={addOpen}
+        onClose={() => setAddOpen(false)}
+        panelClassName={styles.sheet}
+      >
         <div className={styles.sheetHead}>
           <div className={styles.sheetTitle}>เพิ่มรายการบริจาค</div>
           <CloseIcon onClose={() => setAddOpen(false)} />
@@ -555,53 +647,153 @@ export default function Donate() {
               </div>
             </div>
             <div className={styles.qtyPill}>
-              <button type="button" className={styles.qtyBtn} onClick={() => setPickQty((n) => Math.max(1, n - 1))}>−</button>
+              <button
+                type="button"
+                className={styles.qtyBtn}
+                onClick={() => setPickQty((n) => Math.max(1, n - 1))}
+              >
+                −
+              </button>
               <div className={styles.qtyVal}>{pickQty}</div>
-              <button type="button" className={styles.qtyBtn} onClick={() => setPickQty((n) => Math.min(99, n + 1))}>+</button>
+              <button
+                type="button"
+                className={styles.qtyBtn}
+                onClick={() => setPickQty((n) => Math.min(99, n + 1))}
+              >
+                +
+              </button>
             </div>
           </div>
-          <button className={styles.primaryBtnFull} type="button" onClick={addPickedItemToList}>
+          <button
+            className={styles.primaryBtnFull}
+            type="button"
+            onClick={addPickedItemToList}
+          >
             เพิ่มเข้าลิสต์
           </button>
         </div>
       </ModalShell>
 
-      <ModalShell open={formOpen} onClose={() => setFormOpen(false)} panelClassName={styles.sheet}>
+      <ModalShell
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        panelClassName={styles.sheet}
+      >
         <div className={styles.sheetHead}>
           <div className={styles.sheetTitle}>รายละเอียดการรับบริจาค</div>
           <CloseIcon onClose={() => setFormOpen(false)} />
         </div>
         <div className={styles.sheetBody}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="fName">ชื่อผู้ส่ง</label>
-            <input id="fName" className={styles.input} value={senderName} onChange={(e) => setSenderName(e.target.value)} />
+            <label className={styles.label} htmlFor="fName">
+              ชื่อผู้ส่ง
+            </label>
+            <input
+              id="fName"
+              className={styles.input}
+              value={senderName}
+              onChange={(e) => setSenderName(e.target.value)}
+            />
           </div>
           <div className={styles.row2}>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="fPhone">เบอร์</label>
-              <input id="fPhone" className={styles.input} value={senderPhone} onChange={(e) => setSenderPhone(e.target.value)} />
+              <label className={styles.label} htmlFor="fPhone">
+                เบอร์
+              </label>
+              <input
+                id="fPhone"
+                className={styles.input}
+                value={senderPhone}
+                onChange={(e) => setSenderPhone(e.target.value)}
+              />
             </div>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="fType">ประเภท</label>
-              <input id="fType" className={styles.input} value={senderType} onChange={(e) => setSenderType(e.target.value)} />
+              <label className={styles.label} htmlFor="fTypeDropdown">
+                วิธีการส่งสินค้า
+              </label>
+              <div className={styles.dropdownWrap}>
+                <button
+                  id="fTypeDropdown"
+                  type="button"
+                  className={`${styles.input} ${styles.dropdownTrigger}`}
+                  aria-haspopup="listbox"
+                  aria-expanded={senderTypeOpen}
+                  onClick={() => setSenderTypeOpen((prev) => !prev)}
+                >
+                  <span className={styles.dropdownValue}>{senderType}</span>
+                  <span
+                    className={`${styles.dropdownArrow} ${senderTypeOpen ? styles.open : ""}`}
+                    aria-hidden="true"
+                  >
+                    ▾
+                  </span>
+                </button>
+                {senderTypeOpen && (
+                  <div className={styles.dropdownMenu}>
+                    {senderTypeOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        className={`${styles.dropdownOption} ${senderType === option ? styles.selected : ""}`}
+                        onClick={() => {
+                          setSenderType(option);
+                          setSenderTypeOpen(false);
+                        }}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="fAddr">ที่อยู่</label>
-            <input id="fAddr" className={styles.input} value={senderAddr} onChange={(e) => setSenderAddr(e.target.value)} />
+            <label className={styles.label} htmlFor="fAddr">
+              ที่อยู่
+            </label>
+            <input
+              id="fAddr"
+              className={styles.input}
+              value={senderAddr}
+              onChange={(e) => setSenderAddr(e.target.value)}
+            />
           </div>
           <div className={styles.fieldNoMargin}>
-            <label className={styles.label} htmlFor="fNote">หมายเหตุ</label>
-            <input id="fNote" className={styles.input} value={senderNote} onChange={(e) => setSenderNote(e.target.value)} />
+            <label className={styles.label} htmlFor="fNote">
+              หมายเหตุ
+            </label>
+            <input
+              id="fNote"
+              className={styles.input}
+              value={senderNote}
+              onChange={(e) => setSenderNote(e.target.value)}
+            />
           </div>
         </div>
         <div className={styles.sheetActions}>
-          <button className={styles.ghostBtn} type="button" onClick={() => setFormOpen(false)}>ยกเลิก</button>
-          <button className={styles.primaryBtn} type="button" onClick={submitDonationFlow}>ยืนยัน</button>
+          <button
+            className={styles.ghostBtn}
+            type="button"
+            onClick={() => setFormOpen(false)}
+          >
+            ยกเลิก
+          </button>
+          <button
+            className={styles.primaryBtn}
+            type="button"
+            onClick={submitDonationFlow}
+          >
+            ยืนยัน
+          </button>
         </div>
       </ModalShell>
 
-      <ModalShell open={detailOpen} onClose={() => setDetailOpen(false)} panelClassName={styles.sheet}>
+      <ModalShell
+        open={detailOpen}
+        onClose={() => setDetailOpen(false)}
+        panelClassName={styles.sheet}
+      >
         <div className={styles.sheetHead}>
           <div className={styles.sheetTitle}>รายละเอียดสินค้า</div>
           <CloseIcon onClose={() => setDetailOpen(false)} />
@@ -620,8 +812,12 @@ export default function Donate() {
                   />
                 </div>
                 <div className={styles.detailMetaWrap}>
-                  <div className={styles.itemNameMulti}>{selectedSample.name}</div>
-                  <div className={styles.itemMetaMulti}>{selectedSample.desc}</div>
+                  <div className={styles.itemNameMulti}>
+                    {selectedSample.name}
+                  </div>
+                  <div className={styles.itemMetaMulti}>
+                    {selectedSample.desc}
+                  </div>
                   <div className={styles.detailTags}>
                     <div className={styles.sampleTag}>สภาพดี</div>
                     <div className={styles.sampleTag}>พร้อมส่งต่อ</div>
@@ -631,7 +827,9 @@ export default function Donate() {
 
               <div className={styles.detailInfoBlock}>
                 <div className={styles.label}>ผู้บริจาค</div>
-                <div className={styles.detailStrong}>{selectedSample.donor}</div>
+                <div className={styles.detailStrong}>
+                  {selectedSample.donor}
+                </div>
               </div>
 
               <div className={styles.detailInfoBlock}>
@@ -639,7 +837,11 @@ export default function Donate() {
                 <div className={styles.detailMuted}>{selectedSample.loc}</div>
               </div>
 
-              <button className={styles.primaryBtnFull} type="button" onClick={() => setDetailOpen(false)}>
+              <button
+                className={styles.primaryBtnFull}
+                type="button"
+                onClick={() => setDetailOpen(false)}
+              >
                 ปิด
               </button>
             </>

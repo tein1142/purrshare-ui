@@ -3,11 +3,8 @@ import styles from "./css/Cart.module.css";
 import PaymentModal from "../components/PaymentModal";
 import SuccessModal from "../components/SuccessModal";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import logo02 from "../assets/images/LOGO-02.png";
 
 export default function Cart() {
-  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [openPayment, setOpenPayment] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);

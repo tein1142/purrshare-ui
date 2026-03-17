@@ -1,8 +1,6 @@
 .page {
   --page-scale: 0.96;
   width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
   background-color: white;
   padding-bottom: 70px;
 }
@@ -314,6 +312,11 @@
   font-size: calc(var(--fs-sm) * var(--page-scale));
   font-weight: var(--fw-bold);
   color: #6b7280;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .list {
