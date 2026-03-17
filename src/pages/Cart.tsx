@@ -4,17 +4,33 @@ import PaymentModal from "../components/PaymentModal";
 import SuccessModal from "../components/SuccessModal";
 import { useState, useEffect } from "react";
 
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  img: string;
+  qty: number;
+}
+
 export default function Cart() {
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [openPayment, setOpenPayment] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("ps_cart") || "[]");
-    setCartItems(data);
+    const loadCart = () => {
+      try {
+        const data = JSON.parse(localStorage.getItem("ps_cart") || "[]");
+        setCartItems(data);
+      } catch {
+        setCartItems([]);
+      }
+    };
+    
+    loadCart();
   }, []);
 
-  function updateCart(items: any[]) {
+  function updateCart(items: CartItem[]) {
     setCartItems(items);
     localStorage.setItem("ps_cart", JSON.stringify(items));
     globalThis.dispatchEvent(new Event("cart-updated"));

@@ -2,7 +2,11 @@ import styles from "../pages/css/AddCartModal.module.css";
 import { useNavigate } from "react-router-dom";
 import ModalShell from "./ModalShell";
 
-export default function AddCartModal({ onClose }: any) {
+interface Props {
+  onClose: () => void;
+}
+
+export default function AddCartModal({ onClose }: Props) {
   const navigate = useNavigate();
   return (
     <ModalShell open onClose={onClose} panelClassName={styles.modal}>

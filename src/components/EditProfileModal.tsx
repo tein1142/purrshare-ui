@@ -1,14 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "../pages/css/EditProfileModal.module.css";
 import CloseIcon from "./CloseButton";
 import ModalShell from "./ModalShell";
 
+interface ProfileData {
+  name: string;
+  email: string;
+  phone: string;
+  addr: string;
+  since: string;
+}
+
 type Props = {
   open: boolean;
-  profile: any;
-  setProfile: (p: any) => void;
+  profile: ProfileData;
+  setProfile: (p: ProfileData) => void;
   onClose: () => void;
-  onSave: (updated: any) => void;
+  onSave: (updated: ProfileData) => void;
 };
 
 export default function EditProfileModal({
@@ -18,13 +26,7 @@ export default function EditProfileModal({
   onClose,
   onSave,
 }: Readonly<Props>) {
-  const [tempProfile, setTempProfile] = useState(profile);
-
-  useEffect(() => {
-    if (open) {
-      setTempProfile(profile);
-    }
-  }, [open, profile]);
+  const [tempProfile, setTempProfile] = useState<ProfileData>(profile);
 
   if (!open) return null;
 

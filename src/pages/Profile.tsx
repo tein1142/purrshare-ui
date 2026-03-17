@@ -4,8 +4,31 @@ import styles from "./css/Profile.module.css";
 import { useState, useEffect } from "react";
 
 
+interface Order {
+  id: string;
+  status: "pending" | "shipping" | "delivered";
+  items: OrderItem[];
+}
+
+interface OrderItem {
+  id: string;
+  name: string;
+  img: string;
+  qty?: number;
+  price?: number;
+  desc?: string;
+}
+
+interface Profile {
+  name: string;
+  email: string;
+  phone: string;
+  addr: string;
+  since: string;
+}
+
 export default function Profile() {
-  const [orders] = useState<any[]>(() => {
+  const [orders, setOrders] = useState<Order[]>(() => {
     try {
       const pending = JSON.parse(localStorage.getItem("ps_pending") || "[]");
       return pending;
@@ -37,7 +60,7 @@ export default function Profile() {
 
   const [showAll, setShowAll] = useState(false);
 
-  const [profile, setProfile] = useState<any>({
+  const [profile, setProfile] = useState<Profile>({
     name: "ชื่อ นามสกุล",
     email: "minnie@example.com",
     phone: "09x-xxx-xxxx",
@@ -46,29 +69,93 @@ export default function Profile() {
   });
 
   const [openEdit, setOpenEdit] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("pending");
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("ps_profile");
-      if (raw) {
-        setProfile(JSON.parse(raw));
+    const loadProfile = () => {
+      try {
+        const raw = localStorage.getItem("ps_profile");
+        if (raw) {
+          setProfile(JSON.parse(raw));
+        }
+      } catch {
+        // Handle error silently
       }
-    } catch {}
+    };
+    
+    loadProfile();
   }, []);
 
-  const saveProfile = (updated: any) => {
+  // Update order status after 1 minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOrders(prevOrders => {
+        return prevOrders.map(order => {
+          const orderAge = Date.now() - Number(order.id);
+          const oneMinute = 60 * 1000;
+          
+          if (order.status === "pending" && orderAge >= oneMinute) {
+            const updatedOrder: Order = { ...order, status: "shipping" };
+            
+            // Update localStorage
+            try {
+              const allOrders = JSON.parse(localStorage.getItem("ps_pending") || "[]");
+              const orderIndex = allOrders.findIndex((o: Order) => o.id === order.id);
+              if (orderIndex !== -1) {
+                allOrders[orderIndex] = updatedOrder;
+                localStorage.setItem("ps_pending", JSON.stringify(allOrders));
+              }
+            } catch (error) {
+              console.error("Error updating order status:", error);
+            }
+            
+            return updatedOrder;
+          }
+          
+          return order;
+        });
+      });
+    }, 5000); // Check every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const saveProfile = (updated: Profile) => {
     localStorage.setItem("ps_profile", JSON.stringify(updated));
     setOpenEdit(false);
+  };
+
+  const getOrderStatusText = (status: string) => {
+    switch (status) {
+      case "pending":
+        return "สินค้ารอส่ง";
+      case "shipping":
+        return "สินค้ากำลังจัดส่ง";
+      case "delivered":
+        return "จัดส่งแล้ว";
+      default:
+        return "สถานะ";
+    }
   };
 
   const pendingItems = orders.flatMap((order) => {
     const items = Array.isArray(order.items) ? order.items : [];
 
-    return items.map((item: any) => ({
+    return items.map((item: OrderItem) => ({
       ...item,
       orderId: order.id,
       orderStatus: order.status,
     }));
+  });
+
+  // Filter items based on selected tab
+  const filteredItems = pendingItems.filter(item => {
+    if (selectedTab === "pending") {
+      return item.orderStatus === "pending";
+    } else if (selectedTab === "shipping") {
+      return item.orderStatus === "shipping";
+    }
+    return false;
   });
 
   return (
@@ -122,14 +209,14 @@ export default function Profile() {
             </button>
 
             {/* ROLE PILLS */}
-
+{/* 
             <div className={styles.rolePills}>
               <div className={`${styles.pill} ${styles.active}`}>
                 สินค้ารอส่ง
               </div>
 
               <div className={styles.pill}>สินค้ากำลังจัดส่ง</div>
-            </div>
+            </div> */}
 
             {/* STATS */}
 
@@ -179,20 +266,38 @@ export default function Profile() {
         </div>
       </section>
 
-      <section className={styles.section}>
+      <section className={styles.section} data-section="pending-items">
         <div className={styles.secHead}>
-          <div className={styles.secTitle}>รายการสินค้าที่รอส่ง</div>
-          <button
-            type="button"
-            className={styles.secLink}
-            onClick={() => setShowAll((prev) => !prev)}
-          >
-            {showAll ? "ดูน้อยลง ▲" : "ดูทั้งหมด ›"}
-          </button>
+          <div className={styles.tabButtons}>
+            <button
+              type="button"
+              className={`${styles.tabBtn} ${selectedTab === "pending" ? styles.active : ""}`}
+              onClick={() => setSelectedTab("pending")}
+            >
+              สินค้ารอส่ง
+            </button>
+            <button
+              type="button"
+              className={`${styles.tabBtn} ${selectedTab === "shipping" ? styles.active : ""}`}
+              onClick={() => setSelectedTab("shipping")}
+            >
+              สินค้ากำลังจัดส่ง
+            </button>
+          </div>
+          <div className={styles.actionRow}>
+            <div className={styles.secTitle}>รายการสินค้า</div>
+            <button
+              type="button"
+              className={styles.secLink}
+              onClick={() => setShowAll((prev) => !prev)}
+            >
+              {showAll ? "ดูน้อยลง ▲" : "ดูทั้งหมด ›"}
+            </button>
+          </div>
         </div>
 
         <div className={styles.list}>
-          {(showAll ? pendingItems : pendingItems.slice(0, 3)).map((item, i) => {
+          {(showAll ? filteredItems : filteredItems.slice(0, 3)).map((item, i) => {
             return (
               <div key={`${item.orderId}-${i}`} className={styles.row}>
                 <div className={styles.left}>
@@ -206,7 +311,9 @@ export default function Profile() {
                   </div>
                 </div>
 
-                <div className={styles.badge}>สถานะ</div>
+                <div className={styles.badge}>
+                  {getOrderStatusText(item.orderStatus)}
+                </div>
               </div>
             );
           })}

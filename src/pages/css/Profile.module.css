@@ -301,6 +301,64 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tabButtons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.actionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.tabWithAction {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+}
+
+.tabBtn {
+  font-size: calc(var(--fs-xs) * var(--page-scale));
+  font-weight: var(--fw-bold);
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 0;
+  max-width: 140px;
+  text-align: center;
+}
+
+.tabBtn.active {
+  background: #fbf3cf;
+  color: #000000;
+  border: 2px solid transparent;
+}
+
+.tabBtn:hover {
+  background: #e5e7eb;
+}
+
+.tabBtn.active:hover {
+  background: #fbf3cf;
 }
 
 .secTitle {

@@ -7,9 +7,10 @@ import ModalShell from "./ModalShell";
 type Props = {
   open: boolean;
   onClose: () => void;
+  scrollToPending?: boolean;
 };
 
-export default function SuccessModal({ open, onClose }: Readonly<Props>) {
+export default function SuccessModal({ open, onClose, scrollToPending = true }: Readonly<Props>) {
   const navigate = useNavigate();
   
   const [loading, setLoading] = useState(true);
@@ -52,6 +53,16 @@ export default function SuccessModal({ open, onClose }: Readonly<Props>) {
               onClick={() => {
                 onClose();
                 navigate("/profile");
+                
+                // Scroll to pending items section after navigation
+                if (scrollToPending) {
+                  setTimeout(() => {
+                    const element = document.querySelector('[data-section="pending-items"]');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }
               }}
             >
               ตกลง
