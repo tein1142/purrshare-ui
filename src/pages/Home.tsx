@@ -5,6 +5,7 @@ import logo01 from "../assets/images/LOGO-01.png";
 import marketIcon from "../assets/images/home/Market.png";
 import shopIcon from "../assets/images/home/Our_shop.png";
 import shareIcon from "../assets/images/home/share.png";
+import bgImage from "../assets/images/home/BG.png";
 export default function Home() {
   const navigate = useNavigate();
 
@@ -14,7 +15,15 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className={styles.homePage}>
+      <div 
+        className={styles.homePage}
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <img
           className={styles.logo}
           src={logo01}

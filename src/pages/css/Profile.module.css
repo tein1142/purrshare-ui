@@ -256,9 +256,8 @@
 
 .infoGrid {
   display: grid;
-
   grid-template-columns: 1fr 1fr;
-
+  grid-template-rows: auto auto;
   gap: 10px 12px;
 }
 
@@ -481,7 +480,7 @@
   }
 
   .infoGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
 }
@@ -496,6 +495,6 @@
   }
 
   .infoGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr 1fr;
   }
 }

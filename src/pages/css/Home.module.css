@@ -2,11 +2,6 @@
   width: 100%;
   min-height: 100dvh;
 
-  background-image: url("https://img5.pic.in.th/file/secure-sv1/BG-01b9a4e5c37c23e215.png");
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-
   display: flex;
   flex-direction: column;
   align-items: center;
