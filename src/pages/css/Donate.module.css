@@ -14,8 +14,55 @@
   --r22: calc(22px * var(--scale));
 
   --btnH: calc(52px * var(--scale));
-  --searchH: calc(40px * var(--scale));
+  --searchH: calc(44px * var(--scale));
   --tabH: calc(55px * var(--scale));
+}
+
+.top {
+  width: 100%;
+  padding: calc(16px * var(--scale))
+    calc(var(--pad) + env(safe-area-inset-right)) calc(12px * var(--scale))
+    calc(var(--pad) + env(safe-area-inset-left));
+  background: var(--panel);
+  border-bottom-left-radius: var(--r22);
+  border-bottom-right-radius: var(--r22);
+}
+
+.topRow {
+  display: grid;
+  grid-template-columns: var(--searchH) 1fr var(--searchH);
+  align-items: center;
+  gap: calc(10px * var(--scale));
+}
+
+.back {
+  width: var(--searchH);
+  height: var(--searchH);
+  border-radius: var(--r16);
+  border: calc(2px * var(--scale)) solid rgba(58, 42, 39, 0.2);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.backIcon {
+  width: calc(24px * var(--scale));
+  height: calc(24px * var(--scale));
+  object-fit: contain;
+}
+
+.topTitle {
+  text-align: center;
+  font-size: calc(26px * var(--scale));
+  font-weight: var(--fw-bold);
+  color: #d24a32;
+}
+
+.topGhost {
+  width: var(--searchH);
+  height: var(--searchH);
 }
 
 .app {
@@ -42,12 +89,6 @@
   align-items: center;
   width: 100%;
   gap: 12px;
-}
-/* Match Cart header title style */
-.topTitle {
-  font-size: calc(26px * var(--scale));
-  font-weight: var(--fw-bold);
-  color: #d24a32;
 }
 
 .psLogoBtn {

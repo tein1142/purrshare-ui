@@ -17,7 +17,7 @@
   --r16: calc(16px * var(--scale));
   --r22: calc(22px * var(--scale));
 
-  --searchH: calc(40px * var(--scale));
+  --searchH: calc(44px * var(--scale));
   --tabH: calc(78px * var(--scale));
   --tabIcon: calc(30px * var(--scale));
   --tabW: calc(64px * var(--scale));
@@ -85,7 +85,7 @@
 .backBtn {
   width: var(--searchH);
   height: var(--searchH);
-  border: 2px solid var(--line);
+  border: 1.5px solid #000000;
   border-radius: var(--r16);
   background: #fff;
   display: grid;
@@ -94,6 +94,7 @@
   color: var(--line);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  padding: 0;
 }
 
 .backBtn:active {
@@ -104,8 +105,8 @@
   width: 60%;
   height: 60%;
   stroke: var(--line);
-  fill: none;
   stroke-width: 3.2;
+  fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -275,7 +276,7 @@
 .searchBox {
   flex: 1;
   height: var(--searchH);
-  border: 2px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: var(--r16);
   background: #fff;
   display: flex;

@@ -77,9 +77,9 @@ export default function Star() {
               </div>
 
               <div className={styles.featTxt}>
-                <div className={styles.featTitle}>Name 000111</div>
+                <div className={styles.featTitle}>สินค้าแนะนำ</div>
 
-                <div className={styles.featSub}>Lorem ipsum dolor sit amet</div>
+                <div className={styles.featSub}>สินค้าที่เหมาะสำหรับน้องเหมียวของคุณ</div>
 
                 <div className={styles.featPrice}>200 THB</div>
               </div>

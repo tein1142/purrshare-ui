@@ -5,6 +5,9 @@ import SellQuickModal from "../components/SellQuickModal";
 import SellFormModal from "../components/SellFormModal";
 import SellDetailModal from "../components/SellDetailModal";
 import styles from "./css/Sell.module.css";
+import trayImg from "../assets/images/product/sell/กระบะทราย.jpg";
+import fountainImg from "../assets/images/product/sell/น้ำพุแมว.jpg";
+import logo02 from "../assets/images/LOGO-02.png";
 
 type Category =
   | "food"
@@ -43,11 +46,12 @@ type SellerProduct = {
 const LS_KEY = "ps_sell_items";
 
 const sampleImages = [
-  "/external/unsplash_1543852786-1cf6624b9987.jpg?auto=format&fit=crop&w=800&q=70",
-  "/external/unsplash_1518791841217-8f162f1e1131.jpg?auto=format&fit=crop&w=800&q=70",
-  "/external/unsplash_1495360010541-f48722b34f7d.jpg",
-  "/external/unsplash_1592194996308-7b43878e84a6.jpg?auto=format&fit=crop&w=800&q=70",
-  "/external/unsplash_1548681528-6a5c45b66b42.jpg?auto=format&fit=crop&w=800&q=70",
+  trayImg,
+  fountainImg,
+  trayImg,
+  trayImg,
+  trayImg,
+  trayImg,
 ];
 
 const categoryKeys: Category[] = [
@@ -89,7 +93,7 @@ export default function Sell() {
         name: "อาหารแมว MeowMix 1kg",
         nameEn: "MeowMix Cat Food 1kg",
         price: 200,
-        img: sampleImages[2],
+        img: fountainImg,
         desc: "อาหารแมวชนิดเม็ด สำหรับแมวโต อายุ 1 ปีขึ้นไป",
         descEn: "Dry cat food for adult cats, 1 year+",
         province: "กรุงเทพฯ",
@@ -107,7 +111,7 @@ export default function Sell() {
         name: "ทรายแมว OdourLock 5L",
         nameEn: "OdourLock Cat Litter 5L",
         price: 180,
-        img: sampleImages[1],
+        img: trayImg,
         desc: "ทรายแมวเก็บกลิ่น กำจัดกลิ่นเหม็นได้ดี",
         descEn: "Odour control cat litter, 5L bag",
         province: "นนทบุรี",
@@ -125,7 +129,7 @@ export default function Sell() {
         name: "ของเล่นแมว ไม้ตกปลา",
         nameEn: "Cat Toy Fishing Rod",
         price: 99,
-        img: sampleImages[3],
+        img: fountainImg,
         desc: "ของเล่นเสริมพัฒนาการ สำหรับแมวทุกวัย",
         descEn: "Interactive toy for all cat ages",
         province: "สมุทรปราการ",
@@ -206,7 +210,7 @@ export default function Sell() {
   };
 
   function cycleImage() {
-    setImgIndex((prev) => (prev + 1) % sampleImages.length);
+    setImgIndex((prev) => (prev + 1) % 2); // เปลี่ยนเป็น 2 เพราะมีแค่ 2 รูป
   }
 
   function openQuickSheet() {
@@ -241,7 +245,7 @@ export default function Sell() {
       name: quickName.trim(),
       nameEn: quickName.trim(),
       price,
-      img: sampleImages[imgIndex],
+      img: imgIndex === 0 ? fountainImg : trayImg,
       desc: formDesc.trim() || "สินค้าจากผู้ใช้งาน",
       descEn: formDesc.trim() || "User product",
       province: formProvince.trim(),
@@ -276,9 +280,7 @@ export default function Sell() {
             aria-label="Back"
             onClick={() => navigate("/")}
           >
-            <svg viewBox="0 0 24 24">
-              <path d="M15 6l-6 6 6 6" />
-            </svg>
+            <img src={logo02} alt="Back" className={styles.backIcon} />
           </button>
           <div className={styles.topTitle}>{labels.topTitle}</div>
           <div className={styles.topGhost} />

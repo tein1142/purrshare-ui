@@ -57,6 +57,12 @@
   height: calc(18px * var(--scale));
 }
 
+.backIcon {
+  width: calc(24px * var(--scale));
+  height: calc(24px * var(--scale));
+  object-fit: contain;
+}
+
 .back path {
   stroke: rgba(17, 24, 39, 0.75);
   stroke-width: 3;

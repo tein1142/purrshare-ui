@@ -1,6 +1,5 @@
+import { useEffect, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import styles from "./css/Select.module.css";
 import TabBar from "../components/TabBar";
 import logo02 from "../assets/images/LOGO-02.png";
 import foodIcon from "../assets/icons/Food.png";
@@ -10,6 +9,23 @@ import bedIcon from "../assets/icons/Bed.png";
 import toysIcon from "../assets/icons/Toys.png";
 import newIcon from "../assets/icons/New.png";
 import topListIcon from "../assets/icons/Toplist.png";
+import styles from "./css/Select.module.css";
+import collarImg from "../assets/images/product/home/ปลอกคอ.jpg";
+import leashImg from "../assets/images/product/home/สายจูง.jpg";
+import outfitImg from "../assets/images/product/home/ชุดน่ารัก.jpg";
+import bowImg from "../assets/images/product/home/โบว์.jpg";
+import tagImg from "../assets/images/product/home/ป้ายชื่อ.jpg";
+import toysImg from "../assets/images/product/home/ของเล่น.jpg";
+import bowlImg from "../assets/images/product/home/ชามอาหาร.jpg";
+import fountainImg from "../assets/images/product/home/น้ำพุแมว.jpg";
+import bedImg from "../assets/images/product/home/ที่นอน.jpg";
+import condoImg from "../assets/images/product/home/คอนโดแมว.jpg";
+import carrierImg from "../assets/images/product/home/กระเป๋าแมว.jpg";
+import vitaminImg from "../assets/images/product/home/วิตามิน.jpg";
+import clinicalFoodImg from "../assets/images/product/home/อาหารเฉพาะทาง.jpg";
+import coatImg from "../assets/images/product/home/แปรงขน.jpg";
+import dentalImg from "../assets/images/product/home/ดูแลช่องปาก.jpg";
+import padImg from "../assets/images/product/home/ที่ฝนเล็บ.jpg";
 
 type LifestyleItem = {
   name: string;
@@ -31,13 +47,12 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "fashionRow",
     routeCat: "fashion",
     items: [
-      { name: "ปลอกคอ", cat: "collar", img: "/external/unsplash_1518791841217-8f162f1e1131.jpg", hint: "ลุคน่ารัก" },
-      { name: "สายจูง", cat: "leash", img: "/external/unsplash_1543852786-1cf6624b9987.jpg", hint: "พาเดินเล่น" },
-      { name: "ชุดน่ารัก", cat: "outfit", img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg", hint: "แต่งตัววันพิเศษ" },
-      { name: "โบว์", cat: "bow", img: "/external/unsplash_1592194996308-7b43878e84a6.jpg", hint: "เพิ่มความคิวท์" },
-      { name: "ป้ายชื่อ", cat: "tag", img: "/external/unsplash_1519052537078-e6302a4968d4.jpg", hint: "ปลอดภัยขึ้น" },
-      { name: "เสื้อกันหนาว", cat: "sweater", img: "/external/unsplash_1503431128871-cd250803fa41.jpg", hint: "อบอุ่นสบาย" },
-      { name: "หมวก", cat: "hat", img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg", hint: "ถ่ายรูปขึ้น" },
+      { name: "ปลอกคอ", cat: "collar", img: collarImg, hint: "ลุคน่ารัก" },
+      { name: "สายจูง", cat: "leash", img: leashImg, hint: "พาเดินเล่น" },
+      { name: "ชุดน่ารัก", cat: "outfit", img: outfitImg, hint: "แต่งตัววันพิเศษ" },
+      { name: "โบว์", cat: "bow", img: bowImg, hint: "เพิ่มความคิวท์" },
+      { name: "ป้ายชื่อ", cat: "tag", img: tagImg, hint: "ปลอดภัยขึ้น" },
+      { name: "หมวก", cat: "hat", img: outfitImg, hint: "ถ่ายรูปขึ้น" },
     ],
   },
   {
@@ -45,27 +60,27 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "dailyRow",
     routeCat: "daily",
     items: [
-      { name: "ของเล่น", cat: "toys", img: "/external/unsplash_1518791841217-8f162f1e1131.jpg", hint: "เล่นเพลิน" },
-      { name: "ชามอาหาร", cat: "bowl", img: "/external/unsplash_1543852786-1cf6624b9987.jpg", hint: "กินง่าย" },
-      { name: "น้ำพุแมว", cat: "fountain", img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg", hint: "ดื่มน้ำมากขึ้น" },
-      { name: "ที่นอน", cat: "bed", img: "/external/unsplash_1592194996308-7b43878e84a6.jpg", hint: "นุ่มหลับสบาย" },
-      { name: "คอนโดแมว", cat: "condo", img: "/external/unsplash_1519052537078-e6302a4968d4.jpg", hint: "ปีนป่ายสนุก" },
-      { name: "กรง/กระเป๋า", cat: "carrier", img: "/external/unsplash_1503431128871-cd250803fa41.jpg", hint: "เดินทางสะดวก" },
-      { name: "แผ่นรอง", cat: "pad", img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg", hint: "ทำความสะอาดง่าย" },
+      { name: "ของเล่น", cat: "toys", img: toysImg, hint: "เล่นเพลิน" },
+      { name: "ชามอาหาร", cat: "bowl", img: bowlImg, hint: "กินง่าย" },
+      { name: "น้ำพุแมว", cat: "fountain", img: fountainImg, hint: "ดื่มน้ำมากขึ้น" },
+      { name: "ที่นอน", cat: "bed", img: bedImg, hint: "นุ่มหลับสบาย" },
+      { name: "คอนโดแมว", cat: "condo", img: condoImg, hint: "ปีนป่ายสนุก" },
+      { name: "กรง/กระเป๋า", cat: "carrier", img: carrierImg, hint: "เดินทางสะดวก" },
+      { name: "แผ่นรอง", cat: "pad", img: padImg, hint: "ทำความสะอาดง่าย" },
     ],
   },
   {
-    title: "ดูแลสุขภาพ",
+    title: "สุขภาพ",
     rowId: "healthRow",
     routeCat: "health",
     items: [
-      { name: "วิตามิน", cat: "vitamin", img: "/external/unsplash_1518791841217-8f162f1e1131.jpg", hint: "เสริมภูมิคุ้มกัน" },
-      { name: "อาหารเฉพาะทาง", cat: "clinical-food", img: "/external/unsplash_1543852786-1cf6624b9987.jpg", hint: "ดูแลเฉพาะจุด" },
-      { name: "ดูแลช่องปาก", cat: "dental", img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg", hint: "ลมหายใจสดชื่น" },
-      { name: "แชมพู", cat: "shampoo", img: "/external/unsplash_1592194996308-7b43878e84a6.jpg", hint: "ขนนุ่มสะอาด" },
-      { name: "บำรุงขน", cat: "coat", img: "/external/unsplash_1519052537078-e6302a4968d4.jpg", hint: "ลดขนร่วง" },
-      { name: "ป้องกันเห็บหมัด", cat: "flea", img: "/external/unsplash_1503431128871-cd250803fa41.jpg", hint: "ป้องกันระยะยาว" },
-      { name: "อุปกรณ์ดูแล", cat: "care", img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg", hint: "ครบชุดดูแล" },
+      { name: "วิตามิน", cat: "vitamin", img: vitaminImg, hint: "เสริมภูมิคุ้มกัน" },
+      { name: "อาหารเฉพาะทาง", cat: "clinical-food", img: clinicalFoodImg, hint: "ดูแลเฉพาะจุด" },
+      { name: "ดูแลช่องปาก", cat: "dental", img: dentalImg, hint: "ลมหายใจสดชื่น" },
+      { name: "แชมพู", cat: "shampoo", img: coatImg, hint: "ขนนุ่มสะอาด" },
+      { name: "บำรุงขน", cat: "coat", img: coatImg, hint: "ลดขนร่วง" },
+      { name: "ป้องกันเห็บหมัด", cat: "flea", img: dentalImg, hint: "ป้องกันระยะยาว" },
+      { name: "อุปกรณ์ดูแล", cat: "care", img: padImg, hint: "ครบชุดดูแล" },
     ],
   },
 ];
@@ -95,6 +110,14 @@ function highlightCenterTile(row: HTMLElement) {
 
 export default function Select() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/products?search=${encodeURIComponent(search.trim())}`);
+    }
+  };
 
   useEffect(() => {
     const rows = lifestyleSections
@@ -134,25 +157,24 @@ export default function Select() {
       <div className={styles.app}>
         <header className={styles.top}>
           <div className={styles.searchRow}>
-            <div className={styles.brandMark}>
-              <button
-                type="button"
-                className={styles.brandLink}
-                onClick={() => navigate("/")}
-                aria-label="กลับหน้าแรก"
-              >
-                <img
-                  src={logo02}
-                  alt="Purrshare"
-                />
-              </button>
-            </div>
+            <button
+              type="button"
+              className={styles.back}
+              aria-label="Back"
+              onClick={() => navigate("/")}
+            >
+              <img src={logo02} alt="Back" className={styles.backIcon} />
+            </button>
 
             <div className={styles.searchBox}>
-              <input placeholder="ค้นหา..." />
+              <form onSubmit={handleSearch}>
+                <input 
+                  placeholder="ค้นหา..." 
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </form>
             </div>
-
-            {/* <button className={styles.actionBtn}>EN</button> */}
           </div>
 
           <div className={styles.sectionTitle}>หมวดหมู่สินค้า</div>
@@ -160,21 +182,21 @@ export default function Select() {
           <div className={styles.quickCats}>
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=food")}>
               <div className={styles.quickIco}>
-                <img src={foodIcon} alt="อาหารและโภชนาการ" />
+                <img src={foodIcon} alt="อาหาร" />
               </div>
               <span>อาหารและ<br />โภชนาการ</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=litter")}>
               <div className={styles.quickIco}>
-                <img src={toiletIcon} alt="ห้องน้ำและทรายแมว" />
+                <img src={toiletIcon} alt="ทรายแมว" />
               </div>
               <span>ห้องน้ำ<br />ทรายแมว</span>
             </button>
 
             <button type="button" className={styles.quickCat} onClick={() => navigate("/products?cat=daily")}>
               <div className={styles.quickIco}>
-                <img src={itemsIcon} alt="ของใช้ประจำวัน" />
+                <img src={itemsIcon} alt="ของใช้" />
               </div>
               <span>ของใช้<br />ประจำวัน</span>
             </button>
@@ -201,8 +223,7 @@ export default function Select() {
               </div>
               <div className={styles.label}>ของล่าสุด</div>
             </button>
-
-            <button type="button" className={styles.bigBtn} onClick={() => navigate("/products?cat=popular")}>
+            <button type="button" className={styles.bigBtn} onClick={() => navigate("/products?cat=top")}>
               <div className={styles.bigIco}>
                 <img src={topListIcon} alt="ยอดนิยม" />
               </div>

@@ -4,6 +4,12 @@ import CloseIcon from "../components/CloseButton";
 import ModalShell from "../components/ModalShell";
 import TabBar from "../components/TabBar";
 import styles from "./css/Donate.module.css";
+import litterImg from "../assets/images/product/donate/ทรายแมว.jpg";
+import woundDressingImg from "../assets/images/product/donate/ผ้าก๊อซทำแผล.jpg";
+import blanketImg from "../assets/images/product/donate/ผ้าห่ม.jpg";
+import cottonImg from "../assets/images/product/donate/สำลี.jpg";
+import wetFoodImg from "../assets/images/product/donate/อาหารเปียก.jpg";
+import logo02 from "../assets/images/LOGO-02.png";
 
 type CatalogItem = {
   id: string;
@@ -46,25 +52,25 @@ const catalog: CatalogItem[] = [
     id: "food",
     name: "อาหารแมว",
     meta: "สำหรับน้องเหมียว",
-    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+    img: wetFoodImg,
   },
   {
     id: "litter",
     name: "ทรายแมว",
     meta: "สะอาด กลิ่นน้อย",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
+    img: litterImg,
   },
   {
     id: "toy",
     name: "ของเล่นแมว",
     meta: "สนุกเพลินทั้งวัน",
-    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=70",
+    img: wetFoodImg,
   },
   {
     id: "bed",
     name: "ที่นอนแมว",
     meta: "นุ่มสบาย",
-    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
+    img: blanketImg,
   },
 ];
 
@@ -73,7 +79,7 @@ const needsSeed: NeedItem[] = [
     id: "pads",
     name: "สำลีแผ่น",
     meta: "34 / 200 ชิ้น",
-    img: "https://images.unsplash.com/photo-1583947582886-f40ec95dd752?auto=format&fit=crop&w=800&q=70",
+    img: cottonImg,
     current: 34,
     target: 200,
     catalogId: "toy",
@@ -82,7 +88,7 @@ const needsSeed: NeedItem[] = [
     id: "wetfood",
     name: "อาหารเปียก",
     meta: "67 / 100 ชิ้น",
-    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+    img: wetFoodImg,
     current: 67,
     target: 100,
     catalogId: "food",
@@ -91,7 +97,7 @@ const needsSeed: NeedItem[] = [
     id: "wound",
     name: "ผ้าก๊อตทำแผล",
     meta: "23 / 50 ชิ้น",
-    img: "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=70",
+    img: woundDressingImg,
     current: 23,
     target: 50,
     catalogId: "toy",
@@ -100,7 +106,7 @@ const needsSeed: NeedItem[] = [
     id: "litter-need",
     name: "ทรายแมว",
     meta: "12 / 80 ชิ้น",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
+    img: litterImg,
     current: 12,
     target: 80,
     catalogId: "litter",
@@ -109,7 +115,7 @@ const needsSeed: NeedItem[] = [
     id: "blanket",
     name: "ผ้าห่ม/ผ้าขนหนู",
     meta: "9 / 60 ชิ้น",
-    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
+    img: blanketImg,
     current: 9,
     target: 60,
     catalogId: "bed",
@@ -120,46 +126,45 @@ const sampleItems: SampleItem[] = [
   {
     id: "s1",
     name: "อาหารแมวสูตรปลาทูน่า 1kg",
-    desc: "ยังไม่เปิดซอง เหมาะสำหรับน้องแมวโต",
+    desc: "อาหารแมวคุณภาพสำหรับน้องเหมียว",
     donor: "May",
     loc: "ลาดพร้าว, กทม.",
     tag: "อาหาร",
-    img: "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=70",
+    img: wetFoodImg,
   },
   {
     id: "s2",
-    name: "ทรายแมวเบนโทไนท์ 5L",
-    desc: "เหลือจากการย้ายบ้าน สภาพดี",
+    name: "ทรายแมวแม็กซ์ 5L",
+    desc: "ทรายแมวคุณภาพสำหรับ 5 ลิตร",
     donor: "Nina",
     loc: "บางนา, กทม.",
     tag: "ทราย",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=70",
+    img: litterImg,
   },
   {
     id: "s3",
-    name: "ที่นอนแมวทรงโดนัท",
-    desc: "นุ่มมาก ซักแล้ว พร้อมส่งต่อ",
+    name: "ผ้าห่มผ้าขนหนู",
+    desc: "ผ้าห่มอุ่นสำหรับน้องเหมียว",
     donor: "Beam",
     loc: "นนทบุรี",
     tag: "ที่นอน",
-    img: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=70",
+    img: blanketImg,
   },
   {
     id: "s4",
-    name: "ของเล่นไม้ตกแมว (ใหม่)",
-    desc: "ซื้อซ้ำมาเกิน แกะแล้วแต่ยังไม่ใช้",
+    name: "ของเล่นแมวปลายจับ",
+    desc: "ของเล่นแมวเสริมพัฒนาการ",
     donor: "Minnie",
     loc: "พระราม 9, กทม.",
     tag: "ของเล่น",
-    img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=70",
+    img: cottonImg,
   },
 ];
 
 export default function Donate() {
   const navigate = useNavigate();
-  const fallbackImage =
-    "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=70";
-  const [search, setSearch] = useState("");
+  const fallbackImage = litterImg;
+  const [search, _setSearch] = useState("");
   const [needs, setNeeds] = useState<NeedItem[]>(needsSeed);
   const [needsExpanded, setNeedsExpanded] = useState(false);
   const [list, setList] = useState<DonateItem[]>(() => {
@@ -364,70 +369,18 @@ export default function Donate() {
 
   return (
     <div className={styles.app}>
-      <header className={styles.psHeader}>
-        <div className={styles.psHeaderRow}>
+      <header className={styles.top}>
+        <div className={styles.topRow}>
           <button
-            className={styles.psLogoBtn}
             type="button"
+            className={styles.back}
+            aria-label="Back"
             onClick={() => navigate("/")}
-            aria-label="Home"
           >
-            <svg
-              className={styles.psLogoSvg}
-              viewBox="0 0 64 64"
-              aria-hidden="true"
-            >
-              <path
-                d="M32 14c7 0 12 5 12 12 0 9-6 16-12 16s-12-7-12-16c0-7 5-12 12-12Z"
-                fill="none"
-                stroke="rgba(17,24,39,.85)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M20 22c-3-2-5-5-5-8 0-2 1-4 3-4 3 0 5 3 6 6"
-                fill="none"
-                stroke="rgba(17,24,39,.85)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M44 22c3-2 5-5 5-8 0-2-1-4-3-4-3 0-5 3-6 6"
-                fill="none"
-                stroke="rgba(17,24,39,.85)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M18 46c4 4 9 6 14 6s10-2 14-6"
-                fill="none"
-                stroke="rgba(17,24,39,.85)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <img src={logo02} alt="Back" className={styles.backIcon} />
           </button>
-          <div className={styles.psSearch}>
-            <input
-              id="psSearchInput"
-              type="search"
-              placeholder="ค้นหา..."
-              autoComplete="off"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <svg
-              className={styles.psSearchIcon}
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm8 3-4.2-4.2" />
-            </svg>
-          </div>
+          <div className={styles.topTitle}>บริจาคสินค้า</div>
+          <div className={styles.topGhost} />
         </div>
       </header>
 
@@ -436,7 +389,7 @@ export default function Donate() {
           <div className={styles.heroBox}>
             <img
               className={styles.heroImage}
-              src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=70"
+              src={wetFoodImg}
               alt="แบนเนอร์แคมเปญบริจาค"
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;
@@ -576,7 +529,7 @@ export default function Donate() {
             <div className={styles.meowBox}>
               <img
                 className={styles.meowIcon}
-                src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=300&q=70"
+                src={woundDressingImg}
                 alt="แมวขอบคุณสำหรับการบริจาค"
                 loading="lazy"
                 onError={(e) => {
