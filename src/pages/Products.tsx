@@ -163,20 +163,36 @@ const products: Product[] = [
 ];
 
 const categoryLabel: Record<string, string> = {
-  food: "อาหารและโภชนาการ",
-  litter: "ห้องน้ำและทรายแมว",
-  daily: "ของใช้ประจำวัน",
-  furniture: "ที่นอนและเฟอร์นิเจอร์",
-  toys: "ของเล่น",
+  // หมวดหมู่หลัก (จากหน้า Select)
+  fashion: "แฟชั่น",
+  daily: "ชีวิตประจำวัน", 
+  health: "สุขภาพ",
+  new: "ของใหม่ล่าสุด",
+  popular: "สินค้ายอดนิยม",
+  
+  // หมวดหมู่ย่อย (จากหน้า Select)
   collar: "ปลอกคอ",
-  leash: "สายจูง",
+  leash: "สายจูง", 
   outfit: "ชุดน่ารัก",
   bow: "โบว์",
   tag: "ป้ายชื่อ",
-  sweater: "เสื้อกันหนาว",
   hat: "หมวก",
-  new: "ของใหม่ล่าสุด",
-  popular: "สินค้ายอดนิยม",
+  sweater: "เสื้อกันหนาว",
+  toys: "ของเล่น",
+  bowl: "ชามอาหาร",
+  fountain: "น้ำพุแมว",
+  bed: "ที่นอน",
+  condo: "คอนโดแมว",
+  carrier: "กรง/กระเป๋า",
+  pad: "แผ่นรอง",
+  furniture: "ที่นอนและเฟอร์นิเจอร์",
+  vitamin: "วิตามิน",
+  "clinical-food": "อาหารเฉพาะทาง",
+  dental: "ดูแลช่องปาก",
+  shampoo: "ทำความสะอาด",
+  care: "อุปกรณ์ดูแล",
+  food: "อาหารและโภชนาการ",
+  litter: "ห้องน้ำและทรายแมว",
 };
 
 // Map from Select routeCat to product categories
@@ -190,6 +206,9 @@ export default function Product() {
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState("newest");
+  const [priceOrder, setPriceOrder] = useState<"asc" | "desc">("asc");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sortBy, setSortBy] = useState("newest");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showCartModal, setShowCartModal] = useState(false);
   const [customProducts, setCustomProducts] = useState<Product[]>([]);
@@ -219,10 +238,6 @@ export default function Product() {
     };
   }, []);
 
-  let visibleTab = activeTab;
-  if (selectedCategory === "popular") visibleTab = "top";
-  else if (selectedCategory === "new") visibleTab = "newest";
-
   const subtitle = selectedCategory
     ? categoryLabel[selectedCategory] || "หมวดหมู่สินค้า"
     : "Purrshare";
@@ -249,20 +264,22 @@ export default function Product() {
       }
     }
 
-    if (visibleTab === "price") {
+    // Sort based on sortBy
+    if (sortBy === "price-asc") {
       list = [...list].sort((a, b) => a.price - b.price);
-    } else if (visibleTab === "top") {
+    } else if (sortBy === "price-desc") {
+      list = [...list].sort((a, b) => b.price - a.price);
+    } else if (sortBy === "top") {
       list = [...list].sort((a, b) => b.sold - a.sold);
+    } else if (sortBy === "alphabetical") {
+      list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     } else {
+      // newest (default)
       list = [...list].sort((a, b) => b.createdAt - a.createdAt);
     }
 
-    if (visibleTab === "filter") {
-      list = list.filter((p) => p.price <= 250);
-    }
-
     return list;
-  }, [customProducts, query, selectedCategory, visibleTab]);
+  }, [customProducts, query, selectedCategory, sortBy]);
 
   function addToCart(product: Product) {
     try {
@@ -292,6 +309,44 @@ export default function Product() {
     }
   }
 
+  const handlePriceSort = () => {
+    setActiveTab("price");
+    setPriceOrder(prev => prev === "asc" ? "desc" : "asc");
+    setSortBy(priceOrder === "asc" ? "price-desc" : "price-asc");
+  };
+
+  const getPriceEmoji = () => {
+    return priceOrder === "asc" ? "↑" : "↓";
+  };
+
+  const handleFilterToggle = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const getFilterEmoji = () => {
+    return dropdownOpen ? "▴" : "▾";
+  };
+
+  const handleSortOption = (option: string) => {
+    setSortBy(option);
+    setDropdownOpen(false);
+    
+    // Update activeTab and related states
+    if (option === "newest") {
+      setActiveTab("newest");
+    } else if (option === "top") {
+      setActiveTab("top");
+    } else if (option === "price-asc") {
+      setActiveTab("price");
+      setPriceOrder("asc");
+    } else if (option === "price-desc") {
+      setActiveTab("price");
+      setPriceOrder("desc");
+    } else if (option === "alphabetical") {
+      setActiveTab("alphabetical");
+    }
+  };
+
   return (
     <div className={styles.app}>
       {/* HEADER */}
@@ -318,39 +373,90 @@ export default function Product() {
         <div className={styles.controls}>
           <button
             className={`${styles.ctrlBtn} ${
-              visibleTab === "newest" ? styles.active : ""
+              activeTab === "newest" ? styles.active : ""
             }`}
-            onClick={() => setActiveTab("newest")}
+            onClick={() => {
+              setActiveTab("newest");
+              setSortBy("newest");
+            }}
           >
             Newest
           </button>
 
           <button
             className={`${styles.ctrlBtn} ${
-              visibleTab === "top" ? styles.active : ""
+              activeTab === "top" ? styles.active : ""
             }`}
-            onClick={() => setActiveTab("top")}
+            onClick={() => {
+              setActiveTab("top");
+              setSortBy("top");
+            }}
           >
             Top
           </button>
 
           <button
             className={`${styles.ctrlBtn} ${
-              visibleTab === "price" ? styles.active : ""
+              activeTab === "price" ? styles.active : ""
             }`}
-            onClick={() => setActiveTab("price")}
+            onClick={handlePriceSort}
           >
-            Price ↕
+            Price {getPriceEmoji()}
           </button>
 
           <button
             className={`${styles.ctrlBtn} ${
-              visibleTab === "filter" ? styles.active : ""
+              activeTab === "filter" ? styles.active : ""
             }`}
-            onClick={() => setActiveTab("filter")}
+            onClick={handleFilterToggle}
           >
-            Filter ▾
+            Filter {getFilterEmoji()}
           </button>
+          
+          {dropdownOpen && (
+            <div className={styles.dropdown}>
+              <button
+                className={`${styles.dropdownItem} ${
+                  sortBy === "newest" ? styles.active : ""
+                }`}
+                onClick={() => handleSortOption("newest")}
+              >
+                สินค้าล่าสุด
+              </button>
+              <button
+                className={`${styles.dropdownItem} ${
+                  sortBy === "top" ? styles.active : ""
+                }`}
+                onClick={() => handleSortOption("top")}
+              >
+                ยอดนิยม
+              </button>
+              <button
+                className={`${styles.dropdownItem} ${
+                  sortBy === "price-asc" ? styles.active : ""
+                }`}
+                onClick={() => handleSortOption("price-asc")}
+              >
+                ราคา: น้อย → มาก
+              </button>
+              <button
+                className={`${styles.dropdownItem} ${
+                  sortBy === "price-desc" ? styles.active : ""
+                }`}
+                onClick={() => handleSortOption("price-desc")}
+              >
+                ราคา: มาก → น้อย
+              </button>
+              <button
+                className={`${styles.dropdownItem} ${
+                  sortBy === "alphabetical" ? styles.active : ""
+                }`}
+                onClick={() => handleSortOption("alphabetical")}
+              >
+                เรียงตามตัวอักษร
+              </button>
+            </div>
+          )}
         </div>
       </header>
 

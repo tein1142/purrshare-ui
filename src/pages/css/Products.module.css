@@ -156,10 +156,63 @@
 
 .subtitle {
   text-align: center;
-  margin: calc(4px * var(--scale)) 0 0;
-  font-size: calc(12px * var(--scale));
-  font-weight: var(--fw-semibold);
-  color: rgba(17, 24, 39, 0.55);
+  margin: calc(4px * var(--scale)) 0 20;
+  font-size: calc(20px * var(--scale));
+  font-weight: 700;
+  color: black;
+}
+
+/* ---------- DROPDOWN ---------- */
+.controls {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  margin-top: 5px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 50;
+  background: #fff;
+  border: calc(2px * var(--scale)) solid #000000;
+  border-radius: var(--r16);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+  margin-top: calc(4px * var(--scale));
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: calc(10px * var(--scale)) calc(16px * var(--scale));
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: calc(14px * var(--scale));
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background: var(--panel);
+}
+
+.dropdownItem.active {
+  background: var(--panel);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+}
+
+.dropdownItem:first-child {
+  border-top-left-radius: var(--r16);
+  border-top-right-radius: var(--r16);
+}
+
+.dropdownItem:last-child {
+  border-bottom-left-radius: var(--r16);
+  border-bottom-right-radius: var(--r16);
 }
 
 /* ---------- GRID ---------- */
@@ -295,12 +348,6 @@
   font-weight: var(--fw-regular);
   min-width: 0;
   color: black;
-}
-
-.controls {
-  display: flex;
-  gap: 14px;
-  margin-top: 5px;
 }
 
 .ctrlBtn {
