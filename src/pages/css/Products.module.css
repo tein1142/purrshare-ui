@@ -261,19 +261,19 @@
 }
 
 .name {
-  font-size: calc(13px * var(--scale));
+  font-size: calc(20px * var(--scale));
   font-weight: var(--fw-bold);
 }
 
 .price {
-  font-size: calc(13px * var(--scale));
+  font-size: calc(18px * var(--scale));
   font-weight: var(--fw-bold);
   margin-top: calc(4px * var(--scale));
 }
 
 .desc {
   margin-top: calc(4px * var(--scale));
-  font-size: calc(11px * var(--scale));
+  font-size: calc(16px * var(--scale));
   color: rgba(17, 24, 39, 0.7);
   display: -webkit-box;
   -webkit-line-clamp: 2;

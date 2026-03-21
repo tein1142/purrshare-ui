@@ -187,7 +187,7 @@ export default function Profile() {
 
             <div className={styles.heroRow}>
               <div className={styles.avatarSingle}>
-                <img src="/external/randomuser_men_32.jpg" alt="รูปโปรไฟล์" />
+                <img src="/external/randomuser_women_68.jpg" alt="รูปโปรไฟล์" />
               </div>
             </div>
 
