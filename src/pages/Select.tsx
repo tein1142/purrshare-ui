@@ -50,9 +50,9 @@ const lifestyleSections: LifestyleSection[] = [
       { name: "ปลอกคอ", cat: "collar", img: collarImg, hint: "ลุคน่ารัก" },
       { name: "สายจูง", cat: "leash", img: leashImg, hint: "พาเดินเล่น" },
       { name: "ชุดน่ารัก", cat: "outfit", img: outfitImg, hint: "แต่งตัววันพิเศษ" },
-      { name: "โบว์", cat: "bow", img: bowImg, hint: "เพิ่มความคิวท์" },
-      { name: "ป้ายชื่อ", cat: "tag", img: tagImg, hint: "ปลอดภัยขึ้น" },
-      { name: "หมวก", cat: "hat", img: outfitImg, hint: "ถ่ายรูปขึ้น" },
+      // { name: "โบว์", cat: "bow", img: bowImg, hint: "เพิ่มความคิวท์" },
+      // { name: "ป้ายชื่อ", cat: "tag", img: tagImg, hint: "ปลอดภัยขึ้น" },
+      // { name: "หมวก", cat: "hat", img: outfitImg, hint: "ถ่ายรูปขึ้น" },
     ],
   },
   {
@@ -60,13 +60,13 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "dailyRow",
     routeCat: "daily",
     items: [
-      { name: "ของเล่น", cat: "toys", img: toysImg, hint: "เล่นเพลิน" },
+      // { name: "ของเล่น", cat: "toys", img: toysImg, hint: "เล่นเพลิน" },
       { name: "ชามอาหาร", cat: "bowl", img: bowlImg, hint: "กินง่าย" },
       { name: "น้ำพุแมว", cat: "fountain", img: fountainImg, hint: "ดื่มน้ำมากขึ้น" },
       { name: "ที่นอน", cat: "bed", img: bedImg, hint: "นุ่มหลับสบาย" },
-      { name: "คอนโดแมว", cat: "condo", img: condoImg, hint: "ปีนป่ายสนุก" },
-      { name: "กรง/กระเป๋า", cat: "carrier", img: carrierImg, hint: "เดินทางสะดวก" },
-      { name: "แผ่นรอง", cat: "pad", img: padImg, hint: "ทำความสะอาดง่าย" },
+      // { name: "คอนโดแมว", cat: "condo", img: condoImg, hint: "ปีนป่ายสนุก" },
+      // { name: "กรง/กระเป๋า", cat: "carrier", img: carrierImg, hint: "เดินทางสะดวก" },
+      // { name: "แผ่นรอง", cat: "pad", img: padImg, hint: "ทำความสะอาดง่าย" },
     ],
   },
   {
@@ -74,11 +74,11 @@ const lifestyleSections: LifestyleSection[] = [
     rowId: "healthRow",
     routeCat: "health",
     items: [
-      { name: "วิตามิน", cat: "vitamin", img: vitaminImg, hint: "เสริมภูมิคุ้มกัน" },
+      // { name: "วิตามิน", cat: "vitamin", img: vitaminImg, hint: "เสริมภูมิคุ้มกัน" },
       { name: "อาหารเฉพาะทาง", cat: "clinical-food", img: clinicalFoodImg, hint: "ดูแลเฉพาะจุด" },
-      { name: "ดูแลช่องปาก", cat: "dental", img: dentalImg, hint: "ลมหายใจสดชื่น" },
-      { name: "ทำความสะอาด", cat: "shampoo", img: coatImg, hint: "ขนนุ่มสะอาด" },
+      // { name: "ดูแลช่องปาก", cat: "dental", img: dentalImg, hint: "ลมหายใจสดชื่น" },
       { name: "อุปกรณ์ดูแล", cat: "care", img: padImg, hint: "ครบชุดดูแล" },
+      { name: "กรง", cat: "item", img: coatImg, hint: "กรงใส่น้องแมว" },
     ],
   },
 ];
@@ -231,7 +231,7 @@ export default function Select() {
         </header>
 
         <main className={styles.content}>
-          <div className={styles.h1center}>แบ่งหมวดหมู่ตามไลฟ์สไตล์</div>
+          <div className={styles.h1center}>หมวดหมู่ตามไลฟ์สไตล์</div>
           <div className={styles.h1sub}>เลือกไลฟ์สไตล์ที่ใช่ แล้วแตะการ์ดเพื่อเข้าสินค้าทันที</div>
 
           {lifestyleSections.map((section) => (

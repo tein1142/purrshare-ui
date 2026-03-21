@@ -4,6 +4,33 @@ import styles from "./css/Products.module.css";
 import TabBar from "../components/TabBar";
 import ProductModal from "../components/ProductModal";
 import AddCartModal from "../components/AddCartModal";
+import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.png";
+import wetFoodImg from "../assets/images/product/food/อาหารเปียกแมว.jpg";
+import catLickImg from "../assets/images/product/food/แมวเลีย.png";
+import litterBoxImg from "../assets/images/product/toilet/กระบะทรายแมว.png";
+import bentoniteLitterImg from "../assets/images/product/toilet/ทรายแมวเบนโทไนท์ สูตรควบคุมกลิ่น.jpg";
+import autoToiletImg from "../assets/images/product/toilet/ห้องน้ำแมวอัตโนมัต.jpg";
+import litterMatImg from "../assets/images/product/toilet/แผ่นดักทราย.jpg";
+import nailClipperImg from "../assets/images/product/dailyItems/ที่ตัดเล็บแมว.jpeg";
+import nailFileImg from "../assets/images/product/dailyItems/ที่ฝนเล็บ.jpeg";
+import safeCollarImg from "../assets/images/product/dailyItems/ปลอกคอแมวนิรภัย.jpg";
+import brushImg from "../assets/images/product/dailyItems/แปรงขนแมว.jpeg";
+import catBedImg from "../assets/images/product/furniture/ที่นอนแมว.jpg";
+import wallCatHoleImg from "../assets/images/product/furniture/หลุมแมวติดกำแพง.jpg";
+import catCushionImg from "../assets/images/product/furniture/เบาะนอนแมว.jpeg";
+import condoToyImg from "../assets/images/product/toys/ของเล่นคอนโดแมว.jpg";
+import catnipToyImg from "../assets/images/product/toys/ของเล่นตุ๊กตายัดไส้กัญชาแมว.jpg";
+import ballTrackImg from "../assets/images/product/toys/รางบอล.png";
+import scratchingPostImg from "../assets/images/product/toys/ของเล่นลับเล็บแมว รุ่น Curved.jpg";
+import collarBowImg from "../assets/images/product/fashion/collar/ปลอกคอโบว์คนสวย.jpg";
+import collarHollowImg from "../assets/images/product/fashion/collar/ปลอกคอโบว์หล่อ.jpg";
+import collarSmartImg from "../assets/images/product/fashion/collar/ปลอกคอแมวอัจฉริยะ.jpg";
+import dressChristmasImg from "../assets/images/product/fashion/dress/ชุดคริสต์มาส.png";
+import dressSushiImg from "../assets/images/product/fashion/dress/ชุดซูชิ.jpg";
+import dressInterImg from "../assets/images/product/fashion/dress/ชุดปลอกคออินเตอร์.jpg";
+import dressFakthongImg from "../assets/images/product/fashion/dress/ชุดฟักทอง.jpg";
+import leashImg from "../assets/images/product/fashion/leash/สายจูง.jpg";
+import leashReflectImg from "../assets/images/product/fashion/leash/สายจูงผึ้ง.jpg";
 
 type ProductCategory =
   | "food"
@@ -42,123 +69,273 @@ type CartItem = {
 const products: Product[] = [
   {
     id: "p-1",
-    name: "อาหารแมวเกรดโฮลิสติก 1.5kg",
+    name: "อาหารเม็ดแมว 1.2kg",
     price: 359,
-    img: "/external/unsplash_1548681528-6a5c45b66b42.jpg",
+    img: foodDryImg,
     desc: "โปรตีนสูง ย่อยง่าย เหมาะกับแมวโต",
     category: "food",
     createdAt: 1711065600000,
     sold: 91,
   },
   {
+    id: "p-13",
+    name: "อาหารเปียกแมว",
+    price: 189,
+    img: wetFoodImg,
+    desc: "อาหารเปียกสำหรับแมว รสชาติอร่อย",
+    category: "food",
+    createdAt: 1712000000000,
+    sold: 67,
+  },
+  {
+    id: "p-14",
+    name: "ขนมแมวเลีย",
+    price: 29,
+    img: catLickImg,
+    desc: "ขนมเลียสำหรับแมว ช่วยดูแลสุขภาพ",
+    category: "food",
+    createdAt: 1713000000000,
+    sold: 145,
+  },
+  {
     id: "p-2",
-    name: "ทรายแมวจับตัวไว กลิ่นลาเวนเดอร์",
+    name: "ทรายแมวเบนโทไนท์ สูตรควบคุมกลิ่น",
     price: 249,
-    img: "/external/unsplash_1518791841217-8f162f1e1131.jpg",
+    img: bentoniteLitterImg,
     desc: "คุมกลิ่นดี ฝุ่นน้อย ใช้งานได้นาน",
     category: "litter",
     createdAt: 1712448000000,
     sold: 120,
   },
   {
-    id: "p-3",
-    name: "ชามอาหารสเตนเลสกันลื่น",
+    id: "p-15",
+    name: "กระบะทรายแมว",
     price: 189,
-    img: "/external/unsplash_1519052537078-e6302a4968d4.jpg",
-    desc: "ทำความสะอาดง่าย เหมาะกับการใช้งานทุกวัน",
+    img: litterBoxImg,
+    desc: "กระบะทรายขนาดพอเหมาะ ทนทาน",
+    category: "litter",
+    createdAt: 1712500000000,
+    sold: 85,
+  },
+  {
+    id: "p-16",
+    name: "ห้องน้ำแมวอัตโนมัติ",
+    price: 3590,
+    img: autoToiletImg,
+    desc: "ห้องน้ำอัตโนมัติ สะดวกสบาย",
+    category: "litter",
+    createdAt: 1712600000000,
+    sold: 23,
+  },
+  {
+    id: "p-17",
+    name: "แผ่นดักทราย",
+    price: 159,
+    img: litterMatImg,
+    desc: "แผ่นรองกระบะทราย กันทรายติดเท้า",
+    category: "litter",
+    createdAt: 1712700000000,
+    sold: 67,
+  },
+  {
+    id: "p-3",
+    name: "ที่ตัดเล็บแมว",
+    price: 189,
+    img: nailClipperImg,
+    desc: "ที่ตัดเล็บแมวคุณภาพดี ปลอดภัย",
     category: "daily",
     createdAt: 1713657600000,
     sold: 53,
   },
   {
-    id: "p-4",
-    name: "ที่นอนแมวทรงโดนัท",
-    price: 429,
-    img: "/external/unsplash_1503431128871-cd250803fa41.jpg",
-    desc: "นุ่มพิเศษ รองรับสรีระการนอนของแมว",
-    category: "furniture",
-    createdAt: 1714608000000,
+    id: "p-18",
+    name: "ที่ฝนเล็บแมว",
+    price: 129,
+    img: nailFileImg,
+    desc: "ที่ฝนเล็บสำหรับแมว ให้ผิวเล็บเรียบเนียน",
+    category: "daily",
+    createdAt: 1713700000000,
     sold: 38,
   },
   {
-    id: "p-5",
-    name: "ของเล่นไม้ตกแมวพร้อมพู่",
-    price: 119,
-    img: "/external/unsplash_1532386236358-a33d8a9434e3.jpg",
-    desc: "ช่วยกระตุ้นการเคลื่อนไหวและลดความเครียด",
+    id: "p-19",
+    name: "ปลอกคอแมวนิรภัย",
+    price: 259,
+    img: safeCollarImg,
+    desc: "ปลอกคอนิรภัย ช่วยป้องกันอันตราย",
+    category: "daily",
+    createdAt: 1713800000000,
+    sold: 71,
+  },
+  {
+    id: "p-20",
+    name: "แปรงขนแมว",
+    price: 159,
+    img: brushImg,
+    desc: "แปรงขนนุ่ม ดูแลขนแมวได้ดี",
+    category: "daily",
+    createdAt: 1713900000000,
+    sold: 92,
+  },
+  {
+    id: "p-21",
+    name: "ที่นอนแมว",
+    price: 329,
+    img: catBedImg,
+    desc: "ที่นอนนุ่มสบาย เหมาะสำหรับแมวทุกสายพันธุ์",
+    category: "furniture",
+    createdAt: 1714000000000,
+    sold: 64,
+  },
+  {
+    id: "p-22",
+    name: "หลุมแมวติดกำแพง",
+    price: 589,
+    img: wallCatHoleImg,
+    desc: "หลุมแมวติดผนัง ประหยัดพื้นที่",
+    category: "furniture",
+    createdAt: 1714100000000,
+    sold: 28,
+  },
+  {
+    id: "p-23",
+    name: "เบาะนอนแมว",
+    price: 189,
+    img: catCushionImg,
+    desc: "เบาะนอนแมวนุ่ม พกพาสะดวก",
+    category: "furniture",
+    createdAt: 1714200000000,
+    sold: 45,
+  },
+  {
+    id: "p-31",
+    name: "ของเล่นคอนโดแมว",
+    price: 459,
+    img: condoToyImg,
+    desc: "คอนโดแมวพร้อมของเล่น ช่วยออกกำลังกาย",
     category: "toys",
-    createdAt: 1716854400000,
-    sold: 167,
+    createdAt: 1720000000000,
+    sold: 38,
+  },
+  {
+    id: "p-32",
+    name: "ของเล่นตุ๊กตายัดไส้กัญชาแมว",
+    price: 89,
+    img: catnipToyImg,
+    desc: "ตุ๊กตากัญชาแมว ช่วยผ่อนคลายความเครียด",
+    category: "toys",
+    createdAt: 1720100000000,
+    sold: 156,
+  },
+  {
+    id: "p-33",
+    name: "รางบอล",
+    price: 259,
+    img: ballTrackImg,
+    desc: "รางบอลสำหรับแมว ช่วยกระตุ้นความสนใจ",
+    category: "toys",
+    createdAt: 1720200000000,
+    sold: 67,
+  },
+  {
+    id: "p-34",
+    name: "ของเล่นลับเล็บแมว รุ่น Curved",
+    price: 329,
+    img: scratchingPostImg,
+    desc: "เสาลับเล็บโค้งงอ ทนทาน",
+    category: "toys",
+    createdAt: 1714500000000,
+    sold: 72,
   },
   {
     id: "p-6",
-    name: "ปลอกคอผ้าลายจุด พร้อมกระดิ่ง",
+    name: "ปลอกคอโบว์คนสวย",
     price: 189,
-    img: "/external/unsplash_1592194996308-7b43878e84a6.jpg",
-    desc: "นุ่ม เบา ปรับได้ 3 ระดับ",
+    img: collarBowImg,
+    desc: "ปลอกคอพร้อมโบว์สวยงาม",
     category: "collar",
     createdAt: 1717286400000,
     sold: 84,
   },
   {
+    id: "p-35",
+    name: "ปลอกคอโบว์หล่อ",
+    price: 159,
+    img: collarHollowImg,
+    desc: "ปลอกคอโบว์หล่อเบาสบาย",
+    category: "collar",
+    createdAt: 1717300000000,
+    sold: 67,
+  },
+  {
+    id: "p-36",
+    name: "ปลอกคอแมวอัจฉริยะ",
+    price: 289,
+    img: collarSmartImg,
+    desc: "ปลอกคออัจฉริยะควบคุมอนความ",
+    category: "collar",
+    createdAt: 1717400000000,
+    sold: 92,
+  },
+  {
     id: "p-7",
-    name: "สายจูงไนลอนสะท้อนแสง",
+    name: "สายจูง",
     price: 239,
-    img: "/external/unsplash_1543852786-1cf6624b9987.jpg",
-    desc: "เหนียวทน จับถนัดมือ เหมาะเดินเล่นกลางคืน",
+    img: leashImg,
+    desc: "สายจูงเหนียวทน จับถนัดมือ",
     category: "leash",
     createdAt: 1718841600000,
     sold: 41,
   },
   {
-    id: "p-8",
-    name: "เสื้อกันหนาวแมวลายสก็อต",
-    price: 279,
-    img: "/external/unsplash_1526336024174-e58f5cdd8e13.jpg",
-    desc: "ผ้านิ่ม ใส่สบาย เหมาะอากาศเย็น",
-    category: "sweater",
-    createdAt: 1720051200000,
-    sold: 29,
+    id: "p-37",
+    name: "สายจูงผึ้ง",
+    price: 289,
+    img: leashReflectImg,
+    desc: "สายจูงสะท้อนแสง มองเห็นในที่มืด",
+    category: "leash",
+    createdAt: 1718900000000,
+    sold: 58,
   },
   {
-    id: "p-9",
-    name: "ชุดน่ารักแมวลายสตริป",
-    price: 349,
-    img: "/external/unsplash_1545249390-6bdfa286032f.jpg",
-    desc: "ชุดลายเรียบร้อย เหมาะถ่ายรูป",
+    id: "p-8",
+    name: "ชุดคริสต์มาส",
+    price: 599,
+    img: dressChristmasImg,
+    desc: "ชุดคริสต์มาสสำหรับแมว",
     category: "outfit",
     createdAt: 1716000000000,
     sold: 41,
   },
   {
-    id: "p-10",
-    name: "โบว์สีทองประดับ",
-    price: 129,
-    img: "/external/unsplash_1584515933487-779824d29309.jpg",
-    desc: "โบว์สุดน่ารักตรงลำคอแมว",
-    category: "bow",
-    createdAt: 1715700000000,
-    sold: 134,
-  },
-  {
-    id: "p-11",
-    name: "ป้ายชื่อแมวทอง",
-    price: 89,
-    img: "/external/unsplash_1574158622682-e40e69881006.jpg",
-    desc: "ป้ายชื่อแกะสลักชื่อแมวได้",
-    category: "tag",
-    createdAt: 1715900000000,
-    sold: 203,
-  },
-  {
-    id: "p-12",
-    name: "หมวกสายรัดแมว",
-    price: 159,
-    img: "/external/unsplash_1583947582886-f40ec95dd752.jpg",
-    desc: "หมวกแมวเบาเหมาะถ่ายรูป",
-    category: "hat",
+    id: "p-39",
+    name: "ชุดซูชิ",
+    price: 399,
+    img: dressSushiImg,
+    desc: "ชุดซูชิสไตล์สวยงาม",
+    category: "outfit",
     createdAt: 1716100000000,
-    sold: 87,
+    sold: 35,
+  },
+  {
+    id: "p-40",
+    name: "ชุดปลอกคออินเตอร์",
+    price: 459,
+    img: dressInterImg,
+    desc: "ชุดปลอกคออินเตอร์สวยงาม",
+    category: "outfit",
+    createdAt: 1716200000000,
+    sold: 28,
+  },
+  {
+    id: "p-41",
+    name: "ชุดฟักทอง",
+    price: 389,
+    img: dressFakthongImg,
+    desc: "ชุดฟักทองลายเรียบร้อย",
+    category: "outfit",
+    createdAt: 1716300000000,
+    sold: 52,
   },
 ];
 
@@ -253,7 +430,7 @@ export default function Product() {
       );
     });
 
-    if (selectedCategory && selectedCategory !== "new" && selectedCategory !== "popular") {
+    if (selectedCategory && selectedCategory !== "new" && selectedCategory !== "top") {
       // Check if this is a group category (fashion, daily, health)
       const groupCategories = categoryGroupMapping[selectedCategory];
       if (groupCategories) {
@@ -262,6 +439,24 @@ export default function Product() {
         // Direct category match
         list = list.filter((p) => p.category === selectedCategory);
       }
+    }
+
+    // Special handling for "fashion" category - show only 10 specific fashion products (3 collars + 3 leashes + 4 dresses)
+    if (selectedCategory === "fashion") {
+      const fashionProductIds = ["p-6", "p-35", "p-36", "p-7", "p-37", "p-8", "p-39", "p-40", "p-41"];
+      list = list.filter((p) => fashionProductIds.includes(p.id));
+    }
+
+    // Special handling for "new" category - show only 3 specific newest products
+    if (selectedCategory === "new") {
+      const newestProductIds = ["p-31", "p-32", "p-33"];
+      list = list.filter((p) => newestProductIds.includes(p.id));
+    }
+
+    // Special handling for "popular" category - show only the 3 specific popular products
+    if (selectedCategory === "top") {
+      const popularProductIds = ["p-2", "p-19", "p-34"];
+      list = list.filter((p) => popularProductIds.includes(p.id));
     }
 
     // Sort based on sortBy
@@ -367,8 +562,8 @@ export default function Product() {
           </div>
         </div>
 
-        <div className={styles.title}>รายการสินค้า</div>
-        <div className={styles.subtitle}>{subtitle}</div>
+        <div className={styles.title}>{subtitle}</div>
+        <div className={styles.subtitle}>รายการสินค้า</div>
 
         <div className={styles.controls}>
           <button
