@@ -13,18 +13,8 @@ import styles from "./css/Select.module.css";
 import collarImg from "../assets/images/product/home/ปลอกคอ.jpg";
 import leashImg from "../assets/images/product/home/สายจูง.jpg";
 import outfitImg from "../assets/images/product/home/ชุดน่ารัก.jpg";
-import bowImg from "../assets/images/product/home/โบว์.jpg";
-import tagImg from "../assets/images/product/home/ป้ายชื่อ.jpg";
-import toysImg from "../assets/images/product/home/ของเล่น.jpg";
-import bowlImg from "../assets/images/product/home/ชามอาหาร.jpg";
-import fountainImg from "../assets/images/product/home/น้ำพุแมว.jpg";
-import bedImg from "../assets/images/product/home/ที่นอน.jpg";
-import condoImg from "../assets/images/product/home/คอนโดแมว.jpg";
-import carrierImg from "../assets/images/product/home/กระเป๋าแมว.jpg";
-import vitaminImg from "../assets/images/product/home/วิตามิน.jpg";
 import clinicalFoodImg from "../assets/images/product/home/อาหารเฉพาะทาง.jpg";
 import coatImg from "../assets/images/product/home/แปรงขน.jpg";
-import dentalImg from "../assets/images/product/home/ดูแลช่องปาก.jpg";
 import padImg from "../assets/images/product/home/ที่ฝนเล็บ.jpg";
 
 type LifestyleItem = {
