@@ -1,6 +1,7 @@
 import styles from "../pages/css/PaymentModal.module.css";
 import CloseIcon from "./CloseButton";
 import ModalShell from "./ModalShell";
+import kasikornLogo from "../assets/images/logo-kasikorn.png";
 
 type Props = {
   open: boolean;
@@ -32,7 +33,9 @@ export default function PaymentModal({ open, onClose, onSuccess }: Readonly<Prop
         {/* BANK INFO */}
 
         <div className={styles.bankCard}>
-          <div className={styles.bankAvatar}></div>
+          <div className={styles.bankAvatar}>
+          <img src={kasikornLogo} alt="ธนาคารกสิกรไทย" className={styles.bankLogo} />
+        </div>
 
           <div className={styles.bankInfo}>
             <div className={styles.bankName}>ธนาคารกสิกรไทย</div>

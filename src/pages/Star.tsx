@@ -1,6 +1,7 @@
 import styles from "./css/Star.module.css";
 import Tabbar from "../components/TabBar";
 import infoRichMenu from "../assets/images/Info_Rich_Menu-01.jpg";
+import howToReviewImg from "../assets/images/howtoreview.jpg";
 
 export default function Star() {
   return (
@@ -152,22 +153,24 @@ export default function Star() {
         {/* GUIDE */}
 
         <div className={styles.sec}>
-          <div className={styles.secHead}>
+          {/* <div className={styles.secHead}>
             <div className={styles.secTitle}>วิธีทำคะแนนของสมาชิกในระบบ</div>
 
             <div className={styles.secLink}>ดูทั้งหมด ›</div>
-          </div>
+          </div> */}
 
-          <div className={styles.guideCard}>
-            <div className={styles.guideBox}>กราฟที่ “แสดงรายงาน”</div>
+          {/* <div className={styles.guideCard}> */}
+            <div className={styles.infoSection}>
+              <img src={howToReviewImg} alt="วิธีทำรีวิว" className={styles.guideImage} />
+            </div>
 
-            <button className={styles.guideBtn}>แสดงรายงาน</button>
+            {/* <button className={styles.guideBtn}>แสดงรายงาน</button> */}
 
-            <div className={styles.guideNote}>
+            {/* <div className={styles.guideNote}>
               บันทึก: คะแนนจะอัปเดตตามยอดขายและการรีวิวของลูกค้า
               ระบบจะคำนวณเป็นรายเดือน โดยอิงจากคำสั่งซื้อที่ชำระเงินสำเร็จ
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
 
         {/* INFO IMAGE */}
