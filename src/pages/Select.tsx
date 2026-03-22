@@ -55,20 +55,20 @@ const lifestyleSections: LifestyleSection[] = [
       // { name: "หมวก", cat: "hat", img: outfitImg, hint: "ถ่ายรูปขึ้น" },
     ],
   },
-  {
-    title: "ชีวิตประจำวัน",
-    rowId: "dailyRow",
-    routeCat: "daily",
-    items: [
-      // { name: "ของเล่น", cat: "toys", img: toysImg, hint: "เล่นเพลิน" },
-      { name: "ชามอาหาร", cat: "bowl", img: bowlImg, hint: "กินง่าย" },
-      { name: "น้ำพุแมว", cat: "fountain", img: fountainImg, hint: "ดื่มน้ำมากขึ้น" },
-      { name: "ที่นอน", cat: "bed", img: bedImg, hint: "นุ่มหลับสบาย" },
-      // { name: "คอนโดแมว", cat: "condo", img: condoImg, hint: "ปีนป่ายสนุก" },
-      // { name: "กรง/กระเป๋า", cat: "carrier", img: carrierImg, hint: "เดินทางสะดวก" },
-      // { name: "แผ่นรอง", cat: "pad", img: padImg, hint: "ทำความสะอาดง่าย" },
-    ],
-  },
+  // {
+  //   title: "ชีวิตประจำวัน",
+  //   rowId: "dailyRow",
+  //   routeCat: "daily",
+  //   items: [
+  //     // { name: "ของเล่น", cat: "toys", img: toysImg, hint: "เล่นเพลิน" },
+  //     { name: "ชามอาหาร", cat: "bowl", img: bowlImg, hint: "กินง่าย" },
+  //     { name: "น้ำพุแมว", cat: "fountain", img: fountainImg, hint: "ดื่มน้ำมากขึ้น" },
+  //     { name: "ที่นอน", cat: "bed", img: bedImg, hint: "นุ่มหลับสบาย" },
+  //     // { name: "คอนโดแมว", cat: "condo", img: condoImg, hint: "ปีนป่ายสนุก" },
+  //     // { name: "กรง/กระเป๋า", cat: "carrier", img: carrierImg, hint: "เดินทางสะดวก" },
+  //     // { name: "แผ่นรอง", cat: "pad", img: padImg, hint: "ทำความสะอาดง่าย" },
+  //   ],
+  // },
   {
     title: "สุขภาพ",
     rowId: "healthRow",
@@ -78,7 +78,7 @@ const lifestyleSections: LifestyleSection[] = [
       { name: "อาหารเฉพาะทาง", cat: "clinical-food", img: clinicalFoodImg, hint: "ดูแลเฉพาะจุด" },
       // { name: "ดูแลช่องปาก", cat: "dental", img: dentalImg, hint: "ลมหายใจสดชื่น" },
       { name: "อุปกรณ์ดูแล", cat: "care", img: padImg, hint: "ครบชุดดูแล" },
-      { name: "กรง", cat: "item", img: coatImg, hint: "กรงใส่น้องแมว" },
+      { name: "กรง", cat: "cage", img: coatImg, hint: "กรงใส่น้องแมว" },
     ],
   },
 ];

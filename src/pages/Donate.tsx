@@ -5,6 +5,7 @@ import ModalShell from "../components/ModalShell";
 import TabBar from "../components/TabBar";
 import styles from "./css/Donate.module.css";
 import litterImg from "../assets/images/product/donate/ทรายแมว.jpg";
+import feedbackImg from "../assets/images/feedback.jpg";
 import woundDressingImg from "../assets/images/product/donate/ผ้าก๊อซทำแผล.jpg";
 import blanketImg from "../assets/images/product/donate/ผ้าห่ม.jpg";
 import cottonImg from "../assets/images/product/donate/สำลี.jpg";
@@ -163,7 +164,7 @@ const sampleItems: SampleItem[] = [
 
 export default function Donate() {
   const navigate = useNavigate();
-  const fallbackImage = litterImg;
+  const fallbackImage = feedbackImg;
   const [search, _setSearch] = useState("");
   const [needs, setNeeds] = useState<NeedItem[]>(needsSeed);
   const [needsExpanded, setNeedsExpanded] = useState(false);
@@ -389,7 +390,7 @@ export default function Donate() {
           <div className={styles.heroBox}>
             <img
               className={styles.heroImage}
-              src={wetFoodImg}
+              src={feedbackImg}
               alt="แบนเนอร์แคมเปญบริจาค"
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;

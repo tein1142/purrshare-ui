@@ -1,8 +1,12 @@
 import EditProfileModal from "../components/EditProfileModal";
 import TabBar from "../components/TabBar";
+// Import local images for reviews
+import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.png";
+import catBedImg from "../assets/images/product/furniture/ที่นอนแมว.jpg";
+import catnipToyImg from "../assets/images/product/toys/ของเล่นตุ๊กตายัดไส้กัญชาแมว.jpg";
 import styles from "./css/Profile.module.css";
+import profileImg from "../assets/images/minnie-profile.jpg"
 import { useState, useEffect } from "react";
-
 
 interface Order {
   id: string;
@@ -40,21 +44,21 @@ export default function Profile() {
   const [reviews] = useState([
     {
       id: 1,
-      name: "สินค้า",
+      name: "ไม้ตกแมว: ของใหม่มาก สะอาดสุดๆ ขอบคุณมากนะคะ",
       star: 4,
-      img: "/external/placecats_neo_300_200.jpg",
+      img: foodDryImg,
     },
     {
       id: 2,
-      name: "สินค้า",
+      name: "คอนโดแมว: คอนโดแมวมือสองที่สะอาดมากคุณเจ้าของดูแลดีมากค่ะ",
       star: 4,
-      img: "/external/placecats_millie_300_200.jpg",
+      img: catBedImg,
     },
     {
       id: 3,
-      name: "สินค้า",
+      name: "น้ำพุแมว: ตอนแรกเล็งไว้นาน เจอมือสองเลยรีบซื้อมาลองเลย",
       star: 4,
-      img: "/external/placecats_poppy_300_200.jpg",
+      img: catnipToyImg,
     },
   ]);
 
@@ -187,7 +191,7 @@ export default function Profile() {
 
             <div className={styles.heroRow}>
               <div className={styles.avatarSingle}>
-                <img src="/external/randomuser_women_68.jpg" alt="รูปโปรไฟล์" />
+                <img src={profileImg} alt="รูปโปรไฟล์" />
               </div>
             </div>
 

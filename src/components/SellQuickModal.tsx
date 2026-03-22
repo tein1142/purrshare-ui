@@ -55,6 +55,7 @@ export default function SellQuickModal({
             className={styles.input}
             value={quickName}
             onChange={(e) => onChangeName(e.target.value)}
+            placeholder="กรอกชื่อสินค้า"
           />
         </div>
 
@@ -66,6 +67,7 @@ export default function SellQuickModal({
               className={styles.input}
               value={quickPrice}
               onChange={(e) => onChangePrice(e.target.value)}
+              placeholder="กรอกราคา"
             />
           </div>
           <div className={styles.field}>

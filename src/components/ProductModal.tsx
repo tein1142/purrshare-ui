@@ -16,6 +16,9 @@ type Product = {
     | "tag"
     | "sweater"
     | "hat"
+    | "clinical-food"
+    | "care"
+    | "cage"
     | "other";
   id: string;
   createdAt: number;
@@ -111,7 +114,7 @@ export default function ProductModal({
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
                 <img
-                  src="/external/robohash_fafb2830147a924143b9dd45b8250089.png"
+                  src="src/assets/images/LOGO-02.png"
                   alt="Meow & Co."
                 />
               </div>
@@ -123,7 +126,7 @@ export default function ProductModal({
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
                 <img
-                  src="/external/robohash_76bf070195f6c4772b2c57f5bbd52e6a.png"
+                  src="src/assets/images/LOGO-02.png"
                   alt="ร้านแมวอ้วน"
                 />
               </div>

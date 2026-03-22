@@ -8,6 +8,16 @@ import styles from "./css/Sell.module.css";
 import trayImg from "../assets/images/product/sell/กระบะทราย.jpg";
 import fountainImg from "../assets/images/product/sell/น้ำพุแมว.jpg";
 import logo02 from "../assets/images/LOGO-02.png";
+// Additional sample images from various categories
+import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.png";
+import wetFoodImg from "../assets/images/product/food/อาหารเปียกแมว.jpg";
+import catLickImg from "../assets/images/product/food/แมวเลีย.png";
+import nailClipperImg from "../assets/images/product/dailyItems/ที่ตัดเล็บแมว.jpeg";
+import brushImg from "../assets/images/product/dailyItems/แปรงขนแมว.jpeg";
+import catBedImg from "../assets/images/product/furniture/ที่นอนแมว.jpg";
+import catnipToyImg from "../assets/images/product/toys/ของเล่นตุ๊กตายัดไส้กัญชาแมว.jpg";
+import collarBowImg from "../assets/images/product/fashion/collar/ปลอกคอโบว์คนสวย.jpg";
+import specialtyFood1Img from "../assets/images/product/healthy/specialtyFood/อาหารสูตรกำจัดก้อนขน.jpg";
 
 type Category =
   | "food"
@@ -22,6 +32,9 @@ type Category =
   | "tag"
   | "sweater"
   | "hat"
+  | "clinical-food"
+  | "care"
+  | "cage"
   | "other";
 
 type SellerProduct = {
@@ -48,10 +61,17 @@ const LS_KEY = "ps_sell_items";
 const sampleImages = [
   trayImg,
   fountainImg,
-  trayImg,
-  trayImg,
-  trayImg,
-  trayImg,
+  foodDryImg,
+  wetFoodImg,
+  catLickImg,
+  nailClipperImg,
+  brushImg,
+  catBedImg,
+  catnipToyImg,
+  collarBowImg,
+  specialtyFood1Img,
+  trayImg, // Add some variety by repeating
+  fountainImg,
 ];
 
 const categoryKeys: Category[] = [
@@ -67,6 +87,9 @@ const categoryKeys: Category[] = [
   "tag",
   "sweater",
   "hat",
+  "clinical-food",
+  "care",
+  "cage",
   "other",
 ];
 
@@ -93,7 +116,7 @@ export default function Sell() {
         name: "อาหารแมว MeowMix 1kg",
         nameEn: "MeowMix Cat Food 1kg",
         price: 200,
-        img: fountainImg,
+        img: foodDryImg,
         desc: "อาหารแมวชนิดเม็ด สำหรับแมวโต อายุ 1 ปีขึ้นไป",
         descEn: "Dry cat food for adult cats, 1 year+",
         province: "กรุงเทพฯ",
@@ -126,10 +149,10 @@ export default function Sell() {
       {
         id: "a3",
         status: "sold",
-        name: "ของเล่นแมว ไม้ตกปลา",
-        nameEn: "Cat Toy Fishing Rod",
+        name: "ของเล่นแมว น้องหมี",
+        nameEn: "Cat Toy Bear",
         price: 99,
-        img: fountainImg,
+        img: catnipToyImg,
         desc: "ของเล่นเสริมพัฒนาการ สำหรับแมวทุกวัย",
         descEn: "Interactive toy for all cat ages",
         province: "สมุทรปราการ",
@@ -153,8 +176,8 @@ export default function Sell() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [activeItem, setActiveItem] = useState<SellerProduct | null>(null);
 
-  const [quickName, setQuickName] = useState("อาหารแมว MeowMix 1kg");
-  const [quickPrice, setQuickPrice] = useState("200");
+  const [quickName, setQuickName] = useState("");
+  const [quickPrice, setQuickPrice] = useState("");
 
   const [formName, setFormName] = useState("ทรายแมว OdourLock 5L");
   const [formDesc, setFormDesc] = useState("ทรายแมวเก็บกลิ่น กำจัดกลิ่นเหม็นได้ดี");
@@ -210,12 +233,12 @@ export default function Sell() {
   };
 
   function cycleImage() {
-    setImgIndex((prev) => (prev + 1) % 2); // เปลี่ยนเป็น 2 เพราะมีแค่ 2 รูป
+    setImgIndex((prev) => (prev + 1) % sampleImages.length);
   }
 
   function openQuickSheet() {
-    setQuickName("อาหารแมว MeowMix 1kg");
-    setQuickPrice("200");
+    setQuickName("");
+    setQuickPrice("");
     setFormName("ทรายแมว OdourLock 5L");
     setFormDesc("ทรายแมวเก็บกลิ่น กำจัดกลิ่นเหม็นได้ดี");
     setFormProvince("นนทบุรี");
@@ -245,7 +268,7 @@ export default function Sell() {
       name: quickName.trim(),
       nameEn: quickName.trim(),
       price,
-      img: imgIndex === 0 ? fountainImg : trayImg,
+      img: sampleImages[imgIndex],
       desc: formDesc.trim() || "สินค้าจากผู้ใช้งาน",
       descEn: formDesc.trim() || "User product",
       province: formProvince.trim(),
