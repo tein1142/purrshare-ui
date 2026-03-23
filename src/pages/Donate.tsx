@@ -186,6 +186,7 @@ export default function Donate() {
                 100,
                 Math.round((item.current / item.target) * 100),
               );
+              const remain = Math.max(0, item.target - item.current);
               return (
                 <div className={styles.needRow} key={item.id}>
                   <div className={styles.needLeft}>
@@ -209,6 +210,10 @@ export default function Donate() {
                         />
                       </div>
                     </div>
+                  </div>
+                  <div className={styles.needStatBox}>
+                    <div className={styles.needPercent}>{pct}%</div>
+                    <div className={styles.needRemain}>ขาดอีก {remain}</div>
                   </div>
                 </div>
               );

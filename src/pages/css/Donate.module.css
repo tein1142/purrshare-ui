@@ -284,6 +284,30 @@
   flex: 1;
 }
 
+.needStatBox {
+  min-width: calc(72px * var(--scale));
+  padding: calc(6px * var(--scale)) calc(8px * var(--scale));
+  border-radius: calc(12px * var(--scale));
+  border: calc(2px * var(--scale)) solid rgb(58 42 39 / 14%);
+  background: #fff;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.needPercent {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: #111;
+  line-height: 1.1;
+}
+
+.needRemain {
+  margin-top: calc(4px * var(--scale));
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  color: rgb(17 24 39 / 68%);
+}
+
 .needThumb,
 .thumb,
 .detailThumb {
