@@ -40,7 +40,10 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="/external/unsplash_1524504388940-b1c1722653e1.jpg" alt="Mimi Shop" />
+                  <img
+                    src="/external/unsplash_1524504388940-b1c1722653e1.jpg"
+                    alt="Mimi Shop"
+                  />
                 </div>
 
                 <div className={styles.pName}>Mimi Shop</div>
@@ -51,7 +54,10 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="/external/unsplash_1535713875002-d1d0cf377fde.jpg" alt="Purr Premium" />
+                  <img
+                    src="/external/unsplash_1535713875002-d1d0cf377fde.jpg"
+                    alt="Purr Premium"
+                  />
                 </div>
 
                 <div className={styles.pName}>Purr Premium</div>
@@ -62,7 +68,10 @@ export default function Star() {
                 <div className={styles.starBadge}>★</div>
 
                 <div className={styles.ava}>
-                  <img src="/external/unsplash_1544723795-3fb6469f5b39.jpg" alt="Catty Corner" />
+                  <img
+                    src="/external/unsplash_1544723795-3fb6469f5b39.jpg"
+                    alt="Catty Corner"
+                  />
                 </div>
 
                 <div className={styles.pName}>Catty Corner</div>
@@ -153,24 +162,13 @@ export default function Star() {
         {/* GUIDE */}
 
         <div className={styles.sec}>
-          {/* <div className={styles.secHead}>
-            <div className={styles.secTitle}>วิธีทำคะแนนของสมาชิกในระบบ</div>
-
-            <div className={styles.secLink}>ดูทั้งหมด ›</div>
-          </div> */}
-
-          {/* <div className={styles.guideCard}> */}
-            <div className={styles.infoSection}>
-              <img src={howToReviewImg} alt="วิธีทำรีวิว" className={styles.guideImage} />
-            </div>
-
-            {/* <button className={styles.guideBtn}>แสดงรายงาน</button> */}
-
-            {/* <div className={styles.guideNote}>
-              บันทึก: คะแนนจะอัปเดตตามยอดขายและการรีวิวของลูกค้า
-              ระบบจะคำนวณเป็นรายเดือน โดยอิงจากคำสั่งซื้อที่ชำระเงินสำเร็จ
-            </div> */}
-          {/* </div> */}
+          <div className={styles.infoSection}>
+            <img
+              src={howToReviewImg}
+              alt="วิธีทำรีวิว"
+              className={styles.guideImage}
+            />
+          </div>
         </div>
 
         {/* INFO IMAGE */}

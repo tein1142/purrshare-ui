@@ -1,7 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CloseIcon from "../components/CloseButton";
-import ModalShell from "../components/ModalShell";
 import TabBar from "../components/TabBar";
 import styles from "./css/Donate.module.css";
 import litterImg from "../assets/images/product/donate/ทรายแมว.jpg";
@@ -12,13 +10,6 @@ import cottonImg from "../assets/images/product/donate/สำลี.jpg";
 import wetFoodImg from "../assets/images/product/donate/อาหารเปียก.jpg";
 import logo02 from "../assets/images/LOGO-02.png";
 
-type CatalogItem = {
-  id: string;
-  name: string;
-  meta: string;
-  img: string;
-};
-
 type NeedItem = {
   id: string;
   name: string;
@@ -28,52 +19,6 @@ type NeedItem = {
   target: number;
   catalogId: string;
 };
-
-type DonateItem = {
-  id: string;
-  catalogId?: string;
-  name: string;
-  meta: string;
-  img: string;
-  qty: number;
-};
-
-type SampleItem = {
-  id: string;
-  name: string;
-  desc: string;
-  donor: string;
-  loc: string;
-  tag: string;
-  img: string;
-};
-
-const catalog: CatalogItem[] = [
-  {
-    id: "food",
-    name: "อาหารแมว",
-    meta: "สำหรับน้องเหมียว",
-    img: wetFoodImg,
-  },
-  {
-    id: "litter",
-    name: "ทรายแมว",
-    meta: "สะอาด กลิ่นน้อย",
-    img: litterImg,
-  },
-  {
-    id: "toy",
-    name: "ของเล่นแมว",
-    meta: "สนุกเพลินทั้งวัน",
-    img: wetFoodImg,
-  },
-  {
-    id: "bed",
-    name: "ที่นอนแมว",
-    meta: "นุ่มสบาย",
-    img: blanketImg,
-  },
-];
 
 const needsSeed: NeedItem[] = [
   {
@@ -123,80 +68,74 @@ const needsSeed: NeedItem[] = [
   },
 ];
 
-const sampleItems: SampleItem[] = [
-  {
-    id: "s1",
-    name: "อาหารแมวสูตรปลาทูน่า 1kg",
-    desc: "อาหารแมวคุณภาพสำหรับน้องเหมียว",
-    donor: "May",
-    loc: "ลาดพร้าว, กทม.",
-    tag: "อาหาร",
-    img: wetFoodImg,
-  },
-  {
-    id: "s2",
-    name: "ทรายแมวแม็กซ์ 5L",
-    desc: "ทรายแมวคุณภาพสำหรับ 5 ลิตร",
-    donor: "Nina",
-    loc: "บางนา, กทม.",
-    tag: "ทราย",
-    img: litterImg,
-  },
-  {
-    id: "s3",
-    name: "ผ้าห่มผ้าขนหนู",
-    desc: "ผ้าห่มอุ่นสำหรับน้องเหมียว",
-    donor: "Beam",
-    loc: "นนทบุรี",
-    tag: "ที่นอน",
-    img: blanketImg,
-  },
-  {
-    id: "s4",
-    name: "ของเล่นแมวปลายจับ",
-    desc: "ของเล่นแมวเสริมพัฒนาการ",
-    donor: "Minnie",
-    loc: "พระราม 9, กทม.",
-    tag: "ของเล่น",
-    img: cottonImg,
-  },
-];
-
 export default function Donate() {
   const navigate = useNavigate();
   const fallbackImage = feedbackImg;
   const [search, _setSearch] = useState("");
-  const [needs, setNeeds] = useState<NeedItem[]>(needsSeed);
+  const [needs, setNeeds] = useState<NeedItem[]>(() =>
+    needsSeed.map((item) => ({
+      ...item,
+      current: 0,
+      meta: `0/${item.target}`,
+    })),
+  );
   const [needsExpanded, setNeedsExpanded] = useState(false);
-  const [list, setList] = useState<DonateItem[]>(() => {
-    try {
-      const raw = localStorage.getItem("ps_donate_items") || "[]";
-      const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? (parsed as DonateItem[]) : [];
-    } catch {
-      return [];
-    }
-  });
 
-  const [addOpen, setAddOpen] = useState(false);
-  const [formOpen, setFormOpen] = useState(false);
-  const [detailOpen, setDetailOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    const timers: number[] = [];
 
-  const [pickIndex, setPickIndex] = useState(0);
-  const [pickQty, setPickQty] = useState(1);
+    needsSeed.forEach((seed, index) => {
+      const startDelay = 120 + index * 220;
+      let current = 0;
+      const remain = Math.min(
+        seed.target - 1,
+        Math.floor(Math.random() * 20) + 1,
+      );
+      const stopAt = Math.max(0, seed.target - remain);
 
-  const [senderName, setSenderName] = useState("Minnie");
-  const [senderPhone, setSenderPhone] = useState("09x-xxx-xxxx");
-  const [senderType, setSenderType] = useState("จัดส่งทางไปษณีย์");
-  const [senderTypeOpen, setSenderTypeOpen] = useState(false);
-  const [senderAddr, setSenderAddr] = useState("กรุงเทพฯ");
-  const [senderNote, setSenderNote] = useState("ฝากน้องเหมียวด้วยนะ");
+      const startTimer = globalThis.setTimeout(() => {
+        const tick = () => {
+          const step = Math.floor(Math.random() * 5) + 1;
+          current = Math.min(stopAt, current + step);
 
-  const senderTypeOptions = ["จัดส่งทางไปษณีย์", "จัดส่งด้วยตนเอง"];
+          setNeeds((prev) =>
+            prev.map((item) =>
+              item.id === seed.id
+                ? {
+                    ...item,
+                    current,
+                    meta: `${current}/${item.target}`,
+                  }
+                : item,
+            ),
+          );
 
-  const activePick = catalog[pickIndex % catalog.length];
+          if (current >= stopAt) {
+            return;
+          }
+
+          const minDelay = Math.min(250 + index * 35, 650);
+          const maxDelay = Math.min(980 - index * 25, 980);
+          const nextDelay =
+            Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
+
+          const nextTimer = globalThis.setTimeout(tick, nextDelay);
+          timers.push(nextTimer);
+        };
+
+        tick();
+      }, startDelay);
+
+      timers.push(startTimer);
+    });
+
+    return () => {
+      timers.forEach((timer) => {
+        globalThis.clearTimeout(timer);
+        globalThis.clearInterval(timer);
+      });
+    };
+  }, []);
 
   const filteredNeeds = useMemo(() => {
     const base = needsExpanded ? needs : needs.slice(0, 3);
@@ -204,169 +143,6 @@ export default function Donate() {
     if (!q) return base;
     return base.filter((n) => `${n.name} ${n.meta}`.toLowerCase().includes(q));
   }, [needs, needsExpanded, search]);
-
-  const filteredList = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return list;
-    return list.filter((n) => `${n.name} ${n.meta}`.toLowerCase().includes(q));
-  }, [list, search]);
-
-  const filteredSamples = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return sampleItems;
-    return sampleItems.filter((s) =>
-      `${s.name} ${s.desc} ${s.tag}`.toLowerCase().includes(q),
-    );
-  }, [search]);
-
-  const selectedSample = filteredSamples[0] ?? null;
-
-  const totalQty = list.reduce((sum, item) => sum + item.qty, 0);
-
-  function persistDonateItems(next: DonateItem[]) {
-    setList(next);
-    localStorage.setItem("ps_donate_items", JSON.stringify(next));
-  }
-
-  function increaseListQty(id: string) {
-    const next = list.map((item) =>
-      item.id === id ? { ...item, qty: item.qty + 1 } : item,
-    );
-    persistDonateItems(next);
-  }
-
-  function decreaseListQty(id: string) {
-    const next = list
-      .map((item) =>
-        item.id === id ? { ...item, qty: Math.max(0, item.qty - 1) } : item,
-      )
-      .filter((item) => item.qty > 0);
-    persistDonateItems(next);
-  }
-
-  function openAddModal() {
-    setPickIndex((prev) => (prev + 1) % catalog.length);
-    setPickQty(1);
-    setAddOpen(true);
-  }
-
-  function addPickedItemToList() {
-    const existing = list.find((item) => item.id === activePick.id);
-    const next = existing
-      ? list.map((item) =>
-          item.id === activePick.id
-            ? { ...item, qty: item.qty + pickQty }
-            : item,
-        )
-      : [
-          ...list,
-          {
-            id: activePick.id,
-            catalogId: activePick.id,
-            name: activePick.name,
-            meta: activePick.meta,
-            img: activePick.img,
-            qty: pickQty,
-          },
-        ];
-
-    setAddOpen(false);
-    setLoading(true);
-    globalThis.setTimeout(() => {
-      persistDonateItems(next);
-      setLoading(false);
-    }, 260);
-  }
-
-  function addNeedToList(need: NeedItem) {
-    setList((prev) => {
-      const existing = prev.find((item) => item.id === need.id);
-      const next = existing
-        ? prev.map((item) =>
-            item.id === need.id ? { ...item, qty: item.qty + 1 } : item,
-          )
-        : [
-            ...prev,
-            {
-              id: need.id,
-              catalogId: need.catalogId,
-              name: need.name,
-              meta: need.meta,
-              img: need.img,
-              qty: 1,
-            },
-          ];
-
-      localStorage.setItem("ps_donate_items", JSON.stringify(next));
-      return next;
-    });
-  }
-
-  function applyDonationToNeeds(
-    prevNeeds: NeedItem[],
-    submittedItems: DonateItem[],
-  ) {
-    const remainByCatalog = new Map<string, number>();
-    submittedItems.forEach((item) => {
-      const key = item.catalogId ?? item.id;
-      remainByCatalog.set(key, (remainByCatalog.get(key) ?? 0) + item.qty);
-    });
-
-    return prevNeeds.map((need) => {
-      const remain = remainByCatalog.get(need.catalogId) ?? 0;
-      if (remain <= 0) return need;
-
-      const room = Math.max(0, need.target - need.current);
-      if (room <= 0) return need;
-
-      const added = Math.min(remain, room);
-      const nextCurrent = need.current + added;
-      remainByCatalog.set(need.catalogId, remain - added);
-
-      return {
-        ...need,
-        current: nextCurrent,
-        meta: `${nextCurrent} / ${need.target} ชิ้น`,
-      };
-    });
-  }
-
-  function submitDonationFlow() {
-    if (!list.length) {
-      setFormOpen(false);
-      return;
-    }
-
-    setFormOpen(false);
-    setLoading(true);
-
-    const submittedItems = [...list];
-
-    globalThis.setTimeout(() => {
-      const raw = localStorage.getItem("ps_donations") || "[]";
-      const history = JSON.parse(raw);
-      history.unshift({
-        id: Date.now(),
-        senderName,
-        senderPhone,
-        senderType,
-        senderAddr,
-        senderNote,
-        items: list,
-      });
-      localStorage.setItem("ps_donations", JSON.stringify(history));
-
-      setNeeds((prev) => applyDonationToNeeds(prev, submittedItems));
-
-      persistDonateItems([]);
-      setLoading(false);
-      setSuccess(true);
-    }, 700);
-  }
-
-  function closeSuccessModal() {
-    setSuccess(false);
-  }
 
   return (
     <div className={styles.app}>
@@ -385,8 +161,7 @@ export default function Donate() {
         </div>
       </header>
 
-      {!success && (
-        <main className={styles.content}>
+      <main className={styles.content}>
           <div className={styles.heroBox}>
             <img
               className={styles.heroImage}
@@ -401,13 +176,6 @@ export default function Donate() {
             </div>
           </div>
 
-          <div className={styles.flowGuide}>
-            <div className={styles.flowChip}>1. เพิ่มรายการ</div>
-            <div className={styles.flowArrow}>→</div>
-            <div className={styles.flowChip}>2. ตรวจจำนวน</div>
-            <div className={styles.flowArrow}>→</div>
-            <div className={styles.flowChipActive}>3. ยืนยันบริจาค</div>
-          </div>
 
           <div className={styles.sectionTitle}>
             รายการสิ่งของที่มูลนิธิต้องการ
@@ -442,13 +210,6 @@ export default function Donate() {
                       </div>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className={styles.needBtn}
-                    onClick={() => addNeedToList(item)}
-                  >
-                    เพิ่มเข้าลิสต์
-                  </button>
                 </div>
               );
             })}
@@ -461,356 +222,11 @@ export default function Donate() {
             </button>
           </div>
 
-          <div className={styles.sectionTitle}>รายการบริจาคของคุณ</div>
-          <div className={styles.listCard}>
-            {filteredList.length === 0 ? (
-              <div className={styles.emptyWrap}>
-                <div className={styles.empty}>
-                  เพิ่มรายการจากสิ่งของที่มูลนิธิต้องการด้านบน
-                </div>
-                <button
-                  className={styles.openAddBtn}
-                  type="button"
-                  onClick={openAddModal}
-                >
-                  เลือกจากแคตตาล็อก
-                </button>
-              </div>
-            ) : (
-              filteredList.map((item) => (
-                <div className={styles.itemRow} key={item.id}>
-                  <div className={styles.itemLeft}>
-                    <div className={styles.thumb}>
-                      <img
-                        src={item.img}
-                        alt={item.name}
-                        loading="lazy"
-                        onError={(e) => {
-                          e.currentTarget.src = fallbackImage;
-                        }}
-                      />
-                    </div>
-                    <div className={styles.itemTxt}>
-                      <div className={styles.itemName}>{item.name}</div>
-                      <div className={styles.itemMeta}>{item.meta}</div>
-                    </div>
-                  </div>
-
-                  <div className={styles.qtyPill}>
-                    <button
-                      type="button"
-                      className={styles.qtyBtn}
-                      onClick={() => decreaseListQty(item.id)}
-                    >
-                      −
-                    </button>
-                    <div className={styles.qtyVal}>{item.qty}</div>
-                    <button
-                      type="button"
-                      className={styles.qtyBtn}
-                      onClick={() => increaseListQty(item.id)}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
+          <div className={styles.infoSection}>
+            <img src={feedbackImg} alt="ข้อมูลเมนู" />
           </div>
-        </main>
-      )}
-
-      <ModalShell
-        open={success}
-        onClose={closeSuccessModal}
-        panelClassName={styles.sheet}
-      >
-        <div className={styles.sheetBody}>
-          <div className={styles.successCard}>
-            <div className={styles.meowBox}>
-              <img
-                className={styles.meowIcon}
-                src={woundDressingImg}
-                alt="แมวขอบคุณสำหรับการบริจาค"
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.src = fallbackImage;
-                }}
-              />
-            </div>
-            <p className={styles.meow}>Meow</p>
-            <div className={styles.meowSub}>ขอบคุณที่ช่วยน้องเหมียว 💛</div>
-            <button
-              className={styles.primaryBtn}
-              type="button"
-              onClick={closeSuccessModal}
-            >
-              ตกลง
-            </button>
-          </div>
-        </div>
-      </ModalShell>
-
-      {!success && (
-        <div className={styles.bottomBar}>
-          <div className={styles.bottomBarInner}>
-            <div className={styles.summary}>
-              <div className={styles.sumTitle}>พร้อมบริจาคแล้ว</div>
-              <div className={styles.sumSub}>
-                {totalQty > 0
-                  ? `รวม ${totalQty} ชิ้น • กดบริจาคเพื่อกรอกข้อมูล`
-                  : "เพิ่มรายการอย่างน้อย 1 ชิ้น"}
-              </div>
-            </div>
-            <button
-              className={`${styles.primaryBtn} ${styles.donateBtn}`}
-              type="button"
-              disabled={!list.length}
-              onClick={() => setFormOpen(true)}
-            >
-              บริจาค
-            </button>
-          </div>
-        </div>
-      )}
-
-      <ModalShell
-        open={addOpen}
-        onClose={() => setAddOpen(false)}
-        panelClassName={styles.sheet}
-      >
-        <div className={styles.sheetHead}>
-          <div className={styles.sheetTitle}>เพิ่มรายการบริจาค</div>
-          <CloseIcon onClose={() => setAddOpen(false)} />
-        </div>
-        <div className={styles.sheetBody}>
-          <div className={styles.itemRowNoMargin}>
-            <div className={styles.itemLeft}>
-              <div className={styles.thumb}>
-                <img
-                  src={activePick.img}
-                  alt={activePick.name}
-                  onError={(e) => {
-                    e.currentTarget.src = fallbackImage;
-                  }}
-                />
-              </div>
-              <div className={styles.itemTxt}>
-                <div className={styles.itemName}>{activePick.name}</div>
-                <div className={styles.itemMeta}>{activePick.meta}</div>
-              </div>
-            </div>
-            <div className={styles.qtyPill}>
-              <button
-                type="button"
-                className={styles.qtyBtn}
-                onClick={() => setPickQty((n) => Math.max(1, n - 1))}
-              >
-                −
-              </button>
-              <div className={styles.qtyVal}>{pickQty}</div>
-              <button
-                type="button"
-                className={styles.qtyBtn}
-                onClick={() => setPickQty((n) => Math.min(99, n + 1))}
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <button
-            className={styles.primaryBtnFull}
-            type="button"
-            onClick={addPickedItemToList}
-          >
-            เพิ่มเข้าลิสต์
-          </button>
-        </div>
-      </ModalShell>
-
-      <ModalShell
-        open={formOpen}
-        onClose={() => setFormOpen(false)}
-        panelClassName={styles.sheet}
-      >
-        <div className={styles.sheetHead}>
-          <div className={styles.sheetTitle}>รายละเอียดการรับบริจาค</div>
-          <CloseIcon onClose={() => setFormOpen(false)} />
-        </div>
-        <div className={styles.sheetBody}>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="fName">
-              ชื่อผู้ส่ง
-            </label>
-            <input
-              id="fName"
-              className={styles.input}
-              value={senderName}
-              onChange={(e) => setSenderName(e.target.value)}
-            />
-          </div>
-          <div className={styles.row2}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="fPhone">
-                เบอร์
-              </label>
-              <input
-                id="fPhone"
-                className={styles.input}
-                value={senderPhone}
-                onChange={(e) => setSenderPhone(e.target.value)}
-              />
-            </div>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="fTypeDropdown">
-                วิธีการส่งสินค้า
-              </label>
-              <div className={styles.dropdownWrap}>
-                <button
-                  id="fTypeDropdown"
-                  type="button"
-                  className={`${styles.input} ${styles.dropdownTrigger}`}
-                  aria-haspopup="listbox"
-                  aria-expanded={senderTypeOpen}
-                  onClick={() => setSenderTypeOpen((prev) => !prev)}
-                >
-                  <span className={styles.dropdownValue}>{senderType}</span>
-                  <span
-                    className={`${styles.dropdownArrow} ${senderTypeOpen ? styles.open : ""}`}
-                    aria-hidden="true"
-                  >
-                    ▾
-                  </span>
-                </button>
-                {senderTypeOpen && (
-                  <div className={styles.dropdownMenu}>
-                    {senderTypeOptions.map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        className={`${styles.dropdownOption} ${senderType === option ? styles.selected : ""}`}
-                        onClick={() => {
-                          setSenderType(option);
-                          setSenderTypeOpen(false);
-                        }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="fAddr">
-              ที่อยู่
-            </label>
-            <input
-              id="fAddr"
-              className={styles.input}
-              value={senderAddr}
-              onChange={(e) => setSenderAddr(e.target.value)}
-            />
-          </div>
-          <div className={styles.fieldNoMargin}>
-            <label className={styles.label} htmlFor="fNote">
-              หมายเหตุ
-            </label>
-            <input
-              id="fNote"
-              className={styles.input}
-              value={senderNote}
-              onChange={(e) => setSenderNote(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className={styles.sheetActions}>
-          <button
-            className={styles.ghostBtn}
-            type="button"
-            onClick={() => setFormOpen(false)}
-          >
-            ยกเลิก
-          </button>
-          <button
-            className={styles.primaryBtn}
-            type="button"
-            onClick={submitDonationFlow}
-          >
-            ยืนยัน
-          </button>
-        </div>
-      </ModalShell>
-
-      <ModalShell
-        open={detailOpen}
-        onClose={() => setDetailOpen(false)}
-        panelClassName={styles.sheet}
-      >
-        <div className={styles.sheetHead}>
-          <div className={styles.sheetTitle}>รายละเอียดสินค้า</div>
-          <CloseIcon onClose={() => setDetailOpen(false)} />
-        </div>
-        <div className={styles.sheetBody}>
-          {selectedSample && (
-            <>
-              <div className={styles.detailTopRow}>
-                <div className={styles.detailThumb}>
-                  <img
-                    src={selectedSample.img}
-                    alt={selectedSample.name}
-                    onError={(e) => {
-                      e.currentTarget.src = fallbackImage;
-                    }}
-                  />
-                </div>
-                <div className={styles.detailMetaWrap}>
-                  <div className={styles.itemNameMulti}>
-                    {selectedSample.name}
-                  </div>
-                  <div className={styles.itemMetaMulti}>
-                    {selectedSample.desc}
-                  </div>
-                  <div className={styles.detailTags}>
-                    <div className={styles.sampleTag}>สภาพดี</div>
-                    <div className={styles.sampleTag}>พร้อมส่งต่อ</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.detailInfoBlock}>
-                <div className={styles.label}>ผู้บริจาค</div>
-                <div className={styles.detailStrong}>
-                  {selectedSample.donor}
-                </div>
-              </div>
-
-              <div className={styles.detailInfoBlock}>
-                <div className={styles.label}>พื้นที่รับของ</div>
-                <div className={styles.detailMuted}>{selectedSample.loc}</div>
-              </div>
-
-              <button
-                className={styles.primaryBtnFull}
-                type="button"
-                onClick={() => setDetailOpen(false)}
-              >
-                ปิด
-              </button>
-            </>
-          )}
-        </div>
-      </ModalShell>
-
-      {loading && (
-        <div className={styles.loadingOverlay}>
-          <div className={styles.loadingCard}>
-            <div className={styles.spinner} />
-            <div className={styles.loadingText}>กำลังโหลด...</div>
-          </div>
-        </div>
-      )}
+          
+      </main>
 
       <TabBar />
     </div>

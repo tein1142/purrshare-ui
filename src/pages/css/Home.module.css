@@ -56,7 +56,7 @@
 
 .tile img {
   width: 100%;
-  max-width: 150px;
+  max-width: 138px;
 
   transition: transform 0.15s ease;
 }
@@ -170,11 +170,11 @@
   }
 
   .tile img {
-    max-width: 170px;
+    max-width: 156px;
   }
 
   .gridBottom .tile img {
-    max-width: 190px;
+    max-width: 174px;
   }
 
 }
@@ -200,7 +200,7 @@
   }
 
   .tile img {
-    max-width: 136px;
+    max-width: 124px;
   }
 }
 
@@ -228,10 +228,10 @@
   }
 
   .tile img {
-    max-width: 230px;
+    max-width: 210px;
   }
 
   .gridBottom .tile img {
-    max-width: 260px;
+    max-width: 236px;
   }
 }

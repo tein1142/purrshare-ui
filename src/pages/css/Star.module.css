@@ -98,6 +98,7 @@
 .podium {
   text-align: center;
   background: #f8f8f8;
+  border: 3px solid #efe1b4;
   border-radius: 14px;
   padding: 5px;
   position: relative;
@@ -330,7 +331,6 @@
   width: 100%;
   border-radius: 16px;
   border: 4px solid rgba(58,42,39,.18);
-  
 }
 
 .secTitle {

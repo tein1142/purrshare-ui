@@ -39,7 +39,7 @@
   width: var(--searchH);
   height: var(--searchH);
   border-radius: var(--r16);
-  border: calc(2px * var(--scale)) solid rgba(58, 42, 39, 0.2);
+  border: calc(2px * var(--scale)) solid black;
   background: #fff;
   display: grid;
   place-items: center;
@@ -975,4 +975,14 @@
     max-width: 1120px;
     margin: 0 auto;
   }
+}
+
+.infoSection {
+  margin-top: 18px;
+}
+
+.infoSection img {
+  width: 100%;
+  border-radius: 16px;
+  border: 4px solid rgba(58,42,39,.18);
 }
