@@ -268,11 +268,11 @@
 .price {
   font-size: calc(18px * var(--scale));
   font-weight: var(--fw-bold);
-  margin-top: calc(4px * var(--scale));
+  margin-top: calc(5px * var(--scale));
 }
 
 .desc {
-  margin-top: calc(4px * var(--scale));
+  margin-top: calc(-2px * var(--scale));
   font-size: calc(16px * var(--scale));
   color: rgba(17, 24, 39, 0.7);
   display: -webkit-box;

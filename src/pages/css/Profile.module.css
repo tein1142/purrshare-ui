@@ -456,8 +456,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding: 10px 0;
   border-top: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.reviewRow .left {
+  flex: 1;
+  min-width: 0;
 }
 
 .reviewRow:first-child {
@@ -468,6 +474,15 @@
   font-size: calc(var(--fs-sm) * var(--page-scale));
   font-weight: var(--fw-bold);
   letter-spacing: 2px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.reviewComment {
+  font-size: calc(var(--fs-xs) * var(--page-scale));
+  font-weight: var(--fw-regular);
+  color: #4b5563;
+  margin-top: 2px;
 }
 
 @media (max-width: 390px) {

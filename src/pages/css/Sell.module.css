@@ -44,7 +44,7 @@
   width: var(--searchH);
   height: var(--searchH);
   border-radius: var(--r16);
-  border: calc(2px * var(--scale)) solid rgba(58, 42, 39, 0.2);
+  border: calc(2px * var(--scale)) solid black;
   background: #fff;
   display: grid;
   place-items: center;

@@ -1,9 +1,9 @@
 import EditProfileModal from "../components/EditProfileModal";
 import TabBar from "../components/TabBar";
 // Import local images for reviews
-import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.png";
-import catBedImg from "../assets/images/product/furniture/ที่นอนแมว.jpg";
-import catnipToyImg from "../assets/images/product/toys/ของเล่นตุ๊กตายัดไส้กัญชาแมว.jpg";
+import catWandImg from "../assets/images/product/toys/ไม้ตกแมว.png";
+import catCondoImg from "../assets/images/product/home/คอนโดแมว.jpg";
+import catFountainImg from "../assets/images/product/home/น้ำพุแมว.jpg";
 import styles from "./css/Profile.module.css";
 import profileImg from "../assets/images/minnie-profile.jpg"
 import { useState, useEffect } from "react";
@@ -44,21 +44,24 @@ export default function Profile() {
   const [reviews] = useState([
     {
       id: 1,
-      name: "ไม้ตกแมว: ของใหม่มาก สะอาดสุดๆ ขอบคุณมากนะคะ",
+      name: "ไม้ตกแมว",
+      comment: "ของใหม่มาก สะอาดสุดๆ ขอบคุณมากนะคะ",
       star: 4,
-      img: foodDryImg,
+      img: catWandImg,
     },
     {
       id: 2,
-      name: "คอนโดแมว: คอนโดแมวมือสองที่สะอาดมากคุณเจ้าของดูแลดีมากค่ะ",
+      name: "คอนโดแมว",
+      comment: "คอนโดแมวมือสองที่สะอาดมาก คุณเจ้าของดูแลดีมากค่ะ",
       star: 4,
-      img: catBedImg,
+      img: catCondoImg,
     },
     {
       id: 3,
-      name: "น้ำพุแมว: ตอนแรกเล็งไว้นาน เจอมือสองเลยรีบซื้อมาลองเลย",
+      name: "น้ำพุแมว",
+      comment: "ตอนแรกเล็งไว้นาน เจอมือสองเลยรีบซื้อมาลองเลย",
       star: 4,
-      img: catnipToyImg,
+      img: catFountainImg,
     },
   ]);
 
@@ -344,6 +347,7 @@ export default function Profile() {
 
                   <div className={styles.txt}>
                     <div className={styles.t1}>{r.name}</div>
+                    <div className={styles.reviewComment}>{r.comment}</div>
                   </div>
                 </div>
 
