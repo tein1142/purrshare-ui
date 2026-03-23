@@ -97,8 +97,8 @@
 
 .podium {
   text-align: center;
-  background: #f8f8f8;
-  border: 3px solid #efe1b4;
+  background: #fbf3cf;
+  border: 3px solid rgba(0, 0, 0, 0.08);
   border-radius: 14px;
   padding: 5px;
   position: relative;

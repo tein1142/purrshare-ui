@@ -9,6 +9,7 @@ import blanketImg from "../assets/images/product/donate/ผ้าห่ม.jpg";
 import cottonImg from "../assets/images/product/donate/สำลี.jpg";
 import wetFoodImg from "../assets/images/product/donate/อาหารเปียก.jpg";
 import logo02 from "../assets/images/LOGO-02.png";
+import howToDonateImg from "../assets/images/howtodonate.jpg";
 
 type NeedItem = {
   id: string;
@@ -228,7 +229,7 @@ export default function Donate() {
           </div>
 
           <div className={styles.infoSection}>
-            <img src={feedbackImg} alt="ข้อมูลเมนู" />
+            <img src={howToDonateImg} alt="ข้อมูลเมนู" />
           </div>
           
       </main>

@@ -158,7 +158,7 @@
 
 .content {
   width: 100vw;
-  padding: calc(12px * var(--scale)) calc(var(--pad) + env(safe-area-inset-right)) calc(140px * var(--scale)) calc(var(--pad) + env(safe-area-inset-left));
+  padding: calc(12px * var(--scale)) calc(var(--pad) + env(safe-area-inset-right)) calc(72px * var(--scale)) calc(var(--pad) + env(safe-area-inset-left));
 }
 
 .heroBox {
