@@ -71,7 +71,7 @@ const needsSeed: NeedItem[] = [
 export default function Donate() {
   const navigate = useNavigate();
   const fallbackImage = feedbackImg;
-  const [search, _setSearch] = useState("");
+  const [search] = useState("");
   const [needs, setNeeds] = useState<NeedItem[]>(() =>
     needsSeed.map((item) => ({
       ...item,
