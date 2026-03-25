@@ -1,7 +1,7 @@
 import EditProfileModal from "../components/EditProfileModal";
 import TabBar from "../components/TabBar";
 // Import local images for reviews
-import catWandImg from "../assets/images/product/toys/ไม้ตกแมว.png";
+import catWandImg from "../assets/images/product/toys/ไม้ตกแมว.jpg";
 import catCondoImg from "../assets/images/product/home/คอนโดแมว.jpg";
 import catFountainImg from "../assets/images/product/home/น้ำพุแมว.jpg";
 import styles from "./css/Profile.module.css";

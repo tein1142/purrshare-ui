@@ -9,11 +9,11 @@ import trayImg from "../assets/images/product/sell/กระบะทราย.j
 import fountainImg from "../assets/images/product/sell/น้ำพุแมว.jpg";
 import logo02 from "../assets/images/LOGO-02.png";
 // Additional sample images from various categories
-import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.png";
+import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.jpg";
 import wetFoodImg from "../assets/images/product/food/อาหารเปียกแมว.jpg";
-import catLickImg from "../assets/images/product/food/แมวเลีย.png";
-import nailClipperImg from "../assets/images/product/dailyItems/ที่ตัดเล็บแมว.jpeg";
-import brushImg from "../assets/images/product/dailyItems/แปรงขนแมว.jpeg";
+import catLickImg from "../assets/images/product/food/แมวเลีย.jpg";
+import nailClipperImg from "../assets/images/product/dailyItems/ที่ตัดเล็บแมว.jpg";
+import brushImg from "../assets/images/product/dailyItems/แปรงขนแมว.jpg";
 import catBedImg from "../assets/images/product/furniture/ที่นอนแมว.jpg";
 import catnipToyImg from "../assets/images/product/toys/ของเล่นตุ๊กตายัดไส้กัญชาแมว.jpg";
 import collarBowImg from "../assets/images/product/fashion/collar/ปลอกคอโบว์คนสวย.jpg";
