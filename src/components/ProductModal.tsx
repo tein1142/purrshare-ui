@@ -1,6 +1,7 @@
 import styles from "../pages/css/ProductModal.module.css";
 import CloseIcon from "./CloseButton";
 import ModalShell from "./ModalShell";
+import logo02 from "../assets/images/LOGO-02.png";
 
 type Product = {
   category:
@@ -114,7 +115,7 @@ export default function ProductModal({
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
                 <img
-                  src="src/assets/images/LOGO-02.png"
+                  src={logo02}
                   alt="Meow & Co."
                 />
               </div>
@@ -126,7 +127,7 @@ export default function ProductModal({
             <div className={styles.sellerCard}>
               <div className={styles.sellerAvatar}>
                 <img
-                  src="src/assets/images/LOGO-02.png"
+                  src={logo02}
                   alt="ร้านแมวอ้วน"
                 />
               </div>
