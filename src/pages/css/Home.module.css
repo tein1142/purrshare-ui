@@ -18,7 +18,15 @@
 .logo {
   width: 70vw;
   max-width: 260px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.logoCaption {
+  margin: 0 20px 24px;
+  text-align: center;
+  font-size: medium;
+  font-weight: var(--fw-semibold);
+  color: #3a2a27;
 }
 
 /* GRID TOP */
@@ -162,7 +170,11 @@
 
   .logo {
     max-width: 300px;
-    margin-bottom: 48px;
+    margin-bottom: 12px;
+  }
+
+  .logoCaption {
+    margin-bottom: 30px;
   }
 
   .gridTop {
@@ -187,7 +199,12 @@
   .logo {
     width: 76vw;
     max-width: 230px;
-    margin-bottom: 26px;
+    margin-bottom: 8px;
+  }
+
+  .logoCaption {
+    margin: 0 12px 20px;
+    font-size: var(--fs-sm);
   }
 
   .gridTop {
@@ -212,7 +229,12 @@
   .logo {
     width: 34vw;
     max-width: 340px;
-    margin-bottom: 44px;
+    margin-bottom: 12px;
+  }
+
+  .logoCaption {
+    margin-bottom: 28px;
+    font-size: var(--fs-lg);
   }
 
   .gridTop,

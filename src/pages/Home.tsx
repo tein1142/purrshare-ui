@@ -29,6 +29,9 @@ export default function Home() {
           src={logo01}
           alt="Purrshare"
         />
+        <p className={styles.logoCaption}>
+          ชุมชนแห่งการส่งต่อ พื้นที่ของเหล่าทาสแมว
+        </p>
         <div className={styles.gridTop}>
           <button className={styles.tile} onClick={() => goPage("/select")} type="button">
             <img src={marketIcon} alt="เลือกซื้อสินค้า" />
