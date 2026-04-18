@@ -5,7 +5,6 @@ import {
   useState,
   type ChangeEvent,
 } from "react";
-import TabBar from "../components/TabBar";
 import HeaderNavMenu from "../components/HeaderNavMenu";
 import ModalShell from "../components/ModalShell";
 import CloseIcon from "../components/CloseButton";
@@ -780,8 +779,6 @@ export default function Donate() {
           </button>
         </div>
       </ModalShell>
-
-      <TabBar />
     </div>
   );
 }

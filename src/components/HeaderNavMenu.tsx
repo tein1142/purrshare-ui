@@ -4,10 +4,10 @@ import logo02 from "../assets/images/LOGO-02.png";
 import styles from "./HeaderNavMenu.module.css";
 
 const menuItems = [
-  { label: "Home", path: "/" },
-  { label: "Select", path: "/select" },
-  { label: "Sell", path: "/sell" },
-  { label: "Donate", path: "/donate" },
+  { label: "เมนู", path: "/" },
+  { label: "ตลาดเมี๊ยว", path: "/select" },
+  { label: "เปิดแผง", path: "/sell" },
+  { label: "ปันใจส่งต่อ", path: "/donate" },
 ];
 
 type Props = {

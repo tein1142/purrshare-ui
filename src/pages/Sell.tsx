@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import TabBar from "../components/TabBar";
 import HeaderNavMenu from "../components/HeaderNavMenu";
 import SellQuickModal from "../components/SellQuickModal";
 import SellFormModal from "../components/SellFormModal";
@@ -425,7 +424,6 @@ export default function Sell() {
         onClose={() => setIsDetailOpen(false)}
       />
 
-      <TabBar />
     </div>
   );
 }

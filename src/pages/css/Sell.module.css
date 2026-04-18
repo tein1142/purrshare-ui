@@ -209,7 +209,7 @@
 .fab {
   position: fixed;
   right: calc(16px * var(--scale) + env(safe-area-inset-right));
-  bottom: calc(var(--tabH) + env(safe-area-inset-bottom) + calc(18px * var(--scale)) + 10px);
+  bottom: calc(env(safe-area-inset-bottom) + calc(30px * var(--scale)));
   width: calc(62px * var(--scale));
   height: calc(62px * var(--scale));
   padding: 0;
