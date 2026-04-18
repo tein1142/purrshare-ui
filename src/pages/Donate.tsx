@@ -624,23 +624,25 @@ export default function Donate() {
               />
             </label>
 
-            <label className={styles.selfDeliveryField}>
-              <span>วันที่</span>
-              <input
-                type="date"
-                value={selfDeliveryForm.date}
-                onChange={(e) => updateSelfDeliveryField("date", e.target.value)}
-              />
-            </label>
+            <div className={styles.selfDeliveryDateTimeRow}>
+              <label className={styles.selfDeliveryField}>
+                <span>วันที่</span>
+                <input
+                  type="date"
+                  value={selfDeliveryForm.date}
+                  onChange={(e) => updateSelfDeliveryField("date", e.target.value)}
+                />
+              </label>
 
-            <label className={styles.selfDeliveryField}>
-              <span>เวลา</span>
-              <input
-                type="time"
-                value={selfDeliveryForm.time}
-                onChange={(e) => updateSelfDeliveryField("time", e.target.value)}
-              />
-            </label>
+              <label className={styles.selfDeliveryField}>
+                <span>เวลา</span>
+                <input
+                  type="time"
+                  value={selfDeliveryForm.time}
+                  onChange={(e) => updateSelfDeliveryField("time", e.target.value)}
+                />
+              </label>
+            </div>
           </div>
 
           {selfDeliveryError && (
