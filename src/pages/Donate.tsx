@@ -1,4 +1,11 @@
-import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type PointerEvent,
+} from "react";
 import TabBar from "../components/TabBar";
 import HeaderNavMenu from "../components/HeaderNavMenu";
 import ModalShell from "../components/ModalShell";
@@ -32,51 +39,58 @@ type SelfDeliveryForm = {
 };
 
 const MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024;
+const HERO_SLIDE_INTERVAL_MS = 10000;
+const HERO_SWIPE_THRESHOLD_PX = 42;
+
+const heroSlides = [
+  { src: feedbackImg, alt: "แบนเนอร์แคมเปญบริจาค" },
+  { src: feedbackImg, alt: "แบนเนอร์แคมเปญบริจาค" },
+];
 
 const needsSeed: NeedItem[] = [
   {
     id: "pads",
     name: "สำลีแผ่น",
-    meta: "34 / 200 ชิ้น",
+    meta: "34 / 300 ชิ้น",
     img: cottonImg,
     current: 34,
-    target: 200,
+    target: 300,
     catalogId: "toy",
   },
   {
     id: "wetfood",
     name: "อาหารเปียก",
-    meta: "67 / 100 ชิ้น",
+    meta: "67 / 200 ชิ้น",
     img: wetFoodImg,
     current: 67,
-    target: 100,
+    target: 200,
     catalogId: "food",
   },
   {
     id: "wound",
     name: "ผ้าก๊อตทำแผล",
-    meta: "23 / 50 ชิ้น",
+    meta: "23 / 150 ชิ้น",
     img: woundDressingImg,
     current: 23,
-    target: 50,
+    target: 150,
     catalogId: "toy",
   },
   {
     id: "litter-need",
     name: "ทรายแมว",
-    meta: "12 / 80 ชิ้น",
+    meta: "12 / 180 ชิ้น",
     img: litterImg,
     current: 12,
-    target: 80,
+    target: 180,
     catalogId: "litter",
   },
   {
     id: "blanket",
     name: "ผ้าห่ม/ผ้าขนหนู",
-    meta: "9 / 60 ชิ้น",
+    meta: "9 / 160 ชิ้น",
     img: blanketImg,
     current: 9,
-    target: 60,
+    target: 160,
     catalogId: "bed",
   },
 ];
@@ -99,6 +113,10 @@ export default function Donate() {
   const [uploadError, setUploadError] = useState("");
   const [selfDeliveryModalOpen, setSelfDeliveryModalOpen] = useState(false);
   const [selfDeliveryError, setSelfDeliveryError] = useState("");
+  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+  const heroPointerStartXRef = useRef<number | null>(null);
+  const heroPointerDeltaXRef = useRef(0);
+  const heroMouseDraggingRef = useRef(false);
   const [selfDeliveryForm, setSelfDeliveryForm] = useState<SelfDeliveryForm>({
     firstName: "",
     lastName: "",
@@ -167,6 +185,23 @@ export default function Donate() {
         globalThis.clearTimeout(timer);
         globalThis.clearInterval(timer);
       });
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = globalThis.setInterval(() => {
+      setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length);
+    }, HERO_SLIDE_INTERVAL_MS);
+
+    return () => {
+      globalThis.clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      globalThis.removeEventListener("mousemove", onHeroMouseMoveWindow);
+      globalThis.removeEventListener("mouseup", onHeroMouseUpWindow);
     };
   }, []);
 
@@ -317,6 +352,74 @@ export default function Donate() {
     setUploadError("");
   }
 
+  function goToNextHeroSlide() {
+    setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length);
+  }
+
+  function goToPrevHeroSlide() {
+    setHeroSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  }
+
+  function applyHeroSwipeByDistance(dragDistance: number) {
+    if (Math.abs(dragDistance) < HERO_SWIPE_THRESHOLD_PX) {
+      return;
+    }
+
+    if (dragDistance < 0) {
+      goToNextHeroSlide();
+    } else {
+      goToPrevHeroSlide();
+    }
+  }
+
+  function onHeroPointerDown(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType === "mouse") return;
+    heroPointerStartXRef.current = event.clientX;
+    heroPointerDeltaXRef.current = 0;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function onHeroPointerMove(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType === "mouse") return;
+    if (heroPointerStartXRef.current === null) return;
+    heroPointerDeltaXRef.current = event.clientX - heroPointerStartXRef.current;
+  }
+
+  function onHeroPointerEnd(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType === "mouse") return;
+    if (heroPointerStartXRef.current === null) return;
+
+    const dragDistance = heroPointerDeltaXRef.current;
+    applyHeroSwipeByDistance(dragDistance);
+
+    heroPointerStartXRef.current = null;
+    heroPointerDeltaXRef.current = 0;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+  }
+
+  function onHeroMouseDown(event: React.MouseEvent<HTMLDivElement>) {
+    heroMouseDraggingRef.current = true;
+    heroPointerStartXRef.current = event.clientX;
+    heroPointerDeltaXRef.current = 0;
+    globalThis.addEventListener("mousemove", onHeroMouseMoveWindow);
+    globalThis.addEventListener("mouseup", onHeroMouseUpWindow);
+  }
+
+  function onHeroMouseMoveWindow(event: MouseEvent) {
+    if (!heroMouseDraggingRef.current || heroPointerStartXRef.current === null) return;
+    heroPointerDeltaXRef.current = event.clientX - heroPointerStartXRef.current;
+  }
+
+  function onHeroMouseUpWindow() {
+    if (!heroMouseDraggingRef.current) return;
+    applyHeroSwipeByDistance(heroPointerDeltaXRef.current);
+    heroMouseDraggingRef.current = false;
+    heroPointerStartXRef.current = null;
+    heroPointerDeltaXRef.current = 0;
+    globalThis.removeEventListener("mousemove", onHeroMouseMoveWindow);
+    globalThis.removeEventListener("mouseup", onHeroMouseUpWindow);
+  }
+
   return (
     <div className={styles.app}>
       <header className={styles.top}>
@@ -328,19 +431,41 @@ export default function Donate() {
       </header>
 
       <main className={styles.content}>
-          <div className={styles.heroBox}>
-            <img
-              className={styles.heroImage}
-              src={feedbackImg}
-              alt="แบนเนอร์แคมเปญบริจาค"
-              onError={(e) => {
-                e.currentTarget.src = fallbackImage;
-              }}
-            />
-            <div className={styles.heroCaption}>
-              พื้นที่รูป / แบนเนอร์แคมเปญบริจาค
-            </div>
+        <div className={styles.heroBox}>
+          <div
+            className={styles.heroTrack}
+            style={{ transform: `translateX(-${heroSlideIndex * 100}%)` }}
+            onPointerDown={onHeroPointerDown}
+            onPointerMove={onHeroPointerMove}
+            onPointerUp={onHeroPointerEnd}
+            onPointerCancel={onHeroPointerEnd}
+            onMouseDown={onHeroMouseDown}
+          >
+            {heroSlides.map((slide, index) => (
+              <img
+                key={`${slide.src}-${index}`}
+                className={styles.heroImage}
+                src={slide.src}
+                alt={slide.alt}
+                onError={(e) => {
+                  e.currentTarget.src = fallbackImage;
+                }}
+              />
+            ))}
           </div>
+
+          <div className={styles.heroDots}>
+            {heroSlides.map((slide, index) => (
+              <button
+                key={`${slide.src}-${index}`}
+                type="button"
+                className={`${styles.heroDot} ${index === heroSlideIndex ? styles.heroDotActive : ""}`}
+                onClick={() => setHeroSlideIndex(index)}
+                aria-label={`ไปยังสไลด์ที่ ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
 
 
           <div className={styles.sectionTitle}>

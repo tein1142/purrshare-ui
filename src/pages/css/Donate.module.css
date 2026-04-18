@@ -169,22 +169,58 @@
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 10%);
   background: #f2f2f2;
   overflow: hidden;
+  padding: 0;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.heroTrack {
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: calc(12px * var(--scale));
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-bold);
-  color: #111;
-  text-align: center;
+  transition: transform 0.45s ease;
+  cursor: grab;
+}
+
+.heroTrack:active {
+  cursor: grabbing;
 }
 
 .heroImage {
-  position: absolute;
-  inset: 0;
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
+}
+
+.heroDots {
+  position: absolute;
+  left: 50%;
+  bottom: calc(10px * var(--scale));
+  transform: translateX(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(7px * var(--scale));
+  padding: calc(6px * var(--scale)) calc(10px * var(--scale));
+  border-radius: 999px;
+  background: rgb(255 255 255 / 68%);
+  backdrop-filter: blur(2px);
+}
+
+.heroDot {
+  width: calc(8px * var(--scale));
+  height: calc(8px * var(--scale));
+  border-radius: 999px;
+  border: 0;
+  background: rgb(17 24 39 / 35%);
+  padding: 0;
+}
+
+.heroDotActive {
+  width: calc(18px * var(--scale));
+  background: #111827;
 }
 
 .heroCaption {
