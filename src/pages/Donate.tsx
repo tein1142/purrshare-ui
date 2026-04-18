@@ -1,16 +1,20 @@
 import {
   useEffect,
   useMemo,
-  useRef,
   useState,
   type ChangeEvent,
 } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 import HeaderNavMenu from "../components/HeaderNavMenu";
 import ModalShell from "../components/ModalShell";
 import CloseIcon from "../components/CloseButton";
 import styles from "./css/Donate.module.css";
 import litterImg from "../assets/images/product/donate/ทรายแมว.jpg";
-import feedbackImg from "../assets/images/feedback.jpg";
+import feedbackImg from "../assets/images/banner/feedback.jpg";
+import feedbackImg2 from "../assets/images/banner/feedback2.jpg";
+import feedbackImg3 from "../assets/images/banner/feedback3.jpg";
 import woundDressingImg from "../assets/images/product/donate/ผ้าก๊อซทำแผล.jpg";
 import blanketImg from "../assets/images/product/donate/ผ้าห่ม.jpg";
 import cottonImg from "../assets/images/product/donate/สำลี.jpg";
@@ -37,12 +41,12 @@ type SelfDeliveryForm = {
 };
 
 const MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024;
-const HERO_SLIDE_INTERVAL_MS = 10000;
-const HERO_SWIPE_THRESHOLD_PX = 42;
 
 const heroSlides = [
   { src: feedbackImg, alt: "แบนเนอร์แคมเปญบริจาค" },
-  { src: feedbackImg, alt: "แบนเนอร์แคมเปญบริจาค" },
+  { src: feedbackImg2, alt: "แบนเนอร์แคมเปญบริจาค" },
+  { src: feedbackImg3, alt: "แบนเนอร์แคมเปญบริจาค" },
+
 ];
 
 const needsSeed: NeedItem[] = [
@@ -112,10 +116,6 @@ export default function Donate() {
   const [selfDeliveryModalOpen, setSelfDeliveryModalOpen] = useState(false);
   const [selfDeliveryError, setSelfDeliveryError] = useState("");
   const [thankYouOpen, setThankYouOpen] = useState(false);
-  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
-  const heroTouchStartXRef = useRef<number | null>(null);
-  const heroPointerDeltaXRef = useRef(0);
-  const heroMouseStartXRef = useRef<number | null>(null);
   const activeNeedId = activeNeed?.id;
   const [selfDeliveryForm, setSelfDeliveryForm] = useState<SelfDeliveryForm>({
     firstName: "",
@@ -186,16 +186,6 @@ export default function Donate() {
         globalThis.clearTimeout(timer);
         globalThis.clearInterval(timer);
       });
-    };
-  }, []);
-
-  useEffect(() => {
-    const timer = globalThis.setInterval(() => {
-      setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length);
-    }, HERO_SLIDE_INTERVAL_MS);
-
-    return () => {
-      globalThis.clearInterval(timer);
     };
   }, []);
 
@@ -347,69 +337,6 @@ export default function Donate() {
     setUploadError("");
   }
 
-  function goToNextHeroSlide() {
-    setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length);
-  }
-
-  function goToPrevHeroSlide() {
-    setHeroSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  }
-
-  function applyHeroSwipeByDistance(dragDistance: number) {
-    if (Math.abs(dragDistance) < HERO_SWIPE_THRESHOLD_PX) {
-      return;
-    }
-
-    if (dragDistance < 0) {
-      goToNextHeroSlide();
-    } else {
-      goToPrevHeroSlide();
-    }
-  }
-
-  function onHeroTouchStart(event: React.TouchEvent<HTMLDivElement>) {
-    const touch = event.touches[0];
-    if (!touch) return;
-    heroTouchStartXRef.current = touch.clientX;
-  }
-
-  function onHeroTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
-    if (heroTouchStartXRef.current === null) return;
-    const touch = event.changedTouches[0];
-    if (!touch) {
-      heroTouchStartXRef.current = null;
-      return;
-    }
-
-    const dragDistance = touch.clientX - heroTouchStartXRef.current;
-    applyHeroSwipeByDistance(dragDistance);
-
-    heroTouchStartXRef.current = null;
-    heroPointerDeltaXRef.current = 0;
-  }
-
-  function onHeroTouchCancel() {
-    heroTouchStartXRef.current = null;
-    heroPointerDeltaXRef.current = 0;
-  }
-
-  function onHeroMouseDown(event: React.MouseEvent<HTMLDivElement>) {
-    heroMouseStartXRef.current = event.clientX;
-    heroPointerDeltaXRef.current = 0;
-  }
-
-  function onHeroMouseMove(event: React.MouseEvent<HTMLDivElement>) {
-    if (heroMouseStartXRef.current === null) return;
-    heroPointerDeltaXRef.current = event.clientX - heroMouseStartXRef.current;
-  }
-
-  function onHeroMouseEnd() {
-    if (heroMouseStartXRef.current === null) return;
-    applyHeroSwipeByDistance(heroPointerDeltaXRef.current);
-    heroMouseStartXRef.current = null;
-    heroPointerDeltaXRef.current = 0;
-  }
-
   return (
     <div className={styles.app}>
       <header className={styles.top}>
@@ -422,41 +349,26 @@ export default function Donate() {
 
       <main className={styles.content}>
         <div className={styles.heroBox}>
-          <div
-            className={styles.heroTrack}
-            style={{ transform: `translateX(-${heroSlideIndex * 100}%)` }}
-            onTouchStart={onHeroTouchStart}
-            onTouchEnd={onHeroTouchEnd}
-            onTouchCancel={onHeroTouchCancel}
-            onMouseDown={onHeroMouseDown}
-            onMouseMove={onHeroMouseMove}
-            onMouseUp={onHeroMouseEnd}
-            onMouseLeave={onHeroMouseEnd}
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            loop
+            className={styles.heroSwiper}
           >
             {heroSlides.map((slide, index) => (
-              <img
-                key={`${slide.src}-${index}`}
-                className={styles.heroImage}
-                src={slide.src}
-                alt={slide.alt}
-                onError={(e) => {
-                  e.currentTarget.src = fallbackImage;
-                }}
-              />
+              <SwiperSlide key={`${slide.src}-${index}`}>
+                <img
+                  className={styles.heroImage}
+                  src={slide.src}
+                  alt={slide.alt}
+                  onError={(e) => {
+                    e.currentTarget.src = fallbackImage;
+                  }}
+                />
+              </SwiperSlide>
             ))}
-          </div>
-
-          <div className={styles.heroDots}>
-            {heroSlides.map((slide, index) => (
-              <button
-                key={`${slide.src}-${index}`}
-                type="button"
-                className={`${styles.heroDot} ${index === heroSlideIndex ? styles.heroDotActive : ""}`}
-                onClick={() => setHeroSlideIndex(index)}
-                aria-label={`ไปยังสไลด์ที่ ${index + 1}`}
-              />
-            ))}
-          </div>
+          </Swiper>
         </div>
 
 

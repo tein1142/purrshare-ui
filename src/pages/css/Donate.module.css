@@ -170,66 +170,31 @@
   background: #f2f2f2;
   overflow: hidden;
   padding: 0;
-  touch-action: pan-y;
-  user-select: none;
 }
 
-.heroTrack {
+.heroSwiper {
   width: 100%;
   height: 100%;
-  display: flex;
-  transition: transform 0.45s ease;
-  cursor: grab;
-}
-
-.heroTrack:active {
-  cursor: grabbing;
 }
 
 .heroImage {
-  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
   pointer-events: none;
 }
 
-.heroDots {
-  position: absolute;
-  left: 50%;
-  bottom: calc(10px * var(--scale));
-  transform: translateX(-50%);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: calc(7px * var(--scale));
-  padding: calc(6px * var(--scale)) calc(10px * var(--scale));
-  border-radius: 999px;
-  background: rgb(255 255 255 / 68%);
-  backdrop-filter: blur(2px);
-}
-
-.heroDot {
+.heroBox :global(.swiper-pagination-bullet) {
   width: calc(8px * var(--scale));
   height: calc(8px * var(--scale));
-  border-radius: 999px;
-  border: 0;
   background: rgb(17 24 39 / 35%);
-  padding: 0;
+  opacity: 1;
 }
 
-.heroDotActive {
+.heroBox :global(.swiper-pagination-bullet-active) {
   width: calc(18px * var(--scale));
-  background: #111827;
-}
-
-.heroCaption {
-  position: relative;
-  z-index: 1;
-  padding: calc(6px * var(--scale)) calc(10px * var(--scale));
   border-radius: 999px;
-  background: rgb(255 255 255 / 70%);
-  backdrop-filter: blur(2px);
+  background: #111827;
 }
 
 .flowGuide {
