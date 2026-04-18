@@ -1222,12 +1222,20 @@
 
 .selfDeliveryDateTimeRow {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: calc(10px * var(--scale));
 }
 
 .selfDeliveryDateTimeRow .selfDeliveryField {
   min-width: 0;
+  overflow: hidden;
+}
+
+.selfDeliveryDateTimeRow .selfDeliveryField input {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 @media (max-width: 390px) {
