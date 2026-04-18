@@ -112,6 +112,7 @@ export default function Donate() {
   const [uploadError, setUploadError] = useState("");
   const [selfDeliveryModalOpen, setSelfDeliveryModalOpen] = useState(false);
   const [selfDeliveryError, setSelfDeliveryError] = useState("");
+  const [thankYouOpen, setThankYouOpen] = useState(false);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const heroTouchStartXRef = useRef<number | null>(null);
   const heroPointerDeltaXRef = useRef(0);
@@ -250,6 +251,7 @@ export default function Donate() {
     setSelfDeliveryModalOpen(false);
     setSelfDeliveryError("");
     closeNeedModal();
+    setThankYouOpen(true);
   }
 
   function submitDonate() {
@@ -755,6 +757,27 @@ export default function Donate() {
               ยืนยันบริจาค
             </button>
           </div>
+        </div>
+      </ModalShell>
+
+      <ModalShell
+        open={thankYouOpen}
+        onClose={() => setThankYouOpen(false)}
+        panelClassName={styles.thankYouPanel}
+      >
+        <div className={styles.thankYouBody}>
+          <div className={styles.thankYouIcon}>🐱</div>
+          <div className={styles.thankYouTitle}>ขอบคุณที่บริจาค!</div>
+          <div className={styles.thankYouDesc}>
+            น้องแมวขอบคุณจากใจเลยนะคะ 🩷
+          </div>
+          <button
+            type="button"
+            className={styles.primaryBtn}
+            onClick={() => setThankYouOpen(false)}
+          >
+            ปิด
+          </button>
         </div>
       </ModalShell>
 
