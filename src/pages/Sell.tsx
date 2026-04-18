@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import TabBar from "../components/TabBar";
+import HeaderNavMenu from "../components/HeaderNavMenu";
 import SellQuickModal from "../components/SellQuickModal";
 import SellFormModal from "../components/SellFormModal";
 import SellDetailModal from "../components/SellDetailModal";
 import styles from "./css/Sell.module.css";
 import trayImg from "../assets/images/product/sell/กระบะทราย.jpg";
 import fountainImg from "../assets/images/product/sell/น้ำพุแมว.jpg";
-import logo02 from "../assets/images/LOGO-02.png";
 // Additional sample images from various categories
 import foodDryImg from "../assets/images/product/food/อาหารเม็ดแมว1.2kg.jpg";
 import wetFoodImg from "../assets/images/product/food/อาหารเปียกแมว.jpg";
@@ -94,7 +93,6 @@ const categoryKeys: Category[] = [
 ];
 
 export default function Sell() {
-  const navigate = useNavigate();
   const [tab, setTab] = useState<"selling" | "sold">("selling");
   const [items, setItems] = useState<SellerProduct[]>(() => {
     try {
@@ -297,14 +295,7 @@ export default function Sell() {
     <div className={styles.app}>
       <header className={styles.top}>
         <div className={styles.topRow}>
-          <button
-            type="button"
-            className={styles.back}
-            aria-label="Back"
-            onClick={() => navigate("/")}
-          >
-            <img src={logo02} alt="Back" className={styles.backIcon} />
-          </button>
+          <HeaderNavMenu />
           <div className={styles.topTitle}>{labels.topTitle}</div>
           <div className={styles.topGhost} />
         </div>

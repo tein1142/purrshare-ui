@@ -357,7 +357,7 @@
 
   position: fixed;
 
-  bottom: 70px;   /* สูงกว่า tabbar */
+  bottom: 82px;   /* สูงกว่า tabbar */
 
   width: min(100%, 430px);
   max-width: 430px;

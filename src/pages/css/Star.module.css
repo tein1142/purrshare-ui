@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   background: white;
-  padding-bottom: 70px;
+  padding-bottom: 82px;
 }
 
 .top {
@@ -346,7 +346,7 @@
 
 @media (max-width: 390px) {
   .page {
-    padding-bottom: 84px;
+    padding-bottom: 90px;
   }
 
   .content {

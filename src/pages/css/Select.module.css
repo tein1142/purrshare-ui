@@ -129,10 +129,15 @@
   border-radius: var(--r16);
   border: calc(2px * var(--scale)) solid black;
   background: #fff;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(4px * var(--scale));
   cursor: pointer;
   padding: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .backIcon {
@@ -157,6 +162,13 @@
   display: flex;
   align-items: center;
   gap: calc(10px * var(--scale));
+  position: relative;
+  z-index: 2;
+}
+
+.menuWrap {
+  position: relative;
+  flex: 0 0 auto;
 }
 
 .brandMark {
@@ -346,20 +358,64 @@
   border-radius: var(--r16);
   padding: calc(10px * var(--scale)) calc(10px * var(--scale));
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: calc(8px * var(--scale));
   min-width: 0;
   cursor: pointer;
   user-select: none;
   border: 0;
 }
-.bigBtn .bigIco {
-  width: var(--bigIco);
-  height: var(--bigIco);
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
+
+.burgerLine {
+  width: calc(18px * var(--scale));
+  height: calc(2.5px * var(--scale));
+  border-radius: 999px;
+  background: #111;
+  display: block;
+}
+
+.menuBackdrop {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(17, 24, 39, 0.14);
+  z-index: 1;
+}
+
+.menuPanel {
+  position: absolute;
+  top: calc(100% + calc(10px * var(--scale)));
+  left: 0;
+  width: calc(150px * var(--scale));
+  padding: calc(8px * var(--scale));
+  border-radius: calc(18px * var(--scale));
+  border: calc(2px * var(--scale)) solid rgba(58, 42, 39, 0.15);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 calc(12px * var(--scale)) calc(30px * var(--scale)) rgba(17, 24, 39, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--scale));
+  z-index: 3;
+}
+
+.menuItem {
+  width: 100%;
+  min-height: calc(42px * var(--scale));
+  padding: 0 calc(14px * var(--scale));
+  border: 0;
+  border-radius: calc(12px * var(--scale));
+  background: transparent;
+  text-align: left;
+  font-size: calc(15px * var(--scale));
+  font-weight: var(--fw-semibold);
+  color: #111;
+  cursor: pointer;
+}
+
+.menuItem:active {
+  background: var(--panel2);
 }
 .bigBtn .bigIco img {
   width: 100%;

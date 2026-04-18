@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import TabBar from "../components/TabBar";
-import logo02 from "../assets/images/LOGO-02.png";
+import HeaderNavMenu from "../components/HeaderNavMenu";
 import foodIcon from "../assets/icons/Food.png";
 import toiletIcon from "../assets/icons/Toilet.png";
 import itemsIcon from "../assets/icons/Items.png";
@@ -145,14 +145,7 @@ export default function Select() {
       <div className={styles.app}>
         <header className={styles.top}>
           <div className={styles.searchRow}>
-            <button
-              type="button"
-              className={styles.back}
-              aria-label="Back"
-              onClick={() => navigate("/")}
-            >
-              <img src={logo02} alt="Back" className={styles.backIcon} />
-            </button>
+            <HeaderNavMenu />
 
             <div className={styles.searchBox}>
               <form onSubmit={handleSearch}>
