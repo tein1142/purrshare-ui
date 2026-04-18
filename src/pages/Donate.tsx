@@ -43,9 +43,9 @@ type SelfDeliveryForm = {
 const MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024;
 
 const heroSlides = [
-  { src: feedbackImg, alt: "แบนเนอร์แคมเปญบริจาค" },
   { src: feedbackImg2, alt: "แบนเนอร์แคมเปญบริจาค" },
   { src: feedbackImg3, alt: "แบนเนอร์แคมเปญบริจาค" },
+   { src: feedbackImg, alt: "แบนเนอร์แคมเปญบริจาค" }
 
 ];
 

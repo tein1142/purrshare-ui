@@ -263,7 +263,7 @@
   padding: calc(10px * var(--scale));
   border-radius: var(--r18);
   border: calc(2px * var(--scale)) solid rgb(58 42 39 / 8%);
-  background: rgb(0 0 0 / 2%);
+  background: #FBF3CF;
   margin-bottom: calc(10px * var(--scale));
 }
 
