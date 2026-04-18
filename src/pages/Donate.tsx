@@ -4,7 +4,6 @@ import {
   useRef,
   useState,
   type ChangeEvent,
-  type PointerEvent,
 } from "react";
 import TabBar from "../components/TabBar";
 import HeaderNavMenu from "../components/HeaderNavMenu";
@@ -114,9 +113,9 @@ export default function Donate() {
   const [selfDeliveryModalOpen, setSelfDeliveryModalOpen] = useState(false);
   const [selfDeliveryError, setSelfDeliveryError] = useState("");
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
-  const heroPointerStartXRef = useRef<number | null>(null);
+  const heroTouchStartXRef = useRef<number | null>(null);
   const heroPointerDeltaXRef = useRef(0);
-  const heroMouseDraggingRef = useRef(false);
+  const heroMouseStartXRef = useRef<number | null>(null);
   const activeNeedId = activeNeed?.id;
   const [selfDeliveryForm, setSelfDeliveryForm] = useState<SelfDeliveryForm>({
     firstName: "",
@@ -367,52 +366,47 @@ export default function Donate() {
     }
   }
 
-  function onHeroPointerDown(event: PointerEvent<HTMLDivElement>) {
-    if (event.pointerType === "mouse") return;
-    heroPointerStartXRef.current = event.clientX;
-    heroPointerDeltaXRef.current = 0;
-    event.currentTarget.setPointerCapture(event.pointerId);
+  function onHeroTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    const touch = event.touches[0];
+    if (!touch) return;
+    heroTouchStartXRef.current = touch.clientX;
   }
 
-  function onHeroPointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (event.pointerType === "mouse") return;
-    if (heroPointerStartXRef.current === null) return;
-    heroPointerDeltaXRef.current = event.clientX - heroPointerStartXRef.current;
-  }
+  function onHeroTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+    if (heroTouchStartXRef.current === null) return;
+    const touch = event.changedTouches[0];
+    if (!touch) {
+      heroTouchStartXRef.current = null;
+      return;
+    }
 
-  function onHeroPointerEnd(event: PointerEvent<HTMLDivElement>) {
-    if (event.pointerType === "mouse") return;
-    if (heroPointerStartXRef.current === null) return;
-
-    const dragDistance = heroPointerDeltaXRef.current;
+    const dragDistance = touch.clientX - heroTouchStartXRef.current;
     applyHeroSwipeByDistance(dragDistance);
 
-    heroPointerStartXRef.current = null;
+    heroTouchStartXRef.current = null;
     heroPointerDeltaXRef.current = 0;
-    event.currentTarget.releasePointerCapture(event.pointerId);
+  }
+
+  function onHeroTouchCancel() {
+    heroTouchStartXRef.current = null;
+    heroPointerDeltaXRef.current = 0;
   }
 
   function onHeroMouseDown(event: React.MouseEvent<HTMLDivElement>) {
-    heroMouseDraggingRef.current = true;
-    heroPointerStartXRef.current = event.clientX;
+    heroMouseStartXRef.current = event.clientX;
     heroPointerDeltaXRef.current = 0;
-    globalThis.addEventListener("mousemove", onHeroMouseMoveWindow);
-    globalThis.addEventListener("mouseup", onHeroMouseUpWindow);
   }
 
-  function onHeroMouseMoveWindow(event: MouseEvent) {
-    if (!heroMouseDraggingRef.current || heroPointerStartXRef.current === null) return;
-    heroPointerDeltaXRef.current = event.clientX - heroPointerStartXRef.current;
+  function onHeroMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+    if (heroMouseStartXRef.current === null) return;
+    heroPointerDeltaXRef.current = event.clientX - heroMouseStartXRef.current;
   }
 
-  function onHeroMouseUpWindow() {
-    if (!heroMouseDraggingRef.current) return;
+  function onHeroMouseEnd() {
+    if (heroMouseStartXRef.current === null) return;
     applyHeroSwipeByDistance(heroPointerDeltaXRef.current);
-    heroMouseDraggingRef.current = false;
-    heroPointerStartXRef.current = null;
+    heroMouseStartXRef.current = null;
     heroPointerDeltaXRef.current = 0;
-    globalThis.removeEventListener("mousemove", onHeroMouseMoveWindow);
-    globalThis.removeEventListener("mouseup", onHeroMouseUpWindow);
   }
 
   return (
@@ -430,11 +424,13 @@ export default function Donate() {
           <div
             className={styles.heroTrack}
             style={{ transform: `translateX(-${heroSlideIndex * 100}%)` }}
-            onPointerDown={onHeroPointerDown}
-            onPointerMove={onHeroPointerMove}
-            onPointerUp={onHeroPointerEnd}
-            onPointerCancel={onHeroPointerEnd}
+            onTouchStart={onHeroTouchStart}
+            onTouchEnd={onHeroTouchEnd}
+            onTouchCancel={onHeroTouchCancel}
             onMouseDown={onHeroMouseDown}
+            onMouseMove={onHeroMouseMove}
+            onMouseUp={onHeroMouseEnd}
+            onMouseLeave={onHeroMouseEnd}
           >
             {heroSlides.map((slide, index) => (
               <img

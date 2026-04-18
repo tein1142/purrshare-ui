@@ -358,6 +358,8 @@
   border-radius: var(--r16);
   padding: calc(10px * var(--scale)) calc(10px * var(--scale));
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: calc(8px * var(--scale));
   min-width: 0;
   cursor: pointer;
@@ -424,12 +426,15 @@
   display: block;
 }
 .bigBtn .label {
+  flex: 1;
   font-size: var(--bigBtnFont);
   font-weight: var(--fw-medium);
   color: #111;
   line-height: 1.2;
   white-space: normal;
-  overflow-wrap: break-word;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-wrap: pretty;
   text-align: center;
   min-width: 0;
 }
