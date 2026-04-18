@@ -117,6 +117,7 @@ export default function Donate() {
   const heroPointerStartXRef = useRef<number | null>(null);
   const heroPointerDeltaXRef = useRef(0);
   const heroMouseDraggingRef = useRef(false);
+  const activeNeedId = activeNeed?.id;
   const [selfDeliveryForm, setSelfDeliveryForm] = useState<SelfDeliveryForm>({
     firstName: "",
     lastName: "",
@@ -124,8 +125,9 @@ export default function Donate() {
     date: "",
     time: "",
   });
-  const hasUploadedNeedImage =
-    Boolean(activeNeed) && Boolean(uploadedNeedImages[activeNeed.id]);
+  const hasUploadedNeedImage = activeNeedId
+    ? Boolean(uploadedNeedImages[activeNeedId])
+    : false;
   const remainingNeedQty = activeNeed
     ? Math.max(0, activeNeed.target - activeNeed.current)
     : 0;
@@ -195,13 +197,6 @@ export default function Donate() {
 
     return () => {
       globalThis.clearInterval(timer);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      globalThis.removeEventListener("mousemove", onHeroMouseMoveWindow);
-      globalThis.removeEventListener("mouseup", onHeroMouseUpWindow);
     };
   }, []);
 
